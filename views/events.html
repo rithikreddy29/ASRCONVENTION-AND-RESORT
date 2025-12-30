@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events | ASR Convention & Resort</title>
+    <link rel="stylesheet" href="/neo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+        .event-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border: 1px solid #f0f0f0;
+        }
+        .event-card:hover {
+            transform: translateY(-10px);
+        }
+        .event-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+        .event-content {
+            padding: 25px;
+        }
+        .event-content h3 {
+            color: #b8965a;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+        }
+        .event-content ul {
+            list-style: none;
+            padding: 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        .event-content ul li {
+            margin-bottom: 8px;
+        }
+        .event-content ul li i {
+            color: #b8965a;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+
+   
+   <header class="main-header">
+    <nav class="navbar">
+       <a href="/" class="logo-link">
+            <div class="logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+        </a>
+        <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="logo-area">
+            <span class="logo-top">ASR</span>
+            <div class="logo-divider"></div>
+            <span class="logo-bottom">CONVENTION & RESORT</span>
+        </div>
+    </a>
+
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/facilities">Facilities & Amenities</a></li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+        </ul>
+
+        <div class="nav-action">
+            <a href="/#quotation" class="btn-quote">Get Quotation</a>
+        </div>
+    </nav>
+</header>
+
+    <div class="event-grid">
+    <div class="event-card">
+        <div class="event-image" style="background-image: url('/images/hall.jpeg');"></div>
+        <div class="event-content">
+            <h3>Weddings & Receptions</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Capacity up to 5,000 guests</li>
+                <li><i class="fas fa-check"></i> Luxury Bridal Suites</li>
+                <li><i class="fas fa-check"></i> Traditional Mandap setups</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-image" style="background-image: url('/images/event5.jpeg');"></div>
+        <div class="event-content">
+            <h3>Corporate Conventions</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> High-speed Wi-Fi & AV gear</li>
+                <li><i class="fas fa-check"></i> Product Launch layouts</li>
+                <li><i class="fas fa-check"></i> Professional Stage & Lighting</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-image" style="background-image: url('/images/event7.jpeg');"></div>
+        <div class="event-content">
+            <h3>Exhibitions & Expos</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> 30,000 sq. ft. open floor</li>
+                <li><i class="fas fa-check"></i> Massive Dining Area</li>
+                <li><i class="fas fa-check"></i> 1,500+ Car Parking</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-image" style="background-image: url('/images/decor2.png');"></div>
+        <div class="event-content">
+            <h3>Engagements & Pre-Weddings</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Intimate Venue Settings</li>
+                <li><i class="fas fa-check"></i> Haldi & Sangeet Layouts</li>
+                <li><i class="fas fa-check"></i> Themed Floral Decor</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-image" style="background-image: url('/images/bdy.png');"></div>
+        <div class="event-content">
+            <h3>Birthdays & Social Galas</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Fun Party Environments</li>
+                <li><i class="fas fa-check"></i> Customizable Stage Setup</li>
+                <li><i class="fas fa-check"></i> Kid-friendly Food Menus</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-image" style="background-image: url('/images/abtus.jpeg');"></div>
+        <div class="event-content">
+            <h3>Luxury Resort Events</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Poolside Party Layouts</li>
+                <li><i class="fas fa-check"></i> Relaxed Resort Atmosphere</li>
+                <li><i class="fas fa-check"></i> Overnight Luxury Stay</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="event-card">
+        <div class="event-image" style="background-image: url('/images/convention1.jpeg');"></div>
+        <div class="event-content">
+            <h3>Best Decor</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Designer Stage Backdrops</li>
+                <li><i class="fas fa-check"></i> Ambient Mood Lighting</li>
+                <li><i class="fas fa-check"></i> Advanced Sound & Media</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="event-card">
+        <div class="event-image" style="background-image: url('/images/pool.png');"></div>
+        <div class="event-content">
+            <h3>Family Get-Togethers</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Private Garden Spaces</li>
+                <li><i class="fas fa-check"></i> Buffet & Live Counters</li>
+                <li><i class="fas fa-check"></i> Weekend Stay Packages</li>
+            </ul>
+        </div>
+    </div>
+</div> 
+
+    
+
+   <footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-col brand-col">
+            <div class="footer-logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+            <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="logo-area">
+            <span class="logo-top">ASR</span>
+            <div class="logo-divider"></div>
+            <span class="logo-bottom">CONVENTION & RESORT</span>
+        </div>
+    </a>
+            <p class="footer-desc">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/faqs">FAQs</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Details</h4>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+918096660634">+91 8096660634</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <a href="https://wa.me/918096660634" target="_blank">+91 8096660634</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@asrconvention.com</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <a href="https://maps.google.com" target="_blank">Upperpally, Hyderabad</a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Stay Connected</h4>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <div>
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2025 <span>ASR Convention & Resort</span>. Crafted for Excellence.</p>
+    </div>
+</footer>
+</body>
+</html>

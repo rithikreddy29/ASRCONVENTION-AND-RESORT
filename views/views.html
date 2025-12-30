@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASR Convention & Resort Booking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_orange.css">
+    
+    <style>
+        :root { --primary: #b8965a; --dark: #0f172a; --bg: #f8fafc; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: var(--bg); margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+        
+        .booking-card { background: white; width: 100%; max-width: 450px; padding: 40px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); border: 1px solid #e2e8f0; }
+        .logo { text-align: center; margin-bottom: 30px; }
+        .logo h1 { color: var(--dark); margin: 0; font-weight: 800; letter-spacing: -1px; }
+        .logo span { color: var(--primary); font-size: 14px; font-weight: 600; text-transform: uppercase; }
+
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; font-size: 13px; font-weight: 700; color: #64748b; margin-bottom: 8px; }
+        
+        input, select { width: 100%; padding: 14px; border: 2px solid #f1f5f9; border-radius: 12px; font-size: 15px; outline: none; transition: 0.3s; box-sizing: border-box; }
+        input:focus, select:focus { border-color: var(--primary); background: #fffdf9; }
+
+        .btn-submit { width: 100%; background: var(--dark); color: white; padding: 16px; border: none; border-radius: 12px; font-size: 16px; font-weight: 800; cursor: pointer; transition: 0.3s; margin-top: 10px; }
+        .btn-submit:hover { background: var(--primary); transform: translateY(-2px); }
+
+        /* Calendar Highlight */
+        .booked-red { background: #ef4444 !important; color: white !important; border-radius: 50% !important; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+<div class="booking-card">
+    <div class="logo">
+        <h1>ASR</h1>
+        <span>Convention & Resort Stay</span>
+    </div>
+
+    <form id="bookingForm">
+        <div class="form-group">
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" id="phone" placeholder="Enter mobile number" required>
+        </div>
+
+        <div class="form-group">
+            <label>Select Venue</label>
+            <select id="category" required>
+                <option value="convention">Convention Hall</option>
+                <option value="resort">Resort Stay</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Event Date</label>
+            <input type="text" id="eventDate" placeholder="Pick a date" required>
+        </div>
+
+        <div class="form-group">
+            <label>Timing Slot</label>
+            <select id="session" required>
+                <option value="Morning">Morning (6 AM - 2 PM)</option>
+                <option value="Night">Night (4 PM - 12 AM)</option>
+                <option value="Full Day">Full Day (24 Hours)</option>
+            </select>
+        </div>
+
+        <button type="submit" class="btn-submit">CONFIRM INQUIRY</button>
+    </form>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    // 1. Fetch blocked dates to show Red Marks
+    fetch('/get-blocked-dates')
+        .then(res => res.json())
+        .then(blockedDates => {
+            flatpickr("#eventDate", {
+                minDate: "today",
+                dateFormat: "Y-m-d",
+                onDayCreate: (dObj, dStr, fp, dayElem) => {
+                    const dateStr = dayElem.dateObj.toISOString().split('T')[0];
+                    if (blockedDates.includes(dateStr)) {
+                        dayElem.classList.add("booked-red");
+                    }
+                }
+            });
+        });
+
+    // 2. Handle Form Submission
+    document.getElementById('bookingForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const formData = {
+        category: document.querySelector('[name="venuePreference"]').value, // Updated to match your UI names
+        guests: document.querySelector('[name="guests"]').value,
+        eventType: document.querySelector('[name="eventType"]').value,
+        eventDate: document.getElementById('eventDate').value,
+        session: document.querySelector('[name="session"]').value,
+        catering: document.querySelector('[name="catering"]').value,
+        decor: document.querySelector('[name="decor"]').value,
+        name: document.querySelector('[name="fullName"]').value,
+        email: document.querySelector('[name="email"]').value,
+        phone: document.querySelector('[name="phone"]').value
+    };
+
+    const res = await fetch('/add-offline', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+    });
+
+    if(res.ok) {
+        alert("Quote Request Sent Successfully!");
+        location.reload();
+    } else {
+        alert("Server error. Please try again.");
+    }
+});
+</script>
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-col brand-col">
+            <div class="footer-logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+            <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="logo-area">
+            <span class="logo-top">ASR</span>
+            <div class="logo-divider"></div>
+            <span class="logo-bottom">CONVENTION & RESORT</span>
+        </div>
+    </a>
+            <p class="footer-desc">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/faqs">FAQs</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Details</h4>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+918096660634">+91 8096660634</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <a href="https://wa.me/918096660634" target="_blank">+91 8096660634</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@asrconvention.com</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <a href="https://maps.google.com" target="_blank">Upperpally, Hyderabad</a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Stay Connected</h4>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <div>
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2025 <span>ASR Convention & Resort</span>. Crafted for Excellence.</p>
+    </div>
+</footer>
+</body>
+</html>

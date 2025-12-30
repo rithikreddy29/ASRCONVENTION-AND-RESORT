@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | ASR Convention & Resort</title>
+    <link rel="stylesheet" href="/neo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 40px 0;
+        }
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(184, 150, 90, 0.8);
+            color: white;
+            padding: 10px;
+            text-align: center;
+            transform: translateY(100%);
+            transition: 0.3s ease;
+        }
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+    </style>
+    
+</head>
+<body>
+
+  
+   <header class="main-header">
+    <nav class="navbar">
+       <a href="/" class="logo-link">
+            <div class="logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+        </a>
+        <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="logo-area">
+            <span class="logo-top">ASR</span>
+            <div class="logo-divider"></div>
+            <span class="logo-bottom">CONVENTION & RESORT</span>
+        </div>
+    </a>
+
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/facilities">Facilities & Amenities</a></li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+        </ul>
+
+        <div class="nav-action">
+            <a href="/#quotation" class="btn-quote">Get Quotation</a>
+        </div>
+    </nav>
+</header>
+
+    <section class="container" style="padding: 60px 20px;">
+        <h1 style="text-align: center; font-family: 'Playfair Display', serif; color: #b8965a; margin-bottom: 10px;">Visual Tour</h1>
+        <p style="text-align: center; color: #666; margin-bottom: 40px;">Explore the elegance of our halls and the serenity of our resort.</p>
+
+       <div class="gallery-grid">
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Main Convention Hall</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/event3.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Pillar-less Grand Hall</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/event5.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Luxury Stage Decor</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Premium Seating Area</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="/images/mainentry.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Grand Entrance View</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Ceiling & Lighting Design</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Spacious Dining Area</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">VIP Lounge Area</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="/images/event4.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Traditional Mandap Setup</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Reception Hall View</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Exhibition Floor Space</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Corporate Meeting Setup</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="/images/sang.png" alt="ASR Hall">
+        <div class="gallery-overlay">Evening Event Lighting</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Bridal Suite Entry</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Guest Welcome Area</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Banquet Hall Detail</div>
+    </div>
+
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Floral Decor Details</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Food Counter Layout</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">Parking Entrance</div>
+    </div>
+    <div class="gallery-item">
+        <img src="/images/hall.jpeg" alt="ASR Hall">
+        <div class="gallery-overlay">ASR Resort View</div>
+    </div>
+</div>
+<footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-col brand-col">
+            <div class="footer-logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+            <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="logo-area">
+            <span class="logo-top">ASR</span>
+            <div class="logo-divider"></div>
+            <span class="logo-bottom">CONVENTION & RESORT</span>
+        </div>
+    </a>
+            <p class="footer-desc">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/faqs">FAQs</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Details</h4>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+918096660634">+91 8096660634</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <a href="https://wa.me/918096660634" target="_blank">+91 8096660634</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@asrconvention.com</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <a href="https://maps.google.com" target="_blank">Upperpally, Hyderabad</a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Stay Connected</h4>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <div>
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2025 <span>ASR Convention & Resort</span>. Crafted for Excellence.</p>
+    </div>
+</footer>
+
+</body>
+</html>

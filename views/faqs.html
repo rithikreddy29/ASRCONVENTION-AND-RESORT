@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | ASR Convention & Resort</title>
+    <link rel="stylesheet" href="/neo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        .faq-container { max-width: 800px; margin: 50px auto; padding: 0 20px; }
+        .accordion {
+            background-color: #f9f9f9;
+            color: #444;
+            cursor: pointer;
+            padding: 20px;
+            width: 100%;
+            border: none;
+            text-align: left;
+            outline: none;
+            font-size: 1.1rem;
+            transition: 0.4s;
+            border-bottom: 1px solid #ddd;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+        }
+        .active, .accordion:hover { background-color: #f1f1f1; color: #b8965a; }
+        .panel { padding: 0 20px; background-color: white; display: none; overflow: hidden; border-bottom: 1px solid #ddd; }
+        .panel p { padding: 20px 0; color: #666; line-height: 1.6; }
+    </style>
+    
+</head>
+<body>
+
+   <header class="main-header">
+    <nav class="navbar">
+       <a href="/" class="logo-link">
+            <div class="logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+        </a>
+        <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="logo-area">
+            <span class="logo-top">ASR</span>
+            <div class="logo-divider"></div>
+            <span class="logo-bottom">CONVENTION & RESORT</span>
+        </div>
+    </a>
+
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/facilities">Facilities & Amenities</a></li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+        </ul>
+
+        <div class="nav-action">
+            <a href="/#quotation" class="btn-quote">Get Quotation</a>
+        </div>
+    </nav>
+</header>
+    <div class="faq-container">
+        <h1 style="text-align:center; font-family:'Playfair Display'; color:#b8965a;">Frequently Asked Questions</h1>
+        
+        <button class="accordion">What is the total guest capacity? <i class="fas fa-plus"></i></button>
+        <div class="panel"><p>Our pillar-less grand hall can comfortably accommodate up to 3,000 guests for weddings and up to 5,000 for floating crowds.</p></div>
+
+        <button class="accordion">Do you provide in-house catering? <i class="fas fa-plus"></i></button>
+        <div class="panel"><p>We have a massive kitchen facility and can recommend top-tier caterers, or you are welcome to bring your own preferred catering team.</p></div>
+
+        <button class="accordion">Is there enough parking for large events? <i class="fas fa-plus"></i></button>
+        <div class="panel"><p>Yes, we have a dedicated parking zone for over 1,500 vehicles with professional valet support.</p></div>
+    </div>
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        for (var i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                var icon = this.querySelector("i");
+                if (panel.style.display === "block") {
+                    panel.style.display = "none";
+                    icon.className = "fas fa-plus";
+                } else {
+                    panel.style.display = "block";
+                    icon.className = "fas fa-minus";
+                }
+            });
+        }
+    </script>
+</body>
+    <footer class="site-footer">
+    <div class="footer-container">
+        <div class="footer-col brand-col">
+            <div class="footer-logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+            <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="logo-area">
+            <span class="logo-top">ASR</span>
+            <div class="logo-divider"></div>
+            <span class="logo-bottom">CONVENTION & RESORT</span>
+        </div>
+    </a>
+            <p class="footer-desc">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
+        </div>
+
+        <div class="footer-col">
+            <h4>Quick Links</h4>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/about">About Us</a></li>
+                <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/faqs">FAQs</a></li>
+                <li><a href="/blog">Blog</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-col">
+            <h4>Contact Details</h4>
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <a href="tel:+918096660634">+91 8096660634</a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                <a href="https://wa.me/918096660634" target="_blank">+91 8096660634</a>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>info@asrconvention.com</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <a href="https://maps.google.com" target="_blank">Upperpally, Hyderabad</a>
+            </div>
+        </div>
+
+        <div class="footer-col">
+            <h4>Stay Connected</h4>
+            <div class="social-links">
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                <div>
+                <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        <p>© 2025 <span>ASR Convention & Resort</span>. Crafted for Excellence.</p>
+    </div>
+</footer>
+</html>

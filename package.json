@@ -1,0 +1,12 @@
+{
+  "name": "asr-convention-website",
+  "version": "1.0.0",
+  "description": "Website for ASR Convention & Resort",
+  "main": "neo.js",
+  "scripts": {
+    "start": "node neo.js"
+  },
+  "dependencies": {
+    "express": "^4.22.1"
+  }
+}

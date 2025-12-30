@@ -9,172 +9,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     
-    <style>
-        /* CORE VARIABLES */
-        :root {
-            --gold: #b8965a;
-            --dark: #0a0e14;
-            --white: #ffffff;
-            --text-gray: #64748b;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; color: #333; }
-
-        /* HEADER FIX */
-        .main-header {
-            position: fixed;
-            top: 0; width: 100%;
-            background: var(--white);
-            z-index: 1000;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
-        }
-
-        .navbar {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-        }
-
-        /* LOGO */
-        .logo-link { display: flex; align-items: center; text-decoration: none; gap: 12px; }
-        .logo-badge {
-            width: 55px; height: 55px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            overflow: hidden;
-            background: #fff;
-            flex-shrink: 0;
-            display: flex; justify-content: center; align-items: center;
-        }
-        .logo-badge img { width: 100%; height: 100%; object-fit: cover; }
-        .logo-area { display: flex; flex-direction: column; }
-        .logo-top { font-family: 'Playfair Display'; font-size: 1.6rem; font-weight: 900; color: var(--gold); line-height: 1; }
-        .logo-bottom { font-size: 0.65rem; color: #333; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; }
-
-        /* NAVIGATION LINKS (Desktop) */
-        .nav-links { display: flex; list-style: none; gap: 25px; align-items: center; }
-        .nav-links li a { text-decoration: none; color: #333; font-weight: 500; transition: 0.3s; font-size: 0.95rem; }
-        .nav-links li a:hover { color: var(--gold); }
-        .mobile-only-item { display: none; }
-
-        /* HAMBURGER ICON */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            z-index: 1100;
-            padding: 10px;
-        }
-        .menu-toggle span {
-            width: 30px;
-            height: 3px;
-            background: var(--gold);
-            border-radius: 2px;
-            transition: 0.4s;
-        }
-
-        /* MOBILE & TABLET RESPONSIVE MENU */
-        @media (max-width: 992px) {
-            .menu-toggle { display: flex; }
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%; /* Hidden off-screen */
-                width: 75%;
-                height: 100vh;
-                background: var(--dark); /* Dark background for contrast */
-                flex-direction: column;
-                justify-content: center;
-                gap: 30px;
-                transition: 0.4s cubic-bezier(0.77,0.2,0.05,1.0);
-                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
-                padding: 40px;
-            }
-
-            .nav-links.active { right: 0; } /* Slide in */
-
-            /* IMPORTANT: Make links white on mobile so they are visible */
-            .nav-links li a { 
-                color: var(--white); 
-                font-size: 1.4rem; 
-                display: block;
-                text-align: center;
-            }
-
-            .nav-action.desktop-only { display: none; }
-            .mobile-only-item { display: block; width: 100%; text-align: center; }
-            
-            .btn-quote { 
-                background: var(--gold); color: white !important; 
-                padding: 12px 25px; border-radius: 8px; display: inline-block; 
-            }
-        }
-
-        /* HERO - Unblocking Logic */
-        .hero {
-            height: 85vh;
-            padding-top: 85px; /* Pushes content down so header doesn't cover it */
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/mainentry.jpeg');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-        }
-        .hero h1 { font-family: 'Playfair Display'; font-size: 4rem; margin-bottom: 10px; }
-        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } }
-    </style>
+    
 </head>
 <body>
 
     <header class="main-header">
-        <nav class="navbar">
-            <a href="/" class="logo-link">
-                <div class="logo-badge">
-                    <img src="/images/logo.png" alt="ASR Logo">
-                </div>
-                <div class="logo-area">
-                    <span class="logo-top">ASR</span>
-                    <span class="logo-bottom">CONVENTION & RESORT</span>
-                </div>
-            </a>
-
-            <!-- Mobile Hamburger -->
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
+    <nav class="navbar">
+       <a href="/" class="logo-link">
+            <div class="logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
             </div>
+        </a>
+        <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
+        <div class="logo-area">
+            <span class="logo-top">ASR</span>
+            <div class="logo-divider"></div>
+            <span class="logo-bottom">CONVENTION & RESORT</span>
+        </div>
+    </a>
 
-            <!-- Navigation Links -->
-            <ul class="nav-links" id="nav-list">
-                <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/facilities">Facilities</a></li>
-                <li><a href="/events">Events</a></li>
-                <li><a href="/gallery">Gallery</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li class="mobile-only-item"><a href="#quotation" class="btn-quote">Get Quotation</a></li>
-            </ul>
+        <ul class="nav-links">
+            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/about">About Us</a></li>
+            <li><a href="/facilities">Facilities & Amenities</a></li>
+            <li><a href="/events">Events</a></li>
+            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/faqs">FAQs</a></li>
+            <li><a href="/blog">Blog</a></li>
+            <li><a href="/contact">Contact Us</a></li>
+        </ul>
 
-            <!-- Desktop Button -->
-            <div class="nav-action desktop-only">
-                <a href="#quotation" style="background: var(--gold); color: white; padding: 10px 22px; border-radius: 8px; text-decoration: none; font-weight: 600;">Get Quotation</a>
-            </div>
-        </nav>
-    </header>
+        <div class="nav-action">
+            <a href="/#quotation" class="btn-quote">Get Quotation</a>
+        </div>
+    </nav>
+</header>
 
     <section class="hero">
         <div class="hero-content">

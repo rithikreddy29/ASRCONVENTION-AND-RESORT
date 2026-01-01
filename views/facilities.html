@@ -6,32 +6,213 @@
     <title>Facilities & Amenities | ASR Convention & Resort</title>
     <link rel="stylesheet" href="/neo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b8965a;
+            --dark: #0a0e14;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; line-height: 1.6; color: #333; background-color: #fcfcfc; }
 
+        /* HEADER & NAVIGATION */
+        .main-header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            height: 95px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        /* FORCED LOGO ALIGNMENT */
+        .logo-link { 
+            display: flex !important; 
+            flex-direction: row !important; /* Forces horizontal layout */
+            align-items: center !important; 
+            text-decoration: none; 
+            gap: 15px; 
+        }
+        
+        .logo-badge {
+            width: 65px; 
+            height: 65px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            overflow: hidden;
+            background: #fff;
+            flex-shrink: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            padding: 4px;
+            order: 1; /* Ensures badge is first */
+        }
+        .logo-badge img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+        }
+        
+        .logo-area { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            text-align: left;
+            order: 2; /* Ensures text is second */
+        }
+        .logo-top { 
+            font-family: 'Playfair Display'; 
+            font-size: 1.9rem; 
+            font-weight: 900; 
+            color: var(--gold); 
+            line-height: 0.9;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .logo-divider { 
+            width: 100%; 
+            height: 2px; 
+            background: var(--gold); 
+            margin: 2px 0; 
+        }
+        .logo-bottom { 
+            font-size: 0.65rem; 
+            color: #1a1a1a; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            font-weight: 600; 
+            line-height: 1;
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
+        .nav-links li a { text-decoration: none; color: #333; font-weight: 500; transition: var(--transition); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links li a:hover, .nav-links li a.active { color: var(--gold); }
+        
+        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
+
+        .btn-quote {
+            background: var(--gold);
+            color: white !important;
+            padding: 9px 9px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .btn-quote:hover { background: #9a7b45; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(184, 150, 90, 0.3); }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .menu-toggle span { width: 28px; height: 3px; background: var(--gold); border-radius: 2px; }
+        /* HERO SECTION */
+        .page-hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('/images/hall.jpeg');
+            background-size: cover;
+            background-position: center;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 0 5%;
+        }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 15px; }
+        .page-hero p { font-size: 1.5rem; max-width: 800px; margin: 0 auto; font-weight: 300; }
+
+        /* FACILITIES GRID */
+        .features-section { padding: 100px 5%; background: #fff; }
+        .features-grid {
+            max-width: 1300px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+        .feature-card {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid #eee;
+        }
+        .feature-card:hover { transform: translateY(-10px); background: #fff; box-shadow: 0 20px 40px rgba(0,0,0,0.08); border-color: var(--gold); }
+        .feature-card i { font-size: 3rem; color: var(--gold); margin-bottom: 25px; }
+        .feature-card h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 15px; color: var(--dark); }
+        .feature-card p { color: #666; font-size: 1rem; }
+
+        /* FOOTER */
+        .site-footer { background: #0a0e14; color: white; padding: 80px 5% 30px; border-top: 2px solid var(--gold); }
+        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1300px; margin: 0 auto; }
+        .footer-col h4 { color: var(--gold); font-family: 'Playfair Display'; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #64748b; }
+
+        @media (max-width: 1100px) {
+            .menu-toggle { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 80%; max-width: 320px;
+                height: 100vh;
+                background: var(--dark);
+                flex-direction: column;
+                justify-content: center;
+                transition: var(--transition);
+                padding: 40px;
+                gap: 25px;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links li a { color: white; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; padding-bottom: 10px; }
+            .page-hero h1 { font-size: 2.5rem; }
+            .page-hero p { font-size: 1.1rem; }
+        }
+    </style>
 </head>
 <body>
 
-   
-   <header class="main-header">
+<header class="main-header">
     <nav class="navbar">
-       <a href="/" class="logo-link">
-            <div class="logo-badge">
-                <img src="/images/logo.png" alt="ASR Logo">
+        <a href="/" class="logo-link">
+            <div class="logo-badge"><img src="/images/logo.png" alt="ASR Logo"></div>
+            <div class="logo-area">
+                <span class="logo-top">ASR</span>
+                <div class="logo-divider"></div>
+                <span class="logo-bottom">CONVENTION & RESORT</span>
             </div>
         </a>
-        <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
-        <div class="logo-area">
-            <span class="logo-top">ASR</span>
-            <div class="logo-divider"></div>
-            <span class="logo-bottom">CONVENTION & RESORT</span>
-        </div>
-    </a>
 
-        <ul class="nav-links">
-            <li><a href="/" class="active">Home</a></li>
+        <ul class="nav-links" id="nav-list">
+            <li><a href="/">Home</a></li>
             <li><a href="/about">About Us</a></li>
-            <li><a href="/facilities">Facilities & Amenities</a></li>
+            <li><a href="/facilities" class="active">Facilities & Amenities</a></li>
             <li><a href="/events">Events</a></li>
             <li><a href="/gallery">Gallery</a></li>
             <li><a href="/faqs">FAQs</a></li>
@@ -39,82 +220,69 @@
             <li><a href="/contact">Contact Us</a></li>
         </ul>
 
-        <div class="nav-action">
+        <div class="nav-right-actions">
             <a href="/#quotation" class="btn-quote">Get Quotation</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </nav>
 </header>
- <section class="page-hero" style="
-  background:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url('/images/hall.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 85vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(255, 255, 255);
-  text-align: center;
-text-shadow: 0 4px 15px rgba(0,0,0,0.6);">
-        <div>
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 4.5rem;">Our World-Class Facilities</h1>
-            <p style="font-size: 1.7rem;">Experience the perfect blend of luxury and space.</p>
-        </div>
-    </section>
 
-    <section class="features-section">
-        <div class="container">
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-expand-arrows-alt"></i>
-                    <h3>30,000 Sq. Ft. Hall</h3>
-                    <p>A massive, pillar-less grand hall designed for unobstructed views and grand celebrations for up to 3,000 guests.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-parking"></i>
-                    <h3>Vast Parking Area</h3>
-                    <p>Spacious parking facilities for over 1,500+ cars and bikes with dedicated valet services.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-bed"></i>
-                    <h3>Luxury Suite Rooms</h3>
-                    <p>Well-appointed air-conditioned suites for the bride, groom, and family members for a comfortable stay.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-utensils"></i>
-                    <h3>Dining Hall</h3>
-                    <p>A separate, expansive dining area with modern kitchen facilities to serve 1,000+ guests at a time.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-tree"></i>
-                    <h3>Landscaped Lawns</h3>
-                    <p>Beautiful outdoor greenery perfect for mandaps, outdoor parties, and photo sessions.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="fas fa-video"></i>
-                    <h3>Security & CCTV</h3>
-                    <p>24/7 high-definition camera monitoring and professional security staff for complete peace of mind.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="page-hero">
+    <div>
+        <h1>World-Class Facilities</h1>
+        <p>A perfect blend of architectural grandeur, modern comfort, and expansive spaces designed for your most precious moments.</p>
+    </div>
+</section>
 
-   <footer class="site-footer">
+<section class="features-section">
+    <div class="features-grid">
+        <div class="feature-card">
+            <i class="fas fa-expand-arrows-alt"></i>
+            <h3>30,000 Sq. Ft. Hall</h3>
+            <p>A massive, pillar-less grand hall designed for unobstructed views and grand celebrations for up to 5,000 guests.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-parking"></i>
+            <h3>Vast Parking Area</h3>
+            <p>Spacious parking facilities for over 1,500+ cars and bikes with dedicated valet services and smooth traffic flow.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-bed"></i>
+            <h3>Luxury Suite Rooms</h3>
+            <p>Well-appointed air-conditioned suites for the bride, groom, and family members, ensuring comfort during the festivities.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-utensils"></i>
+            <h3>Expansive Dining Hall</h3>
+            <p>A separate, expansive dining area with modern industrial kitchen facilities capable of serving 1,000+ guests simultaneously.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-tree"></i>
+            <h3>Landscaped Lawns</h3>
+            <p>Beautiful outdoor greenery and meticulously maintained lawns perfect for outdoor ceremonies and scenic photo sessions.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-video"></i>
+            <h3>Security & CCTV</h3>
+            <p>24/7 high-definition camera monitoring and professional security personnel for absolute safety and peace of mind.</p>
+        </div>
+    </div>
+</section>
+
+<footer class="site-footer">
     <div class="footer-container">
         <div class="footer-col brand-col">
-            <div class="footer-logo-badge">
-                <img src="/images/logo.png" alt="ASR Logo">
+            <div class="logo-link" style="margin-bottom: 20px;">
+                <div class="logo-badge"><img src="/images/logo.png" alt="ASR Logo"></div>
+                <div class="logo-area">
+                    <span class="logo-top" style="color:var(--gold)">ASR</span>
+                    <div class="logo-divider"></div>
+                    <span class="logo-bottom" style="color:white">CONVENTION & RESORT</span>
+                </div>
             </div>
-            <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
-        <div class="logo-area">
-            <span class="logo-top">ASR</span>
-            <div class="logo-divider"></div>
-            <span class="logo-bottom">CONVENTION & RESORT</span>
-        </div>
-    </a>
-            <p class="footer-desc">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
+            <p style="color: #cbd5e1; font-size: 0.9rem;">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
         </div>
 
         <div class="footer-col">
@@ -130,32 +298,20 @@ text-shadow: 0 4px 15px rgba(0,0,0,0.6);">
 
         <div class="footer-col">
             <h4>Contact Details</h4>
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <a href="tel:+918096660634">+91 8096660634</a>
-            </div>
-            <div class="contact-item">
-                <i class="fab fa-whatsapp"></i>
-                <a href="https://wa.me/918096660634" target="_blank">+91 8096660634</a>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>info@asrconvention.com</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <a href="https://maps.google.com" target="_blank">Upperpally, Hyderabad</a>
-            </div>
+            <ul>
+                <li><a href="tel:+918096660634"><i class="fas fa-phone"></i> +91 8096660634</a></li>
+                <li><a href="https://wa.me/918096660634" target="_blank"><i class="fab fa-whatsapp"></i> +91 8096660634</a></li>
+                <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
+                <li><a href="#"><i class="fas fa-map-marker-alt"></i> Upperpally, Hyderabad</a></li>
+            </ul>
         </div>
 
         <div class="footer-col">
             <h4>Stay Connected</h4>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <div>
-                <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-                </div>
-            </div>
+            <ul class="social-links">
+                <li><a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+            </ul>
         </div>
     </div>
     
@@ -164,5 +320,18 @@ text-shadow: 0 4px 15px rgba(0,0,0,0.6);">
     </div>
 </footer>
 
+<script>
+    const menuBtn = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+    const spans = menuBtn.querySelectorAll('span');
+
+    menuBtn.addEventListener('click', () => {
+        navList.classList.toggle('active');
+        const isActive = navList.classList.contains('active');
+        spans[0].style.transform = isActive ? 'rotate(45deg) translate(8px, 8px)' : '';
+        spans[1].style.opacity = isActive ? '0' : '1';
+        spans[2].style.transform = isActive ? 'rotate(-45deg) translate(7px, -7px)' : '';
+    });
+</script>
 </body>
 </html>

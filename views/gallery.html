@@ -6,187 +6,307 @@
     <title>Gallery | ASR Convention & Resort</title>
     <link rel="stylesheet" href="/neo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --gold: #b8965a;
+            --dark: #0a0e14;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; line-height: 1.6; color: #333; background-color: #fcfcfc; }
+
+        /* HEADER & NAVIGATION */
+        .main-header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            height: 95px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        /* FORCED LOGO ALIGNMENT */
+        .logo-link { 
+            display: flex !important; 
+            flex-direction: row !important; /* Forces horizontal layout */
+            align-items: center !important; 
+            text-decoration: none; 
+            gap: 15px; 
+        }
+        
+        .logo-badge {
+            width: 65px; 
+            height: 65px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            overflow: hidden;
+            background: #fff;
+            flex-shrink: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            padding: 4px;
+            order: 1; /* Ensures badge is first */
+        }
+        .logo-badge img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+        }
+        
+        .logo-area { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            text-align: left;
+            order: 2; /* Ensures text is second */
+        }
+        .logo-top { 
+            font-family: 'Playfair Display'; 
+            font-size: 1.9rem; 
+            font-weight: 900; 
+            color: var(--gold); 
+            line-height: 0.9;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .logo-divider { 
+            width: 100%; 
+            height: 2px; 
+            background: var(--gold); 
+            margin: 2px 0; 
+        }
+        .logo-bottom { 
+            font-size: 0.65rem; 
+            color: #1a1a1a; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            font-weight: 600; 
+            line-height: 1;
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
+        .nav-links li a { text-decoration: none; color: #333; font-weight: 500; transition: var(--transition); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links li a:hover, .nav-links li a.active { color: var(--gold); }
+        
+        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
+
+        .btn-quote {
+            background: var(--gold);
+            color: white !important;
+            padding: 9px 9px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .btn-quote:hover { background: #9a7b45; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(184, 150, 90, 0.3); }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .menu-toggle span { width: 28px; height: 3px; background: var(--gold); border-radius: 2px; }
+
+        /* GALLERY CONTENT */
+        .gallery-section { padding: 160px 5% 80px; max-width: 1400px; margin: 0 auto; }
+        .gallery-header { text-align: center; margin-bottom: 60px; }
+        .gallery-header h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; color: var(--gold); margin-bottom: 15px; }
+        .gallery-header p { color: #666; font-size: 1.1rem; max-width: 600px; margin: 0 auto; }
+
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            padding: 40px 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
         }
         .gallery-item {
             position: relative;
             overflow: hidden;
-            border-radius: 10px;
-            height: 250px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            height: 320px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            background: #eee;
         }
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .gallery-item:hover img {
-            transform: scale(1.1);
-        }
+        .gallery-item:hover img { transform: scale(1.1); }
         .gallery-overlay {
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(184, 150, 90, 0.8);
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 14, 20, 0.8), transparent);
             color: white;
-            padding: 10px;
-            text-align: center;
-            transform: translateY(100%);
-            transition: 0.3s ease;
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+            opacity: 0;
+            transition: var(--transition);
         }
-        .gallery-item:hover .gallery-overlay {
-            transform: translateY(0);
+        .gallery-item:hover .gallery-overlay { opacity: 1; }
+        .gallery-overlay span {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        /* FOOTER */
+        .site-footer { background: #0a0e14; color: white; padding: 80px 5% 30px; border-top: 4px solid var(--gold); }
+        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1300px; margin: 0 auto; }
+        
+        /* Footer Logo Match Header */
+        .footer-col.brand-col .logo-link { margin-bottom: 25px; }
+        .footer-col.brand-col .logo-top { color: var(--gold); }
+        .footer-col.brand-col .logo-bottom { color: #cbd5e1; }
+
+        .footer-col h4 { color: var(--gold); font-family: 'Playfair Display'; margin-bottom: 25px; text-transform: uppercase; font-size: 1.1rem; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 15px; }
+        .footer-col a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .footer-col a:hover { color: var(--gold); transform: translateX(5px); }
+        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #64748b; }
+        .footer-bottom span { color: var(--gold); }
+
+        @media (max-width: 1150px) {
+            .nav-links { display: none; }
+            .menu-toggle { display: flex; }
+            .main-header { height: 85px; }
+            .logo-badge { width: 55px; height: 55px; }
+            .logo-top { font-size: 1.5rem; }
+            .gallery-header h1 { font-size: 2.5rem; }
         }
     </style>
-    
 </head>
 <body>
 
-  
-   <header class="main-header">
+<header class="main-header">
     <nav class="navbar">
-       <a href="/" class="logo-link">
+        <!-- Badge is defined FIRST in the HTML flow -->
+        <a href="/" class="logo-link">
             <div class="logo-badge">
                 <img src="/images/logo.png" alt="ASR Logo">
             </div>
+            <div class="logo-area">
+                <span class="logo-top">ASR</span>
+                <div class="logo-divider"></div>
+                <span class="logo-bottom">CONVENTION & RESORT</span>
+            </div>
         </a>
-        <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
-        <div class="logo-area">
-            <span class="logo-top">ASR</span>
-            <div class="logo-divider"></div>
-            <span class="logo-bottom">CONVENTION & RESORT</span>
-        </div>
-    </a>
 
         <ul class="nav-links">
-            <li><a href="/" class="active">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/about">About Us</a></li>
-            <li><a href="/facilities">Facilities & Amenities</a></li>
+            <li><a href="/facilities">Facilities</a></li>
             <li><a href="/events">Events</a></li>
-            <li><a href="/gallery">Gallery</a></li>
+            <li><a href="/gallery" class="active">Gallery</a></li>
             <li><a href="/faqs">FAQs</a></li>
             <li><a href="/blog">Blog</a></li>
-            <li><a href="/contact">Contact Us</a></li>
+            <li><a href="/contact">Contact</a></li>
         </ul>
 
-        <div class="nav-action">
+        <div class="nav-right-actions">
             <a href="/#quotation" class="btn-quote">Get Quotation</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </nav>
 </header>
 
-    <section class="container" style="padding: 60px 20px;">
-        <h1 style="text-align: center; font-family: 'Playfair Display', serif; color: #b8965a; margin-bottom: 10px;">Visual Tour</h1>
-        <p style="text-align: center; color: #666; margin-bottom: 40px;">Explore the elegance of our halls and the serenity of our resort.</p>
-
-       <div class="gallery-grid">
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Main Convention Hall</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/event3.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Pillar-less Grand Hall</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/event5.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Luxury Stage Decor</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Premium Seating Area</div>
+<section class="gallery-section">
+    <div class="gallery-header">
+        <h1>Visual Tour</h1>
+        <p>Step inside our world of luxury. Explore the architectural brilliance and elegant setups that make ASR Convention & Resort the finest choice in Hyderabad.</p>
     </div>
 
-    <div class="gallery-item">
-        <img src="/images/mainentry.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Grand Entrance View</div>
+    <div class="gallery-grid">
+        <div class="gallery-item">
+            <img src="/images/hall.jpeg" alt="ASR Hall">
+            <div class="gallery-overlay"><span>Main Convention Hall</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/event3.jpeg" alt="Event Setup">
+            <div class="gallery-overlay"><span>Pillar-less Grand Hall</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/event5.jpeg" alt="Stage Decor">
+            <div class="gallery-overlay"><span>Luxury Stage Decor</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/mainentry.jpeg" alt="Entrance">
+            <div class="gallery-overlay"><span>Grand Entrance View</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/hall.jpeg" alt="Lighting">
+            <div class="gallery-overlay"><span>Ceiling & Lighting Design</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/hall.jpeg" alt="Dining">
+            <div class="gallery-overlay"><span>Spacious Dining Area</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/event4.jpeg" alt="Mandap">
+            <div class="gallery-overlay"><span>Traditional Mandap Setup</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/sang.png" alt="Lighting">
+            <div class="gallery-overlay"><span>Evening Event Ambiance</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/hall.jpeg" alt="Lounge">
+            <div class="gallery-overlay"><span>VIP Lounge Area</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/hall.jpeg" alt="Corporate">
+            <div class="gallery-overlay"><span>Corporate Meeting Setup</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/hall.jpeg" alt="Suite">
+            <div class="gallery-overlay"><span>Bridal Suite Entry</span></div>
+        </div>
+        <div class="gallery-item">
+            <img src="/images/hall.jpeg" alt="Resort">
+            <div class="gallery-overlay"><span>ASR Resort View</span></div>
+        </div>
     </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Ceiling & Lighting Design</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Spacious Dining Area</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">VIP Lounge Area</div>
-    </div>
+</section>
 
-    <div class="gallery-item">
-        <img src="/images/event4.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Traditional Mandap Setup</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Reception Hall View</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Exhibition Floor Space</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Corporate Meeting Setup</div>
-    </div>
-
-    <div class="gallery-item">
-        <img src="/images/sang.png" alt="ASR Hall">
-        <div class="gallery-overlay">Evening Event Lighting</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Bridal Suite Entry</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Guest Welcome Area</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Banquet Hall Detail</div>
-    </div>
-
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Floral Decor Details</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Food Counter Layout</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">Parking Entrance</div>
-    </div>
-    <div class="gallery-item">
-        <img src="/images/hall.jpeg" alt="ASR Hall">
-        <div class="gallery-overlay">ASR Resort View</div>
-    </div>
-</div>
 <footer class="site-footer">
     <div class="footer-container">
         <div class="footer-col brand-col">
-            <div class="footer-logo-badge">
-                <img src="/images/logo.png" alt="ASR Logo">
-            </div>
-            <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
-        <div class="logo-area">
-            <span class="logo-top">ASR</span>
-            <div class="logo-divider"></div>
-            <span class="logo-bottom">CONVENTION & RESORT</span>
-        </div>
-    </a>
-            <p class="footer-desc">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
+            <a href="/" class="logo-link">
+                <div class="logo-badge">
+                    <img src="/images/logo.png" alt="ASR Logo">
+                </div>
+                <div class="logo-area">
+                    <span class="logo-top">ASR</span>
+                    <div class="logo-divider"></div>
+                    <span class="logo-bottom">CONVENTION & RESORT</span>
+                </div>
+            </a>
+            <p style="margin-top: 15px; color: #cbd5e1; font-size: 0.95rem;">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
         </div>
 
         <div class="footer-col">
@@ -202,32 +322,20 @@
 
         <div class="footer-col">
             <h4>Contact Details</h4>
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <a href="tel:+918096660634">+91 8096660634</a>
-            </div>
-            <div class="contact-item">
-                <i class="fab fa-whatsapp"></i>
-                <a href="https://wa.me/918096660634" target="_blank">+91 8096660634</a>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>info@asrconvention.com</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <a href="https://maps.google.com" target="_blank">Upperpally, Hyderabad</a>
-            </div>
+            <ul>
+                <li><a href="tel:+918096660634"><i class="fas fa-phone"></i> +91 8096660634</a></li>
+                <li><a href="https://wa.me/918096660634" target="_blank"><i class="fab fa-whatsapp"></i> +91 8096660634</a></li>
+                <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
+                <li><a href="#"><i class="fas fa-map-marker-alt"></i> Upperpally, Hyderabad</a></li>
+            </ul>
         </div>
 
         <div class="footer-col">
-            <h4>Stay Connected</h4>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <div>
-                <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-                </div>
-            </div>
+            <h4>Social Media</h4>
+            <ul>
+                <li><a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+            </ul>
         </div>
     </div>
     
@@ -236,5 +344,11 @@
     </div>
 </footer>
 
+<script>
+    const menuBtn = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => {
+        console.log('Mobile menu toggled');
+    });
+</script>
 </body>
 </html>

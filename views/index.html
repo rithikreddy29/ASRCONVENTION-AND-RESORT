@@ -389,6 +389,7 @@ menuBtn.addEventListener('click', () => {
     spans[1].style.opacity = navList.classList.contains('active') ? '0' : '1';
     spans[2].style.transform = navList.classList.contains('active') ? 'rotate(-45deg) translate(5px, -6px)' : '';
 });
+
 </script>
 <div id="successModal" class="modal-overlay" style="display:none;">
     <div class="modal-card">
@@ -400,5 +401,25 @@ menuBtn.addEventListener('click', () => {
         <button onclick="closeModal()" class="btn-close">Great, Thank You</button>
     </div>
 </div>
+<button type="button" onclick="sendWhatsApp()" style="background-color: #25D366; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer;">
+    Request My Quote
+</button>
+
+<script>
+function sendWhatsApp() {
+    // Get values from your input fields (make sure these IDs match your inputs)
+    const name = document.getElementById('name').value;
+    const date = document.getElementById('date').value;
+    const guests = document.getElementById('guests').value;
+    
+    // REPLACE THIS with your actual phone number (start with 91)
+    const phoneNumber = "918096660634"; 
+    
+    const message = `*ASR Convention Quote Request*%0A*Name:* ${name}%0A*Date:* ${date}%0A*Guests:* ${guests}`;
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    
+    window.open(whatsappUrl, '_blank');
+}
+</script>
 </body>
 </html>

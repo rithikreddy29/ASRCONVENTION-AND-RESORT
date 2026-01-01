@@ -6,29 +6,207 @@
     <title>About Us | ASR Convention & Resort</title>
     <link rel="stylesheet" href="/neo.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #b8965a;
+            --dark: #0a0e14;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; line-height: 1.6; color: #333; background-color: #fcfcfc; }
+
+        /* HEADER & NAVIGATION */
+        .main-header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: var(--white);
+            z-index: 1000;
+            height: 95px;
+            display: flex;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+        }
+
+        .navbar {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+        }
+
+        /* FORCED LOGO ALIGNMENT */
+        .logo-link { 
+            display: flex !important; 
+            flex-direction: row !important; /* Forces horizontal layout */
+            align-items: center !important; 
+            text-decoration: none; 
+            gap: 15px; 
+        }
+        
+        .logo-badge {
+            width: 65px; 
+            height: 65px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            overflow: hidden;
+            background: #fff;
+            flex-shrink: 0;
+            display: flex; 
+            justify-content: center; 
+            align-items: center;
+            padding: 4px;
+            order: 1; /* Ensures badge is first */
+        }
+        .logo-badge img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; 
+        }
+        
+        .logo-area { 
+            display: flex; 
+            flex-direction: column; 
+            justify-content: center;
+            text-align: left;
+            order: 2; /* Ensures text is second */
+        }
+        .logo-top { 
+            font-family: 'Playfair Display'; 
+            font-size: 1.9rem; 
+            font-weight: 900; 
+            color: var(--gold); 
+            line-height: 0.9;
+            letter-spacing: 1px;
+            margin-bottom: 2px;
+        }
+        .logo-divider { 
+            width: 100%; 
+            height: 2px; 
+            background: var(--gold); 
+            margin: 2px 0; 
+        }
+        .logo-bottom { 
+            font-size: 0.65rem; 
+            color: #1a1a1a; 
+            letter-spacing: 2px; 
+            text-transform: uppercase; 
+            font-weight: 600; 
+            line-height: 1;
+        }
+
+        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
+        .nav-links li a { text-decoration: none; color: #333; font-weight: 500; transition: var(--transition); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
+        .nav-links li a:hover, .nav-links li a.active { color: var(--gold); }
+        
+        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
+
+        .btn-quote {
+            background: var(--gold);
+            color: white !important;
+            padding: 9px 9px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+        .btn-quote:hover { background: #9a7b45; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(184, 150, 90, 0.3); }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            padding: 5px;
+        }
+        .menu-toggle span { width: 28px; height: 3px; background: var(--gold); border-radius: 2px; }
+
+        /* PAGE HERO */
+        .page-hero {
+            height: 85vh;
+            background: linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)), url('/images/abtus.jpeg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            margin-top: 0;
+        }
+        .page-hero h1 { font-family: 'Playfair Display', serif; font-size: 5.5rem; margin-bottom: 10px; }
+        .page-hero p { letter-spacing: 2px; text-transform: uppercase; font-size: 2.2rem; margin-top: -10px; }
+
+        /* CONTENT */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        .legacy-section { max-width: 900px; margin: 0 auto; text-align: center; line-height: 1.8; }
+        .section-title { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px; }
+        .legacy-text { font-size: 1.1rem; color: #444; margin-bottom: 20px; }
+        
+        .mission-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px; text-align: left; }
+        .mission-card { background: #f9f9f9; padding: 30px; border-radius: 10px; border-left: 5px solid var(--gold); transition: var(--transition); }
+        .mission-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
+        .mission-card h4 { color: var(--gold); margin-bottom: 15px; font-size: 1.3rem; }
+
+        /* FOOTER */
+        .site-footer { background: #0a0e14; color: white; padding: 80px 5% 30px; border-top: 2px solid var(--gold); margin-top: 50px; }
+        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1300px; margin: 0 auto; }
+        .footer-col h4 { color: var(--gold); font-family: 'Playfair Display'; margin-bottom: 20px; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
+        .footer-col a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #64748b; }
+
+        @media (max-width: 1100px) {
+            .menu-toggle { display: flex; }
+            .nav-links {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 80%; max-width: 320px;
+                height: 100vh;
+                background: var(--dark);
+                flex-direction: column;
+                justify-content: center;
+                transition: var(--transition);
+                padding: 40px;
+                gap: 25px;
+            }
+            .nav-links.active { right: 0; }
+            .nav-links li a { color: white; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; padding-bottom: 10px; }
+            
+            .page-hero h1 { font-size: 3.5rem; }
+            .page-hero p { font-size: 1.2rem; }
+            .mission-grid { grid-template-columns: 1fr; }
+            .nav-right-actions { gap: 10px; }
+            .btn-quote { padding: 8px 14px; font-size: 0.75rem; }
+        }
+    </style>
 </head>
 <body>
 
-   
-     <header class="main-header">
+<header class="main-header">
     <nav class="navbar">
-       <a href="/" class="logo-link">
-            <div class="logo-badge">
-                <img src="/images/logo.png" alt="ASR Logo">
+        <a href="/" class="logo-link">
+            <div class="logo-badge"><img src="/images/logo.png" alt="ASR Logo"></div>
+            <div class="logo-area">
+                <span class="logo-top">ASR</span>
+                <div class="logo-divider"></div>
+                <span class="logo-bottom">CONVENTION & RESORT</span>
             </div>
         </a>
-        <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
-        <div class="logo-area">
-            <span class="logo-top">ASR</span>
-            <div class="logo-divider"></div>
-            <span class="logo-bottom">CONVENTION & RESORT</span>
-        </div>
-    </a>
 
-        <ul class="nav-links">
-            <li><a href="/" class="active">Home</a></li>
-            <li><a href="/about">About Us</a></li>
+        <ul class="nav-links" id="nav-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about" class="active">About Us</a></li>
             <li><a href="/facilities">Facilities & Amenities</a></li>
             <li><a href="/events">Events</a></li>
             <li><a href="/gallery">Gallery</a></li>
@@ -37,78 +215,57 @@
             <li><a href="/contact">Contact Us</a></li>
         </ul>
 
-        <div class="nav-action">
+        <div class="nav-right-actions">
             <a href="/#quotation" class="btn-quote">Get Quotation</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
         </div>
     </nav>
 </header>
 
-   <section class="page-hero" style="
-  background:
-    linear-gradient(rgba(0,0,0,0.45), rgba(0,0,0,0.45)),
-    url('/images/abtus.jpeg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 85vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgb(255, 255, 255);
-  text-align: center;
-text-shadow: 0 4px 15px rgba(0,0,0,0.6);">
-
-
-  <div>
-    <h1 style="font-family: 'Playfair Display', serif; font-size: 5.5rem;">
-      Our Story✨
-    </h1>
-    <p style="letter-spacing: 2px; text-transform: uppercase; font-size: 2.2rem; margin-top: -10px;">
-      Where
-      Tradition Meets Luxury
-    </p>
-  </div>
+<section class="page-hero">
+    <div>
+        <h1>Our Story✨</h1>
+        <p>Where Tradition Meets Luxury</p>
+    </div>
 </section>
 
-
-
-    <section class="container" style="padding: 80px 20px; line-height: 1.8;">
-        <div style="max-width: 900px; margin: 0 auto; text-align: center;">
-            <h2 style="color: #b8965a; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 30px;">A Legacy of Grandeur</h2>
-            <p style="font-size: 1.1rem; color: #444; margin-bottom: 20px;">
-                Located in the heart of Hyderabad, <strong>ASR Convention & Resort</strong> was built with a single vision: to provide a majestic space where life's biggest moments can be celebrated without compromise. 
-            </p>
-            <p style="font-size: 1.1rem; color: #444; margin-bottom: 40px;">
-                Whether it is a grand wedding for 3,000 guests or an intimate corporate retreat, our 30,000 sq. ft. pillar-less hall and lush resort greenery offer the perfect backdrop. We pride ourselves on our attention to detail, world-class hospitality, and a commitment to making every event legendary.
-            </p>
-            
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 50px;">
-                <div style="background: #f9f9f9; padding: 30px; border-radius: 10px; border-left: 5px solid #b8965a;">
-                    <h4 style="color: #b8965a;">Our Mission</h4>
-                    <p>To redefine the event experience by combining vast space with personalized luxury service.</p>
-                </div>
-                <div style="background: #f9f9f9; padding: 30px; border-radius: 10px; border-left: 5px solid #b8965a;">
-                    <h4 style="color: #b8965a;">Our Vision</h4>
-                    <p>To be Hyderabad's most preferred destination for grand celebrations and peaceful resort stays.</p>
-                </div>
+<section class="container">
+    <div class="legacy-section">
+        <h2 class="section-title">A Legacy of Grandeur</h2>
+        <p class="legacy-text">
+            Located in the heart of Hyderabad, <strong>ASR Convention & Resort</strong> was built with a single vision: to provide a majestic space where life's biggest moments can be celebrated without compromise. 
+        </p>
+        <p class="legacy-text" style="margin-bottom: 40px;">
+            Whether it is a grand wedding for 3,000 guests or an intimate corporate retreat, our 30,000 sq. ft. pillar-less hall and lush resort greenery offer the perfect backdrop. We pride ourselves on our attention to detail, world-class hospitality, and a commitment to making every event legendary.
+        </p>
+        
+        <div class="mission-grid">
+            <div class="mission-card">
+                <h4>Our Mission</h4>
+                <p>To redefine the event experience by combining vast space with personalized luxury service and cultural heritage.</p>
+            </div>
+            <div class="mission-card">
+                <h4>Our Vision</h4>
+                <p>To be Hyderabad's most preferred destination for grand celebrations, high-profile conventions, and peaceful resort stays.</p>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
- <footer class="site-footer">
+<footer class="site-footer">
     <div class="footer-container">
         <div class="footer-col brand-col">
-            <div class="footer-logo-badge">
-                <img src="/images/logo.png" alt="ASR Logo">
+            <div class="logo-link" style="margin-bottom: 20px;">
+                <div class="logo-badge"><img src="/images/logo.png" alt="ASR Logo"></div>
+                <div class="logo-area">
+                    <span class="logo-top" style="color:var(--gold)">ASR</span>
+                    <div class="logo-divider"></div>
+                    <span class="logo-bottom" style="color:white">CONVENTION & RESORT</span>
+                </div>
             </div>
-            <a href="/" style="text-decoration: none; color: inherit; display: inline-block;">
-        <div class="logo-area">
-            <span class="logo-top">ASR</span>
-            <div class="logo-divider"></div>
-            <span class="logo-bottom">CONVENTION & RESORT</span>
-        </div>
-    </a>
-            <p class="footer-desc">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
+            <p style="color: #cbd5e1; font-size: 0.9rem;">Hyderabad's most prestigious venue for grand weddings, corporate conventions, and luxury resort stays.</p>
         </div>
 
         <div class="footer-col">
@@ -124,32 +281,20 @@ text-shadow: 0 4px 15px rgba(0,0,0,0.6);">
 
         <div class="footer-col">
             <h4>Contact Details</h4>
-            <div class="contact-item">
-                <i class="fas fa-phone"></i>
-                <a href="tel:+918096660634">+91 8096660634</a>
-            </div>
-            <div class="contact-item">
-                <i class="fab fa-whatsapp"></i>
-                <a href="https://wa.me/918096660634" target="_blank">+91 8096660634</a>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-envelope"></i>
-                <span>info@asrconvention.com</span>
-            </div>
-            <div class="contact-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <a href="https://maps.google.com" target="_blank">Upperpally, Hyderabad</a>
-            </div>
+            <ul>
+                <li><a href="tel:+918096660634"><i class="fas fa-phone"></i> +91 8096660634</a></li>
+                <li><a href="https://wa.me/918096660634" target="_blank"><i class="fab fa-whatsapp"></i> +91 8096660634</a></li>
+                <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
+                <li><a href="#"><i class="fas fa-map-marker-alt"></i> Upperpally, Hyderabad</a></li>
+            </ul>
         </div>
 
         <div class="footer-col">
             <h4>Stay Connected</h4>
-            <div class="social-links">
-                <a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-                <div>
-                <a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a>
-                </div>
-            </div>
+            <ul class="social-links">
+                <li><a href="#" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                <li><a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+            </ul>
         </div>
     </div>
     
@@ -157,5 +302,19 @@ text-shadow: 0 4px 15px rgba(0,0,0,0.6);">
         <p>© 2025 <span>ASR Convention & Resort</span>. Crafted for Excellence.</p>
     </div>
 </footer>
+
+<script>
+    const menuBtn = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+    const spans = menuBtn.querySelectorAll('span');
+
+    menuBtn.addEventListener('click', () => {
+        navList.classList.toggle('active');
+        const isActive = navList.classList.contains('active');
+        spans[0].style.transform = isActive ? 'rotate(45deg) translate(8px, 8px)' : '';
+        spans[1].style.opacity = isActive ? '0' : '1';
+        spans[2].style.transform = isActive ? 'rotate(-45deg) translate(7px, -7px)' : '';
+    });
+</script>
 </body>
 </html>

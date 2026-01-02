@@ -565,6 +565,42 @@
         };
     }
 
+    // FORM SUBMISSION TO WHATSAPP
+    document.getElementById('quoteForm').onsubmit = function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const phone = document.getElementById('phone').value;
+        const venue = document.getElementById('mainCategory').value;
+        const event = document.getElementById('eventType').value;
+        const date = document.getElementById('eventDate').value;
+        const guests = document.getElementById('guests').value;
+
+        // Message formatting
+        const message = `*ASR Quotation Request*%0A` +
+                        `--------------------------%0A` +
+                        `*Name:* ${name}%0A` +
+                        `*Phone:* ${phone}%0A` +
+                        `*Venue:* ${venue}%0A` +
+                        `*Event:* ${event}%0A` +
+                        `*Date:* ${date}%0A` +
+                        `*Guests:* ${guests}%0A` +
+                        `--------------------------%0A` +
+                        `Please provide price details.`;
+
+        const whatsappURL = `https://wa.me/9189949400123?text=${message}`;
+
+        // Show modal and redirect
+        document.getElementById('successModal').style.display = 'flex';
+        
+        setTimeout(() => {
+            window.open(whatsappURL, '_blank');
+            document.getElementById('successModal').style.display = 'none';
+        }, 1500);
+    };
+
+    flatpickr("#eventDate", { minDate: "today" });
+
     document.addEventListener('DOMContentLoaded', initApp);
     function closeModal() { document.getElementById('successModal').style.display = 'none'; }
 </script>

@@ -128,36 +128,6 @@
             padding: 5px;
         }
         .menu-toggle span { width: 28px; height: 3px; background: var(--gold); border-radius: 2px; }
-        /* NAV LINKS */
-        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
-        .nav-links li a { text-decoration: none; color: #333; font-weight: 500; transition: var(--transition); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .nav-links li a:hover { color: var(--gold); }
-        
-        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
-
-        .btn-quote {
-            background: var(--gold);
-            color: white !important;
-            padding: 10px 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-        .btn-quote:hover { background: #9a7b45; transform: translateY(-2px); }
-
-        /* HAMBURGER */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            z-index: 1100;
-            padding: 5px;
-        }
-        .menu-toggle span { width: 28px; height: 3px; background: var(--gold); border-radius: 2px; transition: var(--transition); }
 
         /* HERO SECTION */
         .hero {
@@ -218,7 +188,6 @@
         /* MOBILE OVERRIDES */
         @media (max-width: 1100px) {
             .menu-toggle { display: flex; }
-            .desktop-nav { display: none; }
             
             .nav-links {
                 position: fixed;
@@ -241,7 +210,6 @@
             .hero p { font-size: 1.1rem; }
             .form-row { grid-template-columns: 1fr; }
             
-            /* Ensure the quote button stays visible on mobile */
             .nav-right-actions { gap: 10px; }
             .btn-quote { padding: 8px 14px; font-size: 0.75rem; }
         }
@@ -262,7 +230,6 @@
             </div>
         </a>
 
-        <!-- Main Navigation List: Consistent for all pages -->
         <ul class="nav-links" id="nav-list">
             <li><a href="/">Home</a></li>
             <li><a href="/about">About Us</a></li>
@@ -274,7 +241,6 @@
             <li><a href="/contact">Contact Us</a></li>
         </ul>
 
-        <!-- Right Side Actions: Quote Button + Menu Toggle -->
         <div class="nav-right-actions">
             <a href="#quotation" class="btn-quote">Get Quotation</a>
             <div class="menu-toggle" id="mobile-menu">
@@ -461,7 +427,7 @@
             <h4>Contact Details</h4>
             <ul>
                 <li><a href="tel:+919949400123"><i class="fas fa-phone"></i> +91 9949400123</a></li>
-                 <li><a href="tel:+919394566156"><i class="fas fa-phone"></i> +91 9394566156</a></li>
+                <li><a href="tel:+919394566156"><i class="fas fa-phone"></i> +91 9394566156</a></li>
                 <li><a href="https://wa.me/919949400123" target="_blank"><i class="fab fa-whatsapp"></i> +91 9949400123</a></li>
                 <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
                 <li><a href="https://maps.app.goo.gl/MAwMvb3cGL6n9ESHA"><i class="fas fa-map-marker-alt"></i> Munganoor, Hyderabad</a></li>
@@ -487,8 +453,8 @@
     <div class="modal-card">
         <div class="modal-icon"><i class="fas fa-check-circle" style="font-size:50px; color:var(--gold); margin-bottom:20px;"></i></div>
         <h3>Request Received!</h3>
-        <p>Our event experts will contact you within 24 hours.</p>
-        <button onclick="closeModal()" class="btn-submit" style="margin-top:20px;">Great, Thank You</button>
+        <p>Redirecting you to WhatsApp for final confirmation...</p>
+        <button onclick="closeModal()" class="btn-submit" style="margin-top:20px;">Close</button>
     </div>
 </div>
 
@@ -539,8 +505,12 @@
 
     async function initApp() {
         flatpickr("#eventDate", { minDate: "today", dateFormat: "Y-m-d" });
-        document.getElementById('quoteForm').onsubmit = async (e) => {
+        
+        const form = document.getElementById('quoteForm');
+        form.onsubmit = async (e) => {
             e.preventDefault();
+            
+            // Get data for both server submission and WhatsApp
             const formData = {
                 category: document.getElementById('mainCategory').value,
                 guests: document.getElementById('guests').value,
@@ -551,55 +521,52 @@
                 email: document.getElementById('email').value,
                 phone: document.getElementById('phone').value
             };
+
+            // 1. Attempt Server Submission first
             try {
-                const response = await fetch('/submit-quote', {
+                await fetch('/submit-quote', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(formData)
                 });
-                if (response.ok) {
-                    document.getElementById('successModal').style.display = 'flex';
-                    e.target.reset();
-                }
-            } catch (error) { alert("Submission failed. Check connection."); }
+            } catch (error) { 
+                console.log("Server record failed, proceeding to WhatsApp anyway.");
+            }
+
+            // 2. Show Modal
+            document.getElementById('successModal').style.display = 'flex';
+
+            // 3. Prepare WhatsApp Message
+            const waName = formData.name;
+            const waPhone = formData.phone;
+            const waVenue = formData.category.charAt(0).toUpperCase() + formData.category.slice(1);
+            const waEvent = formData.eventType;
+            const waDate = formData.eventDate;
+            const waGuests = formData.guests;
+            const waSession = formData.session;
+
+            const message = `*ASR Quotation Request*%0A` +
+                            `--------------------------%0A` +
+                            `*Name:* ${waName}%0A` +
+                            `*Phone:* ${waPhone}%0A` +
+                            `*Venue:* ${waVenue}%0A` +
+                            `*Event:* ${waEvent}%0A` +
+                            `*Date:* ${waDate}%0A` +
+                            `*Guests:* ${waGuests}%0A` +
+                            `*Session:* ${waSession}%0A` +
+                            `--------------------------%0A` +
+                            `Please provide price details.`;
+
+            // Note: Fixed the typo in the phone number here (919949400123)
+            const whatsappURL = `https://wa.me/919949400123?text=${message}`;
+
+            // 4. Redirect after a small delay
+            setTimeout(() => {
+                window.location.href = whatsappURL; 
+                form.reset();
+            }, 1800);
         };
     }
-
-    // FORM SUBMISSION TO WHATSAPP
-    document.getElementById('quoteForm').onsubmit = function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const phone = document.getElementById('phone').value;
-        const venue = document.getElementById('mainCategory').value;
-        const event = document.getElementById('eventType').value;
-        const date = document.getElementById('eventDate').value;
-        const guests = document.getElementById('guests').value;
-
-        // Message formatting
-        const message = `*ASR Quotation Request*%0A` +
-                        `--------------------------%0A` +
-                        `*Name:* ${name}%0A` +
-                        `*Phone:* ${phone}%0A` +
-                        `*Venue:* ${venue}%0A` +
-                        `*Event:* ${event}%0A` +
-                        `*Date:* ${date}%0A` +
-                        `*Guests:* ${guests}%0A` +
-                        `--------------------------%0A` +
-                        `Please provide price details.`;
-
-        const whatsappURL = `https://wa.me/9189949400123?text=${message}`;
-
-        // Show modal and redirect
-        document.getElementById('successModal').style.display = 'flex';
-        
-        setTimeout(() => {
-            window.open(whatsappURL, '_blank');
-            document.getElementById('successModal').style.display = 'none';
-        }, 1500);
-    };
-
-    flatpickr("#eventDate", { minDate: "today" });
 
     document.addEventListener('DOMContentLoaded', initApp);
     function closeModal() { document.getElementById('successModal').style.display = 'none'; }

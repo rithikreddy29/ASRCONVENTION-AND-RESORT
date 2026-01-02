@@ -138,17 +138,10 @@ app.post('/api/bookings', (req, res) => {
 
 app.put('/api/bookings/:id', (req, res) => {
   let data = JSON.parse(fs.readFileSync('bookings.json', 'utf8') || '[]');
-
-  data = data.map(b =>
-    b.id == req.params.id
-      ? { ...b, payment: req.body.payment }
-      : b
-  );
-
+  data = data.map(b => b.id == req.params.id ? req.body : b);
   fs.writeFileSync('bookings.json', JSON.stringify(data, null, 2));
   res.sendStatus(200);
 });
-
 
 function saveBooking() {
   fetch('/api/bookings', {

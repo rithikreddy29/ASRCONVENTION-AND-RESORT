@@ -100,3 +100,28 @@ app.post('/add-offline', (req, res) => {
 
 
 app.listen(3000, () => console.log('ASR Executive Server Online (No Admin Panel)'));
+
+
+////owner page
+
+app.get('/owner', (req,res)=>res.sendFile(__dirname+'/views/owner.html'));
+app.get('/manager', (req,res)=>res.sendFile(__dirname+'/views/manager.html'));
+app.get('/admin', (req,res)=>res.sendFile(__dirname+'/views/admin-login.html'));
+
+app.get('/api/inquiries', (req,res)=>{
+  res.json(JSON.parse(fs.readFileSync('inquiries.json')));
+});
+
+app.get('/api/expenses/all', (req,res)=>{
+  const owner = JSON.parse(fs.readFileSync('expenses-owner.json','utf8') || '[]');
+  const manager = JSON.parse(fs.readFileSync('expenses-manager.json','utf8') || '[]');
+  res.json([...owner.map(e=>({...e,role:'owner'})), ...manager.map(e=>({...e,role:'manager'}))]);
+});
+
+app.post('/api/expenses/manager', (req,res)=>{
+  const data = JSON.parse(fs.readFileSync('expenses-manager.json','utf8') || '[]');
+  data.push(req.body);
+  fs.writeFileSync('expenses-manager.json', JSON.stringify(data,null,2));
+  res.sendStatus(200);
+});
+

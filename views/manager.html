@@ -1,0 +1,28 @@
+<h1>Manager Dashboard</h1>
+
+<h2>Customer Enquiries</h2>
+<div id="enquiries"></div>
+
+<h2>Add Expense</h2>
+<input id="title" placeholder="Expense title">
+<input id="amount" type="number">
+<button onclick="addExpense()">Add</button>
+
+<script>
+fetch('/api/inquiries')
+  .then(r => r.json())
+  .then(d => enquiries.innerHTML =
+    d.map(i => `<p>${i.name} - ${i.event}</p>`).join('')
+  );
+
+function addExpense() {
+  fetch('/api/expenses/manager', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      title: title.value,
+      amount: amount.value
+    })
+  }).then(()=>alert('Added'));
+}
+</script>

@@ -1,0 +1,21 @@
+<h1>Owner Dashboard</h1>
+
+<h2>Customer Enquiries</h2>
+<div id="enquiries"></div>
+
+<h2>All Expenses</h2>
+<div id="expenses"></div>
+
+<script>
+fetch('/api/inquiries')
+  .then(r => r.json())
+  .then(d => enquiries.innerHTML =
+    d.map(i => `<p>${i.name} - ${i.event}</p>`).join('')
+  );
+
+fetch('/api/expenses/all')
+  .then(r => r.json())
+  .then(d => expenses.innerHTML =
+    d.map(e => `<p>${e.title} ₹${e.amount} (${e.role})</p>`).join('')
+  );
+</script>

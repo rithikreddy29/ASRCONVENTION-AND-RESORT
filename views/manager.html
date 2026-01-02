@@ -1,28 +1,53 @@
 <h1>Manager Dashboard</h1>
 
-<h2>Customer Enquiries</h2>
-<div id="enquiries"></div>
+<div class="card">
+  <h2>Manual Booking Entry</h2>
 
-<h2>Add Expense</h2>
-<input id="title" placeholder="Expense title">
-<input id="amount" type="number">
-<button onclick="addExpense()">Add</button>
+  <label>Venue Preference</label>
+  <select id="venue">
+    <option value="">Choose Venue...</option>
+    <option>Convention Hall</option>
+    <option>Resort</option>
+  </select>
 
-<script>
-fetch('/api/inquiries')
-  .then(r => r.json())
-  .then(d => enquiries.innerHTML =
-    d.map(i => `<p>${i.name} - ${i.event}</p>`).join('')
-  );
+  <label>No. of Guests</label>
+  <input id="guests" type="number">
 
-function addExpense() {
-  fetch('/api/expenses/manager', {
-    method: 'POST',
-    headers: {'Content-Type':'application/json'},
-    body: JSON.stringify({
-      title: title.value,
-      amount: amount.value
-    })
-  }).then(()=>alert('Added'));
-}
-</script>
+  <label>Event Type</label>
+  <input id="eventType">
+
+  <label>Event Date</label>
+  <input id="eventDate" type="date">
+
+  <label>Preferred Session</label>
+  <select id="session">
+    <option value="">Choose Session...</option>
+    <option>Day</option>
+    <option>Night</option>
+  </select>
+
+  <label>Mobile Number</label>
+  <input id="phone">
+
+  <label>Full Name</label>
+  <input id="name">
+
+  <label>Email Address</label>
+  <input id="email">
+
+  <label>Payment Status</label>
+  <select id="payment">
+    <option>Pending</option>
+    <option>Advance Paid</option>
+    <option>Fully Paid</option>
+  </select>
+
+  <button onclick="saveBooking()">Save Booking</button>
+</div>
+
+<div class="card">
+  <h2>Bookings</h2>
+  <div id="bookings"></div>
+</div>
+
+<script src="/admin.js"></script>

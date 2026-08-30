@@ -971,11 +971,6 @@ h1, h2, h3, h4, h5, h6 {
         visibility: visible;
     }
 
-    .mobile-drawer-header, .mobile-drawer-actions {
-        list-style: none;
-        width: 100%;
-    }
-
     .story-split-grid { grid-template-columns: 1fr; gap: 40px; }
     .floorplan-grid { grid-template-columns: 1fr; }
     .amenities-grid { grid-template-columns: 1fr 1fr; }

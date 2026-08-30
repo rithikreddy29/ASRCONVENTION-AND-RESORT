@@ -661,6 +661,7 @@
     }
 
     // --- 7. MOBILE NAVIGATION ENGINE ---
+    // --- 7. MOBILE NAVIGATION ENGINE ---
     class Navigation {
         constructor() {
             this.menuBtn = document.getElementById('mobile-menu');
@@ -671,7 +672,7 @@
         init() {
             if (!this.menuBtn || !this.navList) return;
 
-            // 1. Create mobile backdrop if not present
+            // Create mobile backdrop if not present
             let backdrop = document.getElementById('nav-backdrop');
             if (!backdrop) {
                 backdrop = document.createElement('div');
@@ -680,41 +681,6 @@
                 document.body.appendChild(backdrop);
             }
             this.backdrop = backdrop;
-
-            // 2. Add header close button to drawer if not present
-            if (!this.navList.querySelector('.mobile-drawer-header')) {
-                const drawerHeader = document.createElement('li');
-                drawerHeader.className = 'mobile-drawer-header';
-                drawerHeader.innerHTML = `
-                    <div style="display:flex; justify-content:space-between; align-items:center; width:100%; padding-bottom:12px; margin-bottom:12px; border-bottom:1px solid rgba(216,148,46,0.3);">
-                        <span style="font-family:var(--font-display); font-size:1.2rem; color:var(--brand-gold); font-weight:700; letter-spacing:1px;">ASR MENU</span>
-                        <button type="button" class="btn-drawer-close" aria-label="Close Menu" style="background:none; border:none; color:var(--brand-cream); font-size:1.6rem; cursor:pointer; padding:4px 8px; line-height:1;">&times;</button>
-                    </div>
-                `;
-                this.navList.insertBefore(drawerHeader, this.navList.firstChild);
-
-                const closeBtn = drawerHeader.querySelector('.btn-drawer-close');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', () => this.closeMenu());
-                }
-            }
-
-            // 3. Add quick action buttons inside drawer footer if not present
-            if (!this.navList.querySelector('.mobile-drawer-actions')) {
-                const drawerActions = document.createElement('li');
-                drawerActions.className = 'mobile-drawer-actions';
-                drawerActions.innerHTML = `
-                    <div style="display:flex; flex-direction:column; gap:10px; width:100%; margin-top:16px; padding-top:16px; border-top:1px solid rgba(243,237,211,0.15);">
-                        <a href="tel:+919949400123" class="btn-call" style="width:100%; height:42px; font-size:0.9rem; justify-content:center;">
-                            <i class="fas fa-phone-alt"></i> Call +91 9949400123
-                        </a>
-                        <a href="https://wa.me/919949400123" target="_blank" class="btn-quote-gold" style="width:100%; height:42px; font-size:0.9rem; justify-content:center;">
-                            <i class="fab fa-whatsapp"></i> WhatsApp Concierge
-                        </a>
-                    </div>
-                `;
-                this.navList.appendChild(drawerActions);
-            }
 
             // Toggle drawer
             const toggleMenu = (e) => {
@@ -750,7 +716,7 @@
             this.navList.classList.add('active');
             this.menuBtn.classList.add('active');
             if (this.backdrop) this.backdrop.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            document.body.style.overflow = 'hidden';
         }
 
         closeMenu() {

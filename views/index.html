@@ -247,13 +247,16 @@
             transition: var(--transition);
         }
 
-        /* HERO SECTION */
+        /* HERO SECTION - DESKTOP */
         .hero {
-            height: 100vh;
-            padding-top: 80px;
-            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/mainentry 2.jpeg');
+            min-height: 85vh;
+            padding-top: 120px;
+            padding-bottom: 60px;
+            background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.6)), url('/images/mainentry 2.jpeg');
             background-size: cover;
-            background-position: center;
+            background-position: center 25%;
+            /* Keeps the 'ASR CONVENTION & RESORTS' board fully visible */
+            background-repeat: no-repeat;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -261,15 +264,21 @@
             color: white;
         }
 
+        .hero-content {
+            max-width: 900px;
+            padding: 0 20px;
+        }
+
         .hero h1 {
             font-family: 'Playfair Display';
-            font-size: 4rem;
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            line-height: 1.2;
         }
 
         .hero p {
-            font-size: 1.5rem;
-            opacity: 0.9;
+            font-size: 1.3rem;
+            opacity: 0.95;
         }
 
         /* SECTIONS */
@@ -544,19 +553,27 @@
                 border-bottom: 1px solid rgba(255, 255, 255, 0.05);
             }
 
+            /* Responsive Hero Image Adjustments */
+            .hero {
+                min-height: 55vh;
+                padding-top: 110px;
+                padding-bottom: 40px;
+                background-position: center 20%;
+            }
+
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 2rem;
+                line-height: 1.25;
             }
 
             .hero p {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
 
             .form-row {
                 grid-template-columns: 1fr;
             }
 
-            /* Ensure the quote button stays visible on mobile */
             .nav-right-actions {
                 gap: 10px;
             }

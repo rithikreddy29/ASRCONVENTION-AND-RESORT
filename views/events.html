@@ -1,413 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events | ASR Convention & Resort</title>
+    <title>Event Collections | ASR Convention & Resort Hyderabad</title>
+    <meta name="description" content="Host grand weddings, corporate summits, Sangeet galas, and poolside events at ASR Convention & Resort Hyderabad.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="/neo.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #b8965a;
-            --dark: #0a0e14;
-            --white: #ffffff;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; line-height: 1.6; color: #333; background-color: #fcfcfc; }
-
-        /* HEADER & NAVIGATION */
-        .main-header {
-            position: fixed;
-            top: 0; width: 100%;
-            background: var(--white);
-            z-index: 1000;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-        }
-
-        .navbar {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-        }
-
-        /* FORCED LOGO ALIGNMENT */
-        .logo-link { 
-            display: flex !important; 
-            flex-direction: row !important; /* Forces horizontal layout */
-            align-items: center !important; 
-            text-decoration: none; 
-            gap: 15px; 
-        }
-        
-        .logo-badge {
-            width: 65px; 
-            height: 65px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            overflow: hidden;
-            background: #fff;
-            flex-shrink: 0;
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            padding: 4px;
-            order: 1; /* Ensures badge is first */
-        }
-        .logo-badge img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-        }
-        
-        .logo-area { 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-            text-align: left;
-            order: 2; /* Ensures text is second */
-        }
-        .logo-top { 
-            font-family: 'Playfair Display'; 
-            font-size: 1.9rem; 
-            font-weight: 900; 
-            color: var(--gold); 
-            line-height: 0.9;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-        }
-        .logo-divider { 
-            width: 100%; 
-            height: 2px; 
-            background: var(--gold); 
-            margin: 2px 0; 
-        }
-        .logo-bottom { 
-            font-size: 0.65rem; 
-            color: #1a1a1a; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            font-weight: 600; 
-            line-height: 1;
-        }
-
-        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
-        .nav-links li a { text-decoration: none; color: #333; font-weight: 500; transition: var(--transition); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .nav-links li a:hover, .nav-links li a.active { color: var(--gold); }
-        
-        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
-
-        .btn-quote {
-            background: var(--gold);
-            color: white !important;
-            padding: 9px 9px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-        .btn-quote:hover { background: #9a7b45; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(184, 150, 90, 0.3); }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 5px;
-        }
-        .menu-toggle span { width: 28px; height: 3px; background: var(--gold); border-radius: 2px; }
-
-        /* EVENTS CONTENT */
-        .events-page-header {
-            text-align: center;
-            padding: 140px 5% 40px;
-            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('/images/pattern.png');
-        }
-        .events-page-header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); margin-bottom: 10px; }
-        .events-page-header p { color: #666; max-width: 700px; margin: 0 auto; font-size: 1.1rem; }
-
-        .event-grid {
-            max-width: 1300px;
-            margin: 0 auto 80px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            padding: 0 5%;
-        }
-
-        .event-card {
-            background: #fff;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            border: 1px solid #f0f0f0;
-            display: flex;
-            flex-direction: column;
-        }
-        .event-card:hover { transform: translateY(-10px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
-        
-        .event-image {
-            height: 240px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        .event-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 50%;
-            background: linear-gradient(to top, rgba(0,0,0,0.3), transparent);
-        }
-
-        .event-content { padding: 30px; flex-grow: 1; }
-        .event-content h3 {
-            color: var(--gold);
-            margin-bottom: 20px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            border-bottom: 1px solid #f0f0f0;
-            padding-bottom: 10px;
-        }
-        .event-content ul { list-style: none; padding: 0; color: #555; }
-        .event-content ul li { margin-bottom: 12px; display: flex; align-items: flex-start; gap: 12px; font-size: 0.95rem; }
-        .event-content ul li i { color: var(--gold); margin-top: 4px; font-size: 0.9rem; }
-
-        /* FOOTER */
-        .site-footer { background: #0a0e14; color: white; padding: 80px 5% 30px; border-top: 2px solid var(--gold); }
-        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1300px; margin: 0 auto; }
-        .footer-col h4 { color: var(--gold); font-family: 'Playfair Display'; margin-bottom: 20px; text-transform: uppercase; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .footer-col a:hover { color: var(--gold); }
-        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #64748b; }
-
-        @media (max-width: 1100px) {
-            .menu-toggle { display: flex; }
-            .nav-links {
-                position: fixed;
-                top: 0; right: -100%;
-                width: 80%; max-width: 320px;
-                height: 100vh;
-                background: var(--dark);
-                flex-direction: column;
-                justify-content: center;
-                transition: var(--transition);
-                padding: 40px;
-                gap: 25px;
-            }
-            .nav-links.active { right: 0; }
-            .nav-links li a { color: white; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; padding-bottom: 10px; }
-            .events-page-header h1 { font-size: 2.2rem; }
-        }
-    </style>
 </head>
+
 <body>
 
-<header class="main-header">
-    <nav class="navbar">
-        <a href="/" class="logo-link">
-            <div class="logo-badge"><img src="/images/logo.png" alt="ASR Logo"></div>
-            <div class="logo-area">
-                <span class="logo-top">ASR</span>
-                <div class="logo-divider"></div>
-                <span class="logo-bottom">CONVENTION & RESORT</span>
-            </div>
-        </a>
+    <!-- ==================== HEADER ==================== -->
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="/" class="logo-link">
+                <div class="logo-badge">
+                    <img src="/images/logo.png" alt="ASR Convention & Resort Logo">
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-brand-title">ASR</span>
+                    <div class="logo-brand-divider"></div>
+                    <span class="logo-brand-subtitle">CONVENTION & RESORT</span>
+                </div>
+            </a>
 
-        <ul class="nav-links" id="nav-list">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/facilities">Facilities & Amenities</a></li>
-            <li><a href="/events" class="active">Events</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/faqs">FAQs</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-        </ul>
-
-        <div class="nav-right-actions">
-            <a href="/#quotation" class="btn-quote">Get Quotation</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<section class="events-page-header">
-    <h1>Our Event Venues</h1>
-    <p>From grand weddings of 5,000 guests to intimate family celebrations, discover the perfect space for your milestones.</p>
-</section>
-
-<main class="event-grid">
-    <div class="event-card">
-        <div class="event-image" style="background-image: url('/images/hall.jpeg');"></div>
-        <div class="event-content">
-            <h3>Weddings & Receptions</h3>
-            <ul>
-                <li><i class="fas fa-check"></i> Capacity up to 5,000 guests</li>
-                <li><i class="fas fa-check"></i> Luxury Bridal Suites</li>
-                <li><i class="fas fa-check"></i> Traditional Mandap setups</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-image" style="background-image: url('/images/event5.jpeg');"></div>
-        <div class="event-content">
-            <h3>Corporate Conventions</h3>
-            <ul>
-                <li><i class="fas fa-check"></i> High-speed Wi-Fi & AV gear</li>
-                <li><i class="fas fa-check"></i> Product Launch layouts</li>
-                <li><i class="fas fa-check"></i> Professional Stage & Lighting</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-image" style="background-image: url('/images/event7.jpeg');"></div>
-        <div class="event-content">
-            <h3>Exhibitions & Expos</h3>
-            <ul>
-                <li><i class="fas fa-check"></i> 30,000 sq. ft. open floor</li>
-                <li><i class="fas fa-check"></i> Massive Dining Area</li>
-                <li><i class="fas fa-check"></i> 1,500+ Car Parking</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-image" style="background-image: url('/images/decor2.png');"></div>
-        <div class="event-content">
-            <h3>Engagements & Pre-Weddings</h3>
-            <ul>
-                <li><i class="fas fa-check"></i> Intimate Venue Settings</li>
-                <li><i class="fas fa-check"></i> Haldi & Sangeet Layouts</li>
-                <li><i class="fas fa-check"></i> Themed Floral Decor</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-image" style="background-image: url('/images/bdy.png');"></div>
-        <div class="event-content">
-            <h3>Birthdays & Social Galas</h3>
-            <ul>
-                <li><i class="fas fa-check"></i> Fun Party Environments</li>
-                <li><i class="fas fa-check"></i> Customizable Stage Setup</li>
-                <li><i class="fas fa-check"></i> Kid-friendly Food Menus</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-image" style="background-image: url('/images/abtus.jpeg');"></div>
-        <div class="event-content">
-            <h3>Luxury Resort Events</h3>
-            <ul>
-                <li><i class="fas fa-check"></i> Poolside Party Layouts</li>
-                <li><i class="fas fa-check"></i> Relaxed Resort Atmosphere</li>
-                <li><i class="fas fa-check"></i> Overnight Luxury Stay</li>
-            </ul>
-        </div>
-    </div>
-    
-    <div class="event-card">
-        <div class="event-image" style="background-image: url('/images/convention1.jpeg');"></div>
-        <div class="event-content">
-            <h3>Bespoke Decor</h3>
-            <ul>
-                <li><i class="fas fa-check"></i> Designer Stage Backdrops</li>
-                <li><i class="fas fa-check"></i> Ambient Mood Lighting</li>
-                <li><i class="fas fa-check"></i> Advanced Sound & Media</li>
-            </ul>
-        </div>
-    </div>
-
-    <div class="event-card">
-        <div class="event-image" style="background-image: url('/images/pool.png');"></div>
-        <div class="event-content">
-            <h3>Family Get-Togethers</h3>
-            <ul>
-                <li><i class="fas fa-check"></i> Private Garden Spaces</li>
-                <li><i class="fas fa-check"></i> Buffet & Live Counters</li>
-                <li><i class="fas fa-check"></i> Weekend Stay Packages</li>
-            </ul>
-        </div>
-    </div>
-</main>
-
-<footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-col brand-col">
-            <div class="footer-logo-badge">
-                <img src="/images/logo.png" alt="ASR Logo">
-            </div>
-            <h4>ASR CONVENTION</h4>
-            <p>Hyderabad's most prestigious venue for grand weddings and luxury stays.</p>
-        </div>
-        <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
+            <ul class="nav-links" id="nav-list">
                 <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/facilities">Facilities</a></li>
+                <li><a href="/events" class="active">Events</a></li>
                 <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/faqs">FAQs</a></li>
+                <li><a href="/blog">Blog</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
+
+            <div class="nav-right-actions">
+                <a href="tel:+919949400123" class="btn-call">
+                    <i class="fas fa-phone-alt" style="font-size: 0.8rem;"></i> Call Us
+                </a>
+                <a href="/#quotation" class="btn-quote-gold">Get a Quote</a>
+                <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero-eventara-section" style="min-height: 55vh; padding-top: 150px; padding-bottom: 70px;">
+        <div class="hero-bg-image" style="background-image: url('/images/event5.jpeg'); opacity: 0.3;"></div>
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-fade-to-cream"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title-main" style="font-size: 3.6rem;">
+                CURATED EVENT SPACES
+                <span class="hero-title-sub">for life's most cherished milestones</span>
+            </h1>
+            <p class="hero-lead">
+                From monumental weddings and Sangeet celebrations to corporate expos and private weekend retreats.
+            </p>
         </div>
-       
-        <div class="footer-col">
-            <h4>Contact Details</h4>
-            <ul>
-                <li><a href="tel:+919949400123"><i class="fas fa-phone"></i> +91 9949400123</a></li>
-                 <li><a href="tel:+919394566156"><i class="fas fa-phone"></i> +91 9394566156</a></li>
-                <li><a href="https://wa.me/919949400123" target="_blank"><i class="fab fa-whatsapp"></i> +91 9949400123</a></li>
-                <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
-                <li><a href="https://maps.app.goo.gl/MAwMvb3cGL6n9ESHA"><i class="fas fa-map-marker-alt"></i> Munganoor, Hyderabad</a></li>
-            </ul>
+    </section>
+
+    <!-- ==================== EVENTS SHOWCASE ==================== -->
+    <section class="floorplans-section">
+        <div class="container">
+            <span class="eyebrow-terracotta">Signature Packages</span>
+            <h2 style="font-size: 3.2rem; color: var(--brand-charcoal); line-height: 1.1; margin-bottom: 10px;">
+                Every Occasion, <br>
+                <span style="font-family: var(--font-cormorant); font-style: italic; font-weight: 300; color: var(--brand-terracotta);">perfectly hosted</span>
+            </h2>
+            <div class="gold-divider-sm" style="margin-bottom: 45px;"></div>
+
+            <!-- Event 01: Weddings -->
+            <article class="floorplan-card">
+                <div class="floorplan-grid">
+                    <div class="floorplan-content">
+                        <div>
+                            <span class="floorplan-num">01</span>
+                            <h3 class="floorplan-title">Grand Weddings & Receptions</h3>
+                            <p class="floorplan-desc">
+                                A majestic setting for traditional weddings and grand evening receptions. Features our 25,000 sq ft pillar-less hall, bridal dressing suites, and separate dining pavilion.
+                            </p>
+                            <div class="floorplan-specs">
+                                <div>
+                                    <div class="floorplan-spec-dt">Capacity</div>
+                                    <div class="floorplan-spec-dd">up to 5,000</div>
+                                </div>
+                                <div>
+                                    <div class="floorplan-spec-dt">Setup</div>
+                                    <div class="floorplan-spec-dd">Hall + Dining</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/#quotation" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.28em; color: var(--brand-terracotta); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                            Plan Wedding <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="floorplan-img-wrap">
+                        <div class="floorplan-img-inner">
+                            <img src="/images/event5.jpeg" alt="Weddings and Receptions">
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 02: Sangeet & Haldi -->
+            <article class="floorplan-card">
+                <div class="floorplan-grid">
+                    <div class="floorplan-content">
+                        <div>
+                            <span class="floorplan-num">02</span>
+                            <h3 class="floorplan-title">Sangeet, Mehendi & Haldi</h3>
+                            <p class="floorplan-desc">
+                                High-energy poolside music, dance floors, rain dance fun, and open lawn seating designed for vibrant pre-wedding celebrations with family and friends.
+                            </p>
+                            <div class="floorplan-specs">
+                                <div>
+                                    <div class="floorplan-spec-dt">Capacity</div>
+                                    <div class="floorplan-spec-dd">up to 1,000</div>
+                                </div>
+                                <div>
+                                    <div class="floorplan-spec-dt">Setup</div>
+                                    <div class="floorplan-spec-dd">Pool + Lawns</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/#quotation" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.28em; color: var(--brand-terracotta); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                            Plan Sangeet Night <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="floorplan-img-wrap">
+                        <div class="floorplan-img-inner">
+                            <img src="/images/sang.png" alt="Sangeet Ambiance">
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Event 03: Corporate Expos -->
+            <article class="floorplan-card">
+                <div class="floorplan-grid">
+                    <div class="floorplan-content">
+                        <div>
+                            <span class="floorplan-num">03</span>
+                            <h3 class="floorplan-title">Corporate Summits & Expos</h3>
+                            <p class="floorplan-desc">
+                                Pillar-less layout with advanced AV capabilities, power redundancy, and ample parking designed for smooth multi-delegate conferences and product exhibitions.
+                            </p>
+                            <div class="floorplan-specs">
+                                <div>
+                                    <div class="floorplan-spec-dt">Capacity</div>
+                                    <div class="floorplan-spec-dd">up to 4,000</div>
+                                </div>
+                                <div>
+                                    <div class="floorplan-spec-dt">Setup</div>
+                                    <div class="floorplan-spec-dd">AV + Parking</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="/#quotation" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.28em; color: var(--brand-terracotta); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                            Plan Corporate Event <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="floorplan-img-wrap">
+                        <div class="floorplan-img-inner">
+                            <img src="/images/mainentry.jpeg" alt="Corporate Conventions">
+                        </div>
+                    </div>
+                </div>
+            </article>
         </div>
+    </section>
 
-        <div class="footer-col">
-            <h4>Stay Connected</h4>
-            <ul class="social-links">
-                <li><a href="https://www.instagram.com/asr_convention_resorts?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
-                <li><a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-            </ul>
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="/" class="logo-link" style="margin-bottom: 18px;">
+                        <div class="logo-badge" style="width: 64px; height: 64px;">
+                            <img src="/images/logo.png" alt="ASR Logo">
+                        </div>
+                        <div class="logo-text-group">
+                            <span class="logo-brand-title">ASR</span>
+                            <div class="logo-brand-divider"></div>
+                            <span class="logo-brand-subtitle">CONVENTION & RESORT</span>
+                        </div>
+                    </a>
+                    <p style="color: var(--text-cream-85); font-size: 0.95rem; line-height: 1.7;">
+                        A luxury space for life's most memorable moments. Hyderabad.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/facilities">Facilities</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/admin" style="color: var(--brand-gold);"><i class="fas fa-lock" style="font-size: 0.75rem;"></i> Staff Portal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="tel:+919949400123"><i class="fas fa-phone-alt"></i> +91 9949400123</a></li>
+                        <li><a href="tel:+919394566156"><i class="fas fa-phone-alt"></i> +91 9394566156</a></li>
+                        <li><a href="https://wa.me/919949400123" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Concierge</a></li>
+                        <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Location</h4>
+                    <p style="color: var(--text-cream-85); font-size: 0.92rem; margin-bottom: 12px;">Munganoor, Vanasthalipuram, Hyderabad, Telangana</p>
+                    <a href="https://maps.app.goo.gl/MAwMvb3cGL6n9ESHA" target="_blank" class="btn-call" style="height: 36px; padding: 0 16px; font-size: 0.8rem; display: inline-flex;">
+                        <i class="fas fa-map-marker-alt"></i> Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 ASR Convention & Resort. All Rights Reserved.</p>
+            </div>
         </div>
-    </div>
-    
-    <div class="footer-bottom">
-        <p>© 2025 <span>ASR Convention & Resort</span>. Crafted for Excellence.</p>
-    </div>
-</footer>
+    </footer>
 
-
-<script>
-    const menuBtn = document.getElementById('mobile-menu');
-    const navList = document.getElementById('nav-list');
-    const spans = menuBtn.querySelectorAll('span');
-
-    menuBtn.addEventListener('click', () => {
-        navList.classList.toggle('active');
-        const isActive = navList.classList.contains('active');
-        spans[0].style.transform = isActive ? 'rotate(45deg) translate(8px, 8px)' : '';
-        spans[1].style.opacity = isActive ? '0' : '1';
-        spans[2].style.transform = isActive ? 'rotate(-45deg) translate(7px, -7px)' : '';
-    });
-</script>
+    <script src="/luxury-engine.js"></script>
 </body>
 </html>

@@ -1,0 +1,1973 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASR Executive Portal | Management & Billing Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Flatpickr Datepicker -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- Eventara Luxury Admin Stylesheet -->
+    <style>
+        :root {
+            --brand-cream: #f3edd3;
+            --brand-cream-light: #faf7eb;
+            --brand-charcoal: #05292c;
+            --brand-charcoal-deep: #031e20;
+            --brand-charcoal-light: #0d3b3f;
+            --brand-gold: #d8942e;
+            --brand-gold-hover: #c58220;
+            --brand-gold-ink: #b87b20;
+            --brand-terracotta: #c46851;
+            --surface-parchment: #faf6ea;
+            --surface-parchment-border: rgba(216, 148, 46, 0.25);
+            --border-neutral: rgba(5, 41, 44, 0.12);
+
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Plus Jakarta Sans', sans-serif;
+
+            --radius-sm: 8px;
+            --radius-md: 14px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            --shadow-card: 0 10px 30px -10px rgba(5, 41, 44, 0.1);
+        }
+
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--brand-cream);
+            color: var(--brand-charcoal);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- 1. DUAL LOGIN WALL --- */
+        #loginWall {
+            position: fixed;
+            inset: 0;
+            background: var(--brand-charcoal);
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-card {
+            background: var(--brand-cream);
+            border: 2px solid var(--brand-gold);
+            border-radius: var(--radius-lg);
+            padding: 38px 30px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .login-badge {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid var(--brand-gold);
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .login-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .login-role-selector {
+            display: flex;
+            gap: 8px;
+            background: var(--surface-parchment);
+            padding: 6px;
+            border-radius: var(--radius-full);
+            margin-bottom: 18px;
+            border: 1px solid var(--surface-parchment-border);
+        }
+
+        .role-choice-btn {
+            flex: 1;
+            padding: 9px;
+            border-radius: var(--radius-full);
+            border: none;
+            background: transparent;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--brand-charcoal);
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .role-choice-btn.active {
+            background: var(--brand-charcoal);
+            color: var(--brand-cream);
+            box-shadow: 0 4px 12px rgba(5, 41, 44, 0.2);
+        }
+
+        .role-choice-btn.active i {
+            color: var(--brand-gold);
+        }
+
+        .quick-login-box {
+            background: var(--surface-parchment);
+            border: 1px dashed var(--brand-gold);
+            border-radius: var(--radius-md);
+            padding: 12px;
+            margin-bottom: 16px;
+            text-align: left;
+        }
+
+        /* --- 2. DASHBOARD HEADER --- */
+        .admin-header {
+            background: var(--brand-charcoal);
+            color: var(--brand-cream);
+            padding: 14px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(243, 237, 211, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-group .logo-badge {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #fff;
+            border: 1.5px solid var(--brand-gold);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-group .logo-badge img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .admin-title-group h1 {
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            color: var(--brand-cream);
+            line-height: 1;
+        }
+
+        .admin-title-group span {
+            font-size: 0.62rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--brand-gold);
+            font-weight: 700;
+        }
+
+        .profile-view-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 5px 12px;
+            background: rgba(216, 148, 46, 0.15);
+            border: 1px solid var(--brand-gold);
+            border-radius: var(--radius-full);
+            color: var(--brand-gold);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- 3. DASHBOARD WRAPPER --- */
+        .admin-main {
+            max-width: 1380px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 24px 20px 60px;
+            flex-grow: 1;
+        }
+
+        /* --- STATS KPI CARDS --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+            gap: 16px;
+            margin-bottom: 25px;
+        }
+
+        .stat-card {
+            background: var(--surface-parchment);
+            border: 1px solid var(--surface-parchment-border);
+            border-radius: var(--radius-md);
+            padding: 18px 16px;
+            box-shadow: var(--shadow-card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card-label {
+            font-size: 0.68rem;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--brand-charcoal);
+            opacity: 0.75;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .stat-card-val {
+            font-family: var(--font-display);
+            font-size: 1.7rem;
+            font-weight: 700;
+            color: var(--brand-charcoal);
+            line-height: 1.1;
+        }
+
+        .stat-card-icon {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            font-size: 1.4rem;
+            color: var(--brand-gold);
+            opacity: 0.65;
+        }
+
+        /* --- TABS NAV --- */
+        .tabs-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--surface-parchment-border);
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 8px 18px;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: var(--radius-full);
+            color: var(--brand-charcoal);
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .tab-btn:hover,
+        .tab-btn.active {
+            background: var(--brand-charcoal);
+            color: var(--brand-cream);
+            border-color: var(--brand-charcoal);
+        }
+
+        .tab-btn.active i {
+            color: var(--brand-gold);
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- 4. VISUAL CALENDAR WITH DAY / NIGHT SESSION STATUS --- */
+        .cal-wrapper {
+            padding: 20px;
+            background: #fff;
+        }
+
+        .cal-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .cal-month-title {
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            color: var(--brand-charcoal);
+            font-weight: 700;
+        }
+
+        .cal-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .cal-day-header {
+            text-align: center;
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--brand-gold-ink);
+            padding: 6px 0;
+            background: var(--surface-parchment);
+            border-radius: var(--radius-sm);
+        }
+
+        .cal-cell {
+            min-height: 68px;
+            border-radius: var(--radius-sm);
+            padding: 6px 8px;
+            border: 1px solid #e5dfd2;
+            background: var(--surface-parchment);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.2s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cal-cell:hover:not(.is-past) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            border-color: var(--brand-gold);
+        }
+
+        .cal-cell-empty {
+            min-height: 68px;
+            border-radius: var(--radius-sm);
+            background: transparent;
+            border: 1px dashed #e5dfd2;
+            opacity: 0.3;
+        }
+
+        .cal-cell-date-num {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--brand-charcoal);
+            line-height: 1;
+        }
+
+        /* Fully Booked in RED */
+        .cal-cell.is-booked {
+            background: #fee2e2 !important;
+            border: 1.5px solid #dc2626 !important;
+            box-shadow: 0 2px 8px rgba(220, 38, 38, 0.15);
+        }
+
+        .cal-cell.is-booked .cal-cell-date-num {
+            color: #991b1b;
+            font-weight: 800;
+        }
+
+        /* Day Booked (Night Free) in AMBER */
+        .cal-cell.is-day-booked {
+            background: #fef3c7 !important;
+            border: 1.5px solid #f59e0b !important;
+            box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+        }
+
+        .cal-cell.is-day-booked .cal-cell-date-num {
+            color: #92400e;
+            font-weight: 800;
+        }
+
+        /* Night Booked (Day Free) in PURPLE */
+        .cal-cell.is-night-booked {
+            background: #ede9fe !important;
+            border: 1.5px solid #8b5cf6 !important;
+            box-shadow: 0 2px 6px rgba(139, 92, 246, 0.15);
+        }
+
+        .cal-cell.is-night-booked .cal-cell-date-num {
+            color: #5b21b6;
+            font-weight: 800;
+        }
+
+        .booked-tag {
+            background: #dc2626;
+            color: #ffffff;
+            font-size: 0.65rem;
+            font-weight: 700;
+            padding: 2px 5px;
+            border-radius: 3px;
+            line-height: 1.1;
+            margin-top: 2px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .day-tag {
+            background: #d97706;
+            color: #ffffff;
+            font-size: 0.63rem;
+            font-weight: 700;
+            padding: 2px 4px;
+            border-radius: 3px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .night-tag {
+            background: #7c3aed;
+            color: #ffffff;
+            font-size: 0.63rem;
+            font-weight: 700;
+            padding: 2px 4px;
+            border-radius: 3px;
+            text-align: center;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .cal-cell.is-past {
+            background: #ede8dc !important;
+            border: 1px solid #dcd5c7 !important;
+            opacity: 0.55;
+            cursor: not-allowed !important;
+        }
+
+        .cal-cell.is-past .cal-cell-date-num {
+            color: #8c8275 !important;
+        }
+
+        .past-tag {
+            font-size: 0.62rem;
+            color: #8c8275;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        .avail-tag {
+            font-size: 0.65rem;
+            color: #166534;
+            font-weight: 600;
+            margin-top: auto;
+        }
+
+        /* --- DATA TABLES --- */
+        .table-card {
+            background: #ffffff;
+            border: 1px solid var(--surface-parchment-border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+        }
+
+        .table-header-row {
+            padding: 16px 20px;
+            background: var(--surface-parchment);
+            border-bottom: 1px solid var(--surface-parchment-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .custom-table th {
+            background: #fdfbf7;
+            padding: 12px 14px;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--brand-charcoal);
+            font-weight: 700;
+            border-bottom: 1px solid var(--border-neutral);
+        }
+
+        .custom-table td {
+            padding: 12px 14px;
+            font-size: 0.88rem;
+            border-bottom: 1px solid rgba(5, 41, 44, 0.06);
+            color: var(--brand-charcoal);
+        }
+
+        .custom-table tbody tr:hover {
+            background: #faf8f2;
+        }
+
+        .badge {
+            padding: 3px 8px;
+            border-radius: var(--radius-full);
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge-paid { background: #e6f7ec; color: #166534; border: 1px solid #bbf7d0; }
+        .badge-partial { background: #fef3c7; color: #92400e; border: 1px solid #fde68a; }
+        .badge-pending { background: #fee2e2; color: #991b1b; border: 1px solid #fecaca; }
+        .badge-confirmed { background: #e0f2fe; color: #075985; border: 1px solid #bae6fd; }
+
+        /* --- BUTTONS --- */
+        .btn-gold {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 8px 18px;
+            background: var(--brand-gold);
+            color: var(--brand-charcoal);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .btn-gold:hover {
+            background: var(--brand-gold-hover);
+            transform: translateY(-1px);
+        }
+
+        .btn-sm-action {
+            padding: 5px 10px;
+            border-radius: var(--radius-sm);
+            font-size: 0.78rem;
+            font-weight: 600;
+            border: 1px solid var(--border-neutral);
+            background: #fff;
+            color: var(--brand-charcoal);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-sm-action:hover {
+            border-color: var(--brand-gold);
+            color: var(--brand-gold-ink);
+        }
+
+        /* --- MODAL DIALOGS --- */
+        .admin-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 41, 44, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .admin-modal.active {
+            display: flex;
+        }
+
+        .modal-body-box {
+            background: #ffffff;
+            border-radius: var(--radius-lg);
+            max-width: 680px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 30px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+            border: 1px solid var(--surface-parchment-border);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin-bottom: 14px;
+        }
+
+        .form-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-field label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--brand-charcoal);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 9px 12px;
+            background: var(--surface-parchment);
+            border: 1px solid var(--border-neutral);
+            border-radius: var(--radius-sm);
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            color: var(--brand-charcoal);
+            outline: none;
+        }
+
+        .form-input:focus {
+            border-color: var(--brand-gold);
+            background: #fff;
+            box-shadow: 0 0 0 3px rgba(216, 148, 46, 0.2);
+        }
+
+        /* ==================== A4 EXACT PRINT LAYOUT ==================== */
+        @page {
+            size: A4 portrait;
+            margin: 10mm 15mm;
+        }
+
+        @media print {
+            html, body {
+                background: #ffffff !important;
+                color: #000000 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                font-size: 11.5px !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body * {
+                visibility: hidden !important;
+            }
+
+            #printableInvoice, #printableInvoice * {
+                visibility: visible !important;
+            }
+
+            #printableInvoice {
+                position: fixed !important;
+                left: 0 !important;
+                top: 0 !important;
+                width: 100% !important;
+                max-width: 180mm !important;
+                margin: 0 auto !important;
+                padding: 10px !important;
+                border: 1px solid #888 !important;
+                border-radius: 6px !important;
+                box-shadow: none !important;
+                page-break-after: avoid !important;
+                page-break-inside: avoid !important;
+                display: block !important;
+            }
+
+            .admin-modal, .admin-modal.active {
+                position: static !important;
+                background: none !important;
+                backdrop-filter: none !important;
+                padding: 0 !important;
+                display: block !important;
+            }
+
+            .modal-body-box {
+                box-shadow: none !important;
+                border: none !important;
+                padding: 0 !important;
+                max-width: 100% !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ==================== 1. DUAL LOGIN WALL ==================== -->
+    <div id="loginWall">
+        <div class="login-card">
+            <div class="login-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+            <h2 style="font-family: var(--font-display); font-size: 1.7rem; color: var(--brand-charcoal); margin-bottom: 4px;">ASR Executive Portal</h2>
+            <p style="font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase; color: var(--brand-gold-ink); font-weight: 700; margin-bottom: 16px;">Protected Staff & Management Authentication</p>
+
+            <div class="login-role-selector">
+                <button type="button" class="role-choice-btn active" id="btnRoleOwner" onclick="selectLoginRole('owner')">
+                    <i class="fas fa-crown"></i> 👑 Owner
+                </button>
+                <button type="button" class="role-choice-btn" id="btnRoleManager" onclick="selectLoginRole('manager')">
+                    <i class="fas fa-user-tie"></i> 👔 Manager
+                </button>
+            </div>
+
+            <form id="adminLoginForm">
+                <input type="hidden" id="selectedRole" value="owner">
+
+                <div class="form-field" style="margin-bottom: 16px; text-align: left;">
+                    <label id="loginRoleLabel">Enter Owner Password</label>
+                    <input type="password" id="loginPassword" class="form-input" placeholder="Password: owner2345" required autofocus autocomplete="current-password">
+                </div>
+
+                <button type="submit" class="btn-gold" style="width: 100%; height: 44px; font-size: 0.92rem;">
+                    <i class="fas fa-lock"></i> Unlock Dashboard
+                </button>
+            </form>
+
+            <p id="loginError" style="color: #dc2626; font-size: 0.82rem; margin-top: 12px; display: none;">Invalid password. Access restricted to authorized personnel.</p>
+        </div>
+    </div>
+
+    <!-- ==================== 2. ADMIN PORTAL HEADER ==================== -->
+    <header class="admin-header">
+        <div class="logo-group">
+            <div class="logo-badge">
+                <img src="/images/logo.png" alt="ASR Logo">
+            </div>
+            <div class="admin-title-group">
+                <h1>ASR CONVENTION & RESORT</h1>
+                <span>Executive Management & Billing</span>
+            </div>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 12px;">
+            <!-- Owner Perspective Switcher -->
+            <div id="ownerProfileSwitcher" style="display: none;">
+                <button onclick="toggleOwnerPerspective()" class="btn-sm-action" style="background: rgba(216,148,46,0.2); color: var(--brand-gold); border-color: var(--brand-gold); padding: 6px 12px; font-weight: 700;">
+                    <i class="fas fa-exchange-alt"></i> <span id="currentPerspectiveText">Switch to Manager View</span>
+                </button>
+            </div>
+
+            <div class="profile-view-pill" id="activeRoleBadge">
+                <i class="fas fa-crown"></i> Owner Mode
+            </div>
+
+            <a href="/" target="_blank" style="color: var(--brand-cream); font-size: 0.82rem; text-decoration: none;">
+                <i class="fas fa-external-link-alt"></i> Website
+            </a>
+            <button onclick="logoutAdmin()" class="btn-sm-action" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.2);">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+    </header>
+
+    <!-- ==================== 3. MAIN DASHBOARD CONTENT ==================== -->
+    <main class="admin-main">
+        
+        <!-- Live Metrics Bar -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <i class="fas fa-calendar-check stat-card-icon"></i>
+                <div class="stat-card-label">Total Bookings</div>
+                <div class="stat-card-val" id="metricTotalBookings">0</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-coins stat-card-icon"></i>
+                <div class="stat-card-label">Total Revenue Booked</div>
+                <div class="stat-card-val" id="metricTotalRevenue">₹0</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-hand-holding-usd stat-card-icon"></i>
+                <div class="stat-card-label">Advance Received</div>
+                <div class="stat-card-val" id="metricTotalAdvance" style="color: #166534;">₹0</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-hourglass-half stat-card-icon"></i>
+                <div class="stat-card-label">Balance Pending</div>
+                <div class="stat-card-val" id="metricBalancePending" style="color: #991b1b;">₹0</div>
+            </div>
+            <div class="stat-card">
+                <i class="fas fa-inbox stat-card-icon"></i>
+                <div class="stat-card-label">Website Leads</div>
+                <div class="stat-card-val" id="metricTotalInquiries">0</div>
+            </div>
+        </div>
+
+        <!-- Navigation Tabs Bar -->
+        <div class="tabs-bar">
+            <button class="tab-btn active" onclick="switchTab('calendar')">
+                <i class="fas fa-calendar-alt"></i> Visual Calendar (Booked in Red)
+            </button>
+            <button class="tab-btn" onclick="switchTab('billing')">
+                <i class="fas fa-file-invoice-dollar"></i> Billing & Balance Payments
+            </button>
+            <button class="tab-btn" onclick="switchTab('bookings')">
+                <i class="fas fa-list"></i> Event Bookings List
+            </button>
+            <button class="tab-btn" onclick="switchTab('inquiries')">
+                <i class="fas fa-envelope-open-text"></i> Website Leads (<span id="inquiryBadgeCount">0</span>)
+            </button>
+        </div>
+
+        <!-- TAB 1: COMPACT VISUAL CALENDAR (PAST DATES SHADED, BOOKED IN RED) -->
+        <section id="panel-calendar" class="tab-panel active">
+            <div class="table-card cal-wrapper">
+                <div class="cal-header-bar">
+                    <div>
+                        <h3 class="cal-month-title" id="calendarMonthHeading">September 2026</h3>
+                        <p style="font-size: 0.8rem; color: var(--text-charcoal-70);">
+                            <span style="display:inline-block; width:12px; height:12px; background:#dc2626; border-radius:2px; vertical-align:middle; margin-right:3px;"></span> 
+                            <strong style="color:#991b1b;">Red = Full Day Booked</strong> | 
+                            <span style="display:inline-block; width:12px; height:12px; background:#f59e0b; border-radius:2px; vertical-align:middle; margin-left:6px; margin-right:3px;"></span> 
+                            <span style="color:#92400e;">Amber = Day Booked (Night Free)</span> | 
+                            <span style="display:inline-block; width:12px; height:12px; background:#8b5cf6; border-radius:2px; vertical-align:middle; margin-left:6px; margin-right:3px;"></span> 
+                            <span style="color:#5b21b6;">Purple = Night Booked (Day Free)</span> | 
+                            <span style="display:inline-block; width:12px; height:12px; background:#ede8dc; border:1px solid #dcd5c7; border-radius:2px; vertical-align:middle; margin-left:6px; margin-right:3px;"></span> 
+                            <span style="color:#8c8275;">Shaded Gray = Past</span>
+                        </p>
+                    </div>
+                    <div style="display: flex; gap: 8px;">
+                        <button onclick="changeMonth(-1)" class="btn-sm-action"><i class="fas fa-chevron-left"></i> Prev</button>
+                        <button onclick="jumpToToday()" class="btn-sm-action">Today</button>
+                        <button onclick="changeMonth(1)" class="btn-sm-action">Next <i class="fas fa-chevron-right"></i></button>
+                        <button onclick="openBookingModal()" class="btn-gold" style="margin-left: 8px;">
+                            <i class="fas fa-plus"></i> New Booking
+                        </button>
+                    </div>
+                </div>
+
+                <div class="cal-grid" style="margin-bottom: 6px;">
+                    <div class="cal-day-header">Sun</div>
+                    <div class="cal-day-header">Mon</div>
+                    <div class="cal-day-header">Tue</div>
+                    <div class="cal-day-header">Wed</div>
+                    <div class="cal-day-header">Thu</div>
+                    <div class="cal-day-header">Fri</div>
+                    <div class="cal-day-header">Sat</div>
+                </div>
+
+                <div class="cal-grid" id="calendarDaysGrid">
+                    <!-- Dynamic Date Cells Render Here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: BILLING & BALANCE PAYMENTS LEDGER -->
+        <section id="panel-billing" class="tab-panel">
+            <div class="table-card">
+                <div class="table-header-row">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-family: var(--font-display);">Event Billing, Discounts & Payments Ledger</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-charcoal-70);">Track subtotal, discount %, advances, and click "+ Add Payment" to collect remaining amounts.</p>
+                    </div>
+                    <button onclick="openBookingModal()" class="btn-gold">
+                        <i class="fas fa-plus"></i> New Billing Entry
+                    </button>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Client Name</th>
+                                <th>Event Date</th>
+                                <th>Subtotal (₹)</th>
+                                <th>Discount</th>
+                                <th>Net Total (₹)</th>
+                                <th>Advance Paid (₹)</th>
+                                <th>Balance Due (₹)</th>
+                                <th>Payment Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="billingTableBody">
+                            <tr><td colspan="10" style="text-align: center; padding: 25px;">Loading billing data...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: EVENT BOOKINGS LIST -->
+        <section id="panel-bookings" class="tab-panel">
+            <div class="table-card">
+                <div class="table-header-row">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-family: var(--font-display);">Event Booking Directory</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-charcoal-70);">Manage dates, catering package, stage decor theme, and guest counts.</p>
+                    </div>
+                    <button onclick="openBookingModal()" class="btn-gold">
+                        <i class="fas fa-plus"></i> + New Event Entry
+                    </button>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Client / Event</th>
+                                <th>Contact</th>
+                                <th>Venue Space</th>
+                                <th>Event Date</th>
+                                <th>Catering & Decor</th>
+                                <th>Guests</th>
+                                <th>Entered By</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="bookingsTableBody">
+                            <tr><td colspan="10" style="text-align: center; padding: 25px;">Loading bookings...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: WEBSITE LEADS / INQUIRIES -->
+        <section id="panel-inquiries" class="tab-panel">
+            <div class="table-card">
+                <div class="table-header-row">
+                    <div>
+                        <h3 style="font-size: 1.25rem; font-family: var(--font-display);">Inquiries from Website Quotation Form</h3>
+                        <p style="font-size: 0.82rem; color: var(--text-charcoal-70);">Incoming customer requests with catering & decor preferences. Click WhatsApp to reply or Delete to remove.</p>
+                    </div>
+                </div>
+
+                <div style="overflow-x: auto;">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Date Received</th>
+                                <th>Name</th>
+                                <th>Phone</th>
+                                <th>Venue Preference</th>
+                                <th>Event Type</th>
+                                <th>Target Date</th>
+                                <th>Catering & Decor</th>
+                                <th>Guests</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="inquiriesTableBody">
+                            <tr><td colspan="9" style="text-align: center; padding: 25px;">Loading inquiries...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ==================== 4. MODAL: NEW / EDIT BOOKING & BILLING ==================== -->
+    <div id="bookingModal" class="admin-modal">
+        <div class="modal-body-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; border-bottom: 1px solid var(--border-neutral); padding-bottom: 10px;">
+                <h3 id="bookingModalTitle" style="font-size: 1.35rem; font-family: var(--font-display);">Event Booking & Billing Entry</h3>
+                <button onclick="closeBookingModal()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer;">&times;</button>
+            </div>
+
+            <form id="bookingForm">
+                <input type="hidden" id="editBookingId">
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Client / Event Name</label>
+                        <input type="text" id="bClientName" class="form-input" placeholder="e.g. Ramesh Reddy Wedding" required>
+                    </div>
+                    <div class="form-field">
+                        <label>Contact Phone</label>
+                        <input type="tel" id="bClientPhone" class="form-input" placeholder="10-digit mobile number" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Client Email</label>
+                        <input type="email" id="bClientEmail" class="form-input" placeholder="client@example.com">
+                    </div>
+                    <div class="form-field">
+                        <label>Venue Space</label>
+                        <select id="bVenue" class="form-input" required>
+                            <option value="Main Convention Hall (25,000 Sq Ft)">Main Convention Hall (25,000 Sq Ft)</option>
+                            <option value="Mini Banquet Hall (10,000 Sq Ft)">Mini Banquet Hall (10,000 Sq Ft)</option>
+                            <option value="Oasis Pool & Rain Dance">Oasis Pool & Rain Dance</option>
+                            <option value="Verdant Lawns & Suites">Verdant Lawns & Suites</option>
+                            <option value="Grand Dining Pavilion">Grand Dining Pavilion</option>
+                            <option value="Full Resort & Convention">Full Resort & Convention Estate</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Event Type</label>
+                        <input type="text" id="bEventType" class="form-input" placeholder="e.g. Wedding, Reception, Engagement..." required>
+                    </div>
+                    <div class="form-field">
+                        <label>Event Date</label>
+                        <input type="text" id="bEventDate" class="form-input" placeholder="YYYY-MM-DD" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Session Timing</label>
+                        <select id="bSession" class="form-input">
+                            <option value="FullDay">Full 24-Hour Day</option>
+                            <option value="Day">Day Session (Morning/Afternoon)</option>
+                            <option value="Night">Evening / Night Session</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Expected Guests</label>
+                        <input type="number" id="bGuests" class="form-input" placeholder="e.g. 1500" min="1">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label><i class="fas fa-utensils" style="color:var(--brand-gold);"></i> Catering Package</label>
+                        <select id="bCatering" class="form-input">
+                            <option value="None / Self-Catering">None / Self-Catering</option>
+                            <option value="Standard Veg Banquet Feast">Standard Veg Banquet Feast</option>
+                            <option value="Grand Non-Veg & Veg Royal Feast">Grand Non-Veg & Veg Royal Feast</option>
+                            <option value="Luxury Live Counters & Global Desserts">Luxury Live Counters & Global Desserts</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label><i class="fas fa-gem" style="color:var(--brand-gold);"></i> Stage & Decor Theme</label>
+                        <select id="bDecor" class="form-input">
+                            <option value="None / Standard Estate Lighting">None / Standard Estate Lighting</option>
+                            <option value="Traditional Floral Mandap & Entry Arch">Traditional Floral Mandap & Entry Arch</option>
+                            <option value="Contemporary Grand LED Stage & Truss">Contemporary Grand LED Stage & Truss</option>
+                            <option value="Royal Palace Theme Floral & Ambient Decor">Royal Palace Theme Floral & Ambient Decor</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Billing Breakdown with Real-Time Discount % Calculation -->
+                <div style="background: var(--surface-parchment); padding: 14px; border-radius: var(--radius-sm); margin-bottom: 14px; border: 1px solid var(--surface-parchment-border);">
+                    <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 1px; color: var(--brand-gold-ink); font-weight: 700; display: block; margin-bottom: 10px;">
+                        <i class="fas fa-calculator"></i> Billing & Discount Calculation
+                    </span>
+                    
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>Package Subtotal (₹)</label>
+                            <input type="number" id="bSubtotal" class="form-input" placeholder="0" oninput="recalcModalBilling()" required>
+                        </div>
+                        <div class="form-field">
+                            <label>Discount (%)</label>
+                            <input type="number" id="bDiscountPercent" class="form-input" placeholder="0" min="0" max="100" oninput="recalcModalBilling()">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>Discount Amount (₹)</label>
+                            <input type="number" id="bDiscountAmount" class="form-input" placeholder="0" readonly style="background: #eef2f5; font-weight: 600;">
+                        </div>
+                        <div class="form-field">
+                            <label>Net Total Amount (₹)</label>
+                            <input type="number" id="bNetTotal" class="form-input" placeholder="0" readonly style="background: #e6f7ec; font-weight: 700; color: #166534;">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label>Advance Payment Paid (₹)</label>
+                            <input type="number" id="bAdvancePaid" class="form-input" placeholder="0" oninput="recalcModalBilling()">
+                        </div>
+                        <div class="form-field">
+                            <label>Remaining Balance Due (₹)</label>
+                            <input type="number" id="bBalanceDue" class="form-input" placeholder="0" readonly style="background: #fee2e2; font-weight: 700; color: #991b1b;">
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Payment Mode</label>
+                        <select id="bPaymentMode" class="form-input">
+                            <option value="UPI (GPay / PhonePe)">UPI (GPay / PhonePe)</option>
+                            <option value="Bank Transfer (NEFT / RTGS)">Bank Transfer (NEFT / RTGS)</option>
+                            <option value="Cash Deposit">Cash Deposit</option>
+                            <option value="Credit / Debit Card">Credit / Debit Card</option>
+                            <option value="Cheque">Cheque</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-field" style="margin-bottom: 18px;">
+                    <label>Special Instructions & Notes</label>
+                    <textarea id="bNotes" class="form-input" rows="2" placeholder="Specific requirements, stage decorator details, catering notes..."></textarea>
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" onclick="closeBookingModal()" class="btn-sm-action">Cancel</button>
+                    <button type="submit" class="btn-gold"><i class="fas fa-save"></i> Save Event Record</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== 5. MODAL: ADD REMAINING PAYMENT ==================== -->
+    <div id="addPaymentModal" class="admin-modal">
+        <div class="modal-body-box" style="max-width: 500px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; border-bottom: 1px solid var(--border-neutral); padding-bottom: 10px;">
+                <h3 style="font-size: 1.3rem; font-family: var(--font-display);"><i class="fas fa-hand-holding-usd" style="color:var(--brand-gold);"></i> Record Balance Payment</h3>
+                <button onclick="closeAddPaymentModal()" style="background: none; border: none; font-size: 1.4rem; cursor: pointer;">&times;</button>
+            </div>
+
+            <form id="addPaymentForm" onsubmit="submitRemainingPayment(event)">
+                <input type="hidden" id="payBookingId">
+
+                <div style="background: var(--surface-parchment); padding: 12px; border-radius: var(--radius-sm); margin-bottom: 16px;">
+                    <div style="font-size: 0.85rem; color: #666;">Booking: <strong id="payClientTitle" style="color:var(--brand-charcoal);">—</strong></div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 6px;">
+                        <span>Total Net Package: <strong id="payNetTotalVal">₹0</strong></span>
+                        <span>Current Due: <strong id="payCurrentBalanceVal" style="color:#991b1b;">₹0</strong></span>
+                    </div>
+                </div>
+
+                <div class="form-field" style="margin-bottom: 14px;">
+                    <label>Payment Amount Received (₹)</label>
+                    <input type="number" id="payAmountInput" class="form-input" placeholder="Enter amount received" required min="1">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-field">
+                        <label>Payment Mode</label>
+                        <select id="payModeSelect" class="form-input">
+                            <option value="UPI (GPay / PhonePe)">UPI (GPay / PhonePe)</option>
+                            <option value="Bank Transfer (NEFT / RTGS)">Bank Transfer (NEFT / RTGS)</option>
+                            <option value="Cash Deposit">Cash Deposit</option>
+                            <option value="Credit / Debit Card">Credit / Debit Card</option>
+                            <option value="Cheque">Cheque</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label>Payment Date</label>
+                        <input type="text" id="payDateInput" class="form-input" required>
+                    </div>
+                </div>
+
+                <div class="form-field" style="margin-bottom: 20px;">
+                    <label>Receipt Note / Reference No.</label>
+                    <input type="text" id="payNoteInput" class="form-input" placeholder="e.g. Final Settlement / Second Installment">
+                </div>
+
+                <div style="display: flex; justify-content: flex-end; gap: 10px;">
+                    <button type="button" onclick="closeAddPaymentModal()" class="btn-sm-action">Cancel</button>
+                    <button type="submit" class="btn-gold"><i class="fas fa-check"></i> Add Payment & Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- ==================== 6. MODAL: EXACT A4 PRINTABLE RECEIPT ==================== -->
+    <div id="invoiceReceiptModal" class="admin-modal">
+        <div class="modal-body-box" style="max-width: 760px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="font-size: 1.2rem; font-family: var(--font-display);">Event Booking Receipt (A4 Fit)</h3>
+                <div style="display: flex; gap: 8px;">
+                    <button onclick="window.print()" class="btn-gold"><i class="fas fa-print"></i> Print A4 Receipt</button>
+                    <button onclick="closeInvoiceModal()" class="btn-sm-action">&times; Close</button>
+                </div>
+            </div>
+
+            <!-- Printable Receipt Body -->
+            <div id="printableInvoice" style="background: #fff; padding: 24px; border: 1px solid #ccc; border-radius: 6px;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid var(--brand-gold); padding-bottom: 12px; margin-bottom: 16px;">
+                    <div>
+                        <h2 style="font-family: var(--font-display); font-size: 1.6rem; color: var(--brand-charcoal); line-height: 1; margin-bottom: 4px;">ASR CONVENTION & RESORT</h2>
+                        <p style="font-size: 0.8rem; color: #444;">Munganoor, Vanasthalipuram, Hyderabad, Telangana</p>
+                        <p style="font-size: 0.8rem; color: #444;">Phone: +91 9949400123 / +91 9394566156 | Email: info@asrconvention.com</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <span style="font-size: 0.7rem; text-transform: uppercase; letter-spacing: 1px; color: var(--brand-gold-ink); font-weight: 700;">Official Tax Invoice & Receipt</span>
+                        <div id="invReceiptId" style="font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--brand-charcoal);">BK-1001</div>
+                        <div id="invDate" style="font-size: 0.8rem; color: #666;">Date: 2026-08-30</div>
+                    </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; background: #fdfbf7; padding: 12px; border-radius: 6px; border: 1px solid #eee;">
+                    <div>
+                        <span style="font-size: 0.68rem; text-transform: uppercase; color: #666; font-weight: 700;">Billed To Client</span>
+                        <h4 id="invClientName" style="font-size: 1.05rem; color: var(--brand-charcoal); margin: 2px 0;">Client Name</h4>
+                        <div id="invClientPhone" style="font-size: 0.82rem; color: #333;">Phone: -</div>
+                        <div id="invClientEmail" style="font-size: 0.8rem; color: #555;">Email: -</div>
+                    </div>
+                    <div>
+                        <span style="font-size: 0.68rem; text-transform: uppercase; color: #666; font-weight: 700;">Event Reservation Particulars</span>
+                        <div id="invEventName" style="font-weight: 700; color: var(--brand-charcoal); margin: 2px 0;">Wedding Celebration</div>
+                        <div id="invVenue" style="font-size: 0.82rem; color: #333;">Venue: Main Convention Hall</div>
+                        <div id="invEventDate" style="font-size: 0.82rem; color: #333;">Event Date: 2026-09-24 (Full Day)</div>
+                        <div id="invCateringDecor" style="font-size: 0.8rem; color: #555; margin-top: 2px;">Catering: - | Decor: -</div>
+                    </div>
+                </div>
+
+                <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px;">
+                    <thead>
+                        <tr style="background: #f4efea; border-bottom: 1.5px solid #ccc;">
+                            <th style="padding: 8px; text-align: left; font-size: 0.75rem; text-transform: uppercase;">Particulars & Package Description</th>
+                            <th style="padding: 8px; text-align: right; font-size: 0.75rem; text-transform: uppercase;">Amount (₹)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 9px 8px; border-bottom: 1px solid #eee;">
+                                <strong>Venue Estate Reservation & Climate Control Central AC Package</strong>
+                                <div style="font-size: 0.75rem; color: #666;">Includes heavy-duty generator backup, parking marshals, stage truss & suites.</div>
+                            </td>
+                            <td id="invSubtotalRow" style="padding: 9px 8px; text-align: right; font-weight: 600; border-bottom: 1px solid #eee;">₹0</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div style="display: flex; justify-content: flex-end; margin-bottom: 20px;">
+                    <div style="width: 270px; border: 1px solid #eee; padding: 10px; border-radius: 6px; background: #faf8f2;">
+                        <div style="display: flex; justify-content: space-between; padding: 3px 0; font-size: 0.85rem;">
+                            <span>Package Subtotal:</span>
+                            <strong id="invSubtotalSum">₹0</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 3px 0; font-size: 0.85rem; color: #b87b20;">
+                            <span>Discount (<span id="invDiscountPercent">0</span>%):</span>
+                            <strong id="invDiscountSum">-₹0</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.92rem; border-top: 1px solid #ddd;">
+                            <span>Net Total Amount:</span>
+                            <strong id="invNetTotalSum">₹0</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 4px 0; font-size: 0.92rem; color: #166534;">
+                            <span>Payments Received:</span>
+                            <strong id="invAdvanceSum">₹0</strong>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 5px 0; font-size: 1rem; border-top: 2px solid #333; margin-top: 3px; color: #991b1b;">
+                            <span>Balance Due:</span>
+                            <strong id="invBalanceSum">₹0</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid #ddd; padding-top: 10px; font-size: 0.7rem; color: #555; line-height: 1.35;">
+                    <strong>Standard Terms & Conditions:</strong>
+                    <div>1. Booking is confirmed upon receipt of designated advance. Advance is non-refundable upon client cancellation.</div>
+                    <div>2. Remaining balance must be cleared prior to event commencement. Sound limits per state regulations apply.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Flatpickr Script -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <!-- Admin Portal Core Engine -->
+    <script>
+        let currentRole = 'owner';
+        let currentPerspective = 'owner';
+        let dashboardData = { metrics: {}, inquiries: [], bookings: [], blockedDates: [] };
+        let calCurrentYear = new Date().getFullYear();
+        let calCurrentMonth = new Date().getMonth();
+
+        const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+        // 1. Auth Setup
+        document.addEventListener('DOMContentLoaded', () => {
+            const token = sessionStorage.getItem('asr_admin_token');
+            const savedRole = sessionStorage.getItem('asr_admin_role');
+
+            if (token && savedRole) {
+                currentRole = savedRole;
+                currentPerspective = savedRole;
+                document.getElementById('loginWall').style.display = 'none';
+                updateHeaderUI();
+                loadDashboardData();
+            }
+
+            flatpickr('#bEventDate', { minDate: 'today', dateFormat: 'Y-m-d' });
+            flatpickr('#payDateInput', { defaultDate: 'today', dateFormat: 'Y-m-d' });
+
+            document.getElementById('adminLoginForm').addEventListener('submit', handleLogin);
+            document.getElementById('bookingForm').addEventListener('submit', handleSaveBooking);
+        });
+
+        function selectLoginRole(role) {
+            currentRole = role;
+            document.getElementById('selectedRole').value = role;
+
+            if (role === 'owner') {
+                document.getElementById('btnRoleOwner').classList.add('active');
+                document.getElementById('btnRoleManager').classList.remove('active');
+                document.getElementById('loginRoleLabel').textContent = 'Enter Owner Password';
+                document.getElementById('loginPassword').placeholder = 'Password: owner2345';
+            } else {
+                document.getElementById('btnRoleOwner').classList.remove('active');
+                document.getElementById('btnRoleManager').classList.add('active');
+                document.getElementById('loginRoleLabel').textContent = 'Enter Manager Password';
+                document.getElementById('loginPassword').placeholder = 'Password: asr1234';
+            }
+            document.getElementById('loginPassword').value = '';
+            document.getElementById('loginError').style.display = 'none';
+        }
+
+        function quickLogin(role) {
+            currentRole = role;
+            currentPerspective = role;
+            sessionStorage.setItem('asr_admin_token', 'asr_' + role + '_' + Date.now());
+            sessionStorage.setItem('asr_admin_role', role);
+            document.getElementById('loginWall').style.display = 'none';
+            updateHeaderUI();
+            loadDashboardData();
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+            const role = document.getElementById('selectedRole').value;
+            const password = document.getElementById('loginPassword').value.trim();
+
+            const ownerPasses = ['owner2345', '2345', '9999', 'owner2026'];
+            const managerPasses = ['asr1234', '1234', 'manager123'];
+
+            let isAuthorized = false;
+            let verifiedRole = role;
+
+            if (role === 'owner' && ownerPasses.includes(password.toLowerCase())) {
+                isAuthorized = true;
+                verifiedRole = 'owner';
+            } else if (role === 'manager' && managerPasses.includes(password.toLowerCase())) {
+                isAuthorized = true;
+                verifiedRole = 'manager';
+            } else if (ownerPasses.includes(password.toLowerCase())) {
+                isAuthorized = true;
+                verifiedRole = 'owner';
+            } else if (managerPasses.includes(password.toLowerCase())) {
+                isAuthorized = true;
+                verifiedRole = 'manager';
+            }
+
+            if (isAuthorized) {
+                quickLogin(verifiedRole);
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ role, password })
+                });
+                const data = await res.json();
+                if (data.success) {
+                    quickLogin(data.role || role);
+                } else {
+                    document.getElementById('loginError').style.display = 'block';
+                }
+            } catch (err) {
+                document.getElementById('loginError').style.display = 'block';
+            }
+        }
+
+        function updateHeaderUI() {
+            const badge = document.getElementById('activeRoleBadge');
+            const switcher = document.getElementById('ownerProfileSwitcher');
+
+            if (currentRole === 'owner') {
+                switcher.style.display = 'block';
+                if (currentPerspective === 'owner') {
+                    badge.innerHTML = `<i class="fas fa-crown"></i> 👑 Owner Master Profile`;
+                    document.getElementById('currentPerspectiveText').textContent = 'Switch to Manager View';
+                } else {
+                    badge.innerHTML = `<i class="fas fa-user-tie"></i> 👔 Manager Operations View`;
+                    document.getElementById('currentPerspectiveText').textContent = 'Switch to Owner View';
+                }
+            } else {
+                switcher.style.display = 'none';
+                badge.innerHTML = `<i class="fas fa-user-tie"></i> 👔 Manager Profile`;
+            }
+        }
+
+        function toggleOwnerPerspective() {
+            if (currentRole !== 'owner') return;
+            currentPerspective = currentPerspective === 'owner' ? 'manager' : 'owner';
+            updateHeaderUI();
+            renderAll();
+        }
+
+        function logoutAdmin() {
+            sessionStorage.removeItem('asr_admin_token');
+            sessionStorage.removeItem('asr_admin_role');
+            window.location.reload();
+        }
+
+        // 2. Load Dashboard Dataset
+        async function loadDashboardData() {
+            try {
+                const res = await fetch('/api/admin/data');
+                dashboardData = await res.json();
+                renderAll();
+            } catch (err) {
+                console.error("Dashboard load failed:", err);
+            }
+        }
+
+        function renderAll() {
+            renderMetrics();
+            renderCalendar();
+            renderBookingsTable();
+            renderBillingTable();
+            renderInquiriesTable();
+        }
+
+        function renderMetrics() {
+            const m = dashboardData.metrics || {};
+            document.getElementById('metricTotalBookings').textContent = m.totalBookings || 0;
+            document.getElementById('metricTotalRevenue').textContent = '₹' + (m.totalRevenue || 0).toLocaleString();
+            document.getElementById('metricTotalAdvance').textContent = '₹' + (m.totalAdvance || 0).toLocaleString();
+            document.getElementById('metricBalancePending').textContent = '₹' + (m.totalBalanceDue || 0).toLocaleString();
+            document.getElementById('metricTotalInquiries').textContent = m.totalInquiries || 0;
+            document.getElementById('inquiryBadgeCount').textContent = m.totalInquiries || 0;
+        }
+
+        // 3. COMPACT VISUAL CALENDAR (WITH DAY VS NIGHT SESSION RECOGNITION)
+        function renderCalendar() {
+            const grid = document.getElementById('calendarDaysGrid');
+            const heading = document.getElementById('calendarMonthHeading');
+            heading.textContent = `${monthNames[calCurrentMonth]} ${calCurrentYear}`;
+
+            grid.innerHTML = '';
+
+            const today = new Date();
+            const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
+
+            const firstDay = new Date(calCurrentYear, calCurrentMonth, 1).getDay();
+            const daysInMonth = new Date(calCurrentYear, calCurrentMonth + 1, 0).getDate();
+
+            for (let i = 0; i < firstDay; i++) {
+                const emptyCell = document.createElement('div');
+                emptyCell.className = 'cal-cell-empty';
+                grid.appendChild(emptyCell);
+            }
+
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${calCurrentYear}-${String(calCurrentMonth + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const bookingsOnDate = (dashboardData.bookings || []).filter(b => b.eventDate === dateStr);
+                const isHardBlocked = (dashboardData.blockedDates || []).includes(dateStr);
+                const isPast = dateStr < todayStr;
+
+                const hasFullDay = isHardBlocked || bookingsOnDate.some(b => b.session === 'FullDay');
+                const hasDay = bookingsOnDate.some(b => b.session === 'Day');
+                const hasNight = bookingsOnDate.some(b => b.session === 'Night');
+
+                const isFullyBooked = hasFullDay || (hasDay && hasNight);
+
+                const cell = document.createElement('div');
+
+                if (isPast) {
+                    cell.className = 'cal-cell is-past';
+                    cell.innerHTML = `
+                        <div class="cal-cell-date-num">${day}</div>
+                        <div class="past-tag">Past</div>
+                    `;
+                    cell.onclick = null;
+                } else if (isFullyBooked) {
+                    cell.className = 'cal-cell is-booked';
+                    const mainBooking = bookingsOnDate[0];
+                    const label = mainBooking ? (mainBooking.clientName || mainBooking.eventType) : 'Private Hold';
+                    cell.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span class="cal-cell-date-num">${day}</span>
+                            <span style="font-size:0.6rem; font-weight:800; color:#dc2626;">🔴 FULL BOOKED</span>
+                        </div>
+                        <div class="booked-tag" title="${label}">${label}</div>
+                    `;
+                    cell.onclick = () => {
+                        if (mainBooking) editBooking(mainBooking.id);
+                        else alert(`Date ${dateStr} is blocked for private hold.`);
+                    };
+                } else if (hasDay) {
+                    cell.className = 'cal-cell is-day-booked';
+                    const dayBooking = bookingsOnDate.find(b => b.session === 'Day');
+                    const label = dayBooking ? (dayBooking.clientName || dayBooking.eventType) : 'Day Booked';
+                    cell.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span class="cal-cell-date-num">${day}</span>
+                            <span style="font-size:0.6rem; font-weight:800; color:#d97706;">☀️ DAY BOOKED</span>
+                        </div>
+                        <div class="day-tag" title="${label}">${label}</div>
+                        <div style="font-size:0.62rem; color:#166534; font-weight:700;">🌙 Night Free</div>
+                    `;
+                    cell.onclick = () => {
+                        if (confirm(`Day session is booked on ${dateStr} (${label}). Would you like to create a Night Session booking?`)) {
+                            openBookingModal();
+                            document.getElementById('bEventDate').value = dateStr;
+                            document.getElementById('bSession').value = 'Night';
+                        } else if (dayBooking) {
+                            editBooking(dayBooking.id);
+                        }
+                    };
+                } else if (hasNight) {
+                    cell.className = 'cal-cell is-night-booked';
+                    const nightBooking = bookingsOnDate.find(b => b.session === 'Night');
+                    const label = nightBooking ? (nightBooking.clientName || nightBooking.eventType) : 'Night Booked';
+                    cell.innerHTML = `
+                        <div style="display:flex; justify-content:space-between; align-items:center;">
+                            <span class="cal-cell-date-num">${day}</span>
+                            <span style="font-size:0.6rem; font-weight:800; color:#7c3aed;">🌙 NIGHT BOOKED</span>
+                        </div>
+                        <div class="night-tag" title="${label}">${label}</div>
+                        <div style="font-size:0.62rem; color:#166534; font-weight:700;">☀️ Day Free</div>
+                    `;
+                    cell.onclick = () => {
+                        if (confirm(`Night session is booked on ${dateStr} (${label}). Would you like to create a Day Session booking?`)) {
+                            openBookingModal();
+                            document.getElementById('bEventDate').value = dateStr;
+                            document.getElementById('bSession').value = 'Day';
+                        } else if (nightBooking) {
+                            editBooking(nightBooking.id);
+                        }
+                    };
+                } else {
+                    cell.className = 'cal-cell';
+                    cell.innerHTML = `
+                        <div class="cal-cell-date-num">${day}</div>
+                        <div class="avail-tag">🟢 Available</div>
+                    `;
+                    cell.onclick = () => {
+                        openBookingModal();
+                        document.getElementById('bEventDate').value = dateStr;
+                    };
+                }
+
+                grid.appendChild(cell);
+            }
+        }
+
+        function changeMonth(delta) {
+            calCurrentMonth += delta;
+            if (calCurrentMonth < 0) {
+                calCurrentMonth = 11;
+                calCurrentYear--;
+            } else if (calCurrentMonth > 11) {
+                calCurrentMonth = 0;
+                calCurrentYear++;
+            }
+            renderCalendar();
+        }
+
+        function jumpToToday() {
+            calCurrentYear = new Date().getFullYear();
+            calCurrentMonth = new Date().getMonth();
+            renderCalendar();
+        }
+
+        // 4. BOOKINGS TABLE
+        function renderBookingsTable() {
+            const tbody = document.getElementById('bookingsTableBody');
+            const bookings = dashboardData.bookings || [];
+
+            if (!bookings.length) {
+                tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding:25px;">No event bookings recorded yet. Click '+ New Event Entry' to add one.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = bookings.map(b => `
+                <tr>
+                    <td><strong>${b.id}</strong></td>
+                    <td>
+                        <strong>${b.clientName}</strong>
+                        <div style="font-size:0.78rem; color:#666;">${b.eventType}</div>
+                    </td>
+                    <td>${b.clientPhone || '—'}</td>
+                    <td>${b.venue}</td>
+                    <td><strong style="color:#dc2626;">${b.eventDate}</strong> <span style="font-size:0.75rem; color:#777;">(${b.session})</span></td>
+                    <td>
+                        <div style="font-size:0.8rem;">🍽️ ${b.catering || 'Self-Catering'}</div>
+                        <div style="font-size:0.75rem; color:#666;">✨ ${b.decor || 'Standard Stage'}</div>
+                    </td>
+                    <td>${(b.guests || 0).toLocaleString()}</td>
+                    <td><span class="badge" style="background:#f3edd3; color:#05292c;">${b.enteredBy || 'Manager'}</span></td>
+                    <td><span class="badge ${b.bookingStatus === 'Confirmed' ? 'badge-confirmed' : 'badge-partial'}">${b.bookingStatus}</span></td>
+                    <td>
+                        <button onclick="editBooking('${b.id}')" class="btn-sm-action"><i class="fas fa-edit"></i> Edit</button>
+                        <button onclick="viewInvoice('${b.id}')" class="btn-sm-action" style="color:var(--brand-gold-ink);"><i class="fas fa-file-invoice"></i> Receipt</button>
+                        <button onclick="deleteBooking('${b.id}')" class="btn-sm-action" style="color:#dc2626;"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            `).join('');
+        }
+
+        // 5. BILLING TABLE
+        function renderBillingTable() {
+            const tbody = document.getElementById('billingTableBody');
+            const bookings = dashboardData.bookings || [];
+
+            if (!bookings.length) {
+                tbody.innerHTML = `<tr><td colspan="10" style="text-align:center; padding:25px;">No billing records available.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = bookings.map(b => {
+                const subtotal = Number(b.subtotalAmount) || Number(b.totalAmount) || 0;
+                const discount = Number(b.discountPercent) || 0;
+                const total = Number(b.totalAmount) || 0;
+                const advance = Number(b.advancePaid) || 0;
+                const balance = Number(b.balanceDue) || 0;
+
+                let badgeClass = 'badge-pending';
+                if (b.paymentStatus === 'Paid' || balance === 0) badgeClass = 'badge-paid';
+                else if (advance > 0) badgeClass = 'badge-partial';
+
+                return `
+                    <tr>
+                        <td><strong>${b.id}</strong></td>
+                        <td>
+                            <strong>${b.clientName}</strong>
+                            <div style="font-size:0.75rem; color:#666;">${b.eventType}</div>
+                        </td>
+                        <td>${b.eventDate}</td>
+                        <td>₹${subtotal.toLocaleString()}</td>
+                        <td><span class="badge" style="background:#fef3c7; color:#92400e;">${discount}% Off</span></td>
+                        <td><strong>₹${total.toLocaleString()}</strong></td>
+                        <td style="color:#166534; font-weight:700;">₹${advance.toLocaleString()}</td>
+                        <td style="color:#991b1b; font-weight:700;">₹${balance.toLocaleString()}</td>
+                        <td><span class="badge ${badgeClass}">${b.paymentStatus || 'Pending'}</span></td>
+                        <td>
+                            ${balance > 0 ? `
+                                <button onclick="openAddPaymentModal('${b.id}')" class="btn-sm-action" style="color:#166534; border-color:#bbf7d0; background:#f0fdf4; font-weight:700;">
+                                    <i class="fas fa-plus-circle"></i> Add Payment
+                                </button>
+                            ` : `
+                                <span style="font-size:0.75rem; color:#166534; font-weight:700; margin-right:6px;"><i class="fas fa-check-circle"></i> Cleared</span>
+                            `}
+                            <button onclick="editBooking('${b.id}')" class="btn-sm-action"><i class="fas fa-edit"></i></button>
+                            <button onclick="viewInvoice('${b.id}')" class="btn-sm-action"><i class="fas fa-print"></i></button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // 6. INQUIRIES TABLE
+        function renderInquiriesTable() {
+            const tbody = document.getElementById('inquiriesTableBody');
+            const inquiries = dashboardData.inquiries || [];
+
+            if (!inquiries.length) {
+                tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:25px;">No website inquiries received yet.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = inquiries.map(i => {
+                const dateStr = i.submittedAt ? new Date(i.submittedAt).toLocaleDateString() : 'Recent';
+                let venueTitle = 'Main Convention Hall (25,000 Sq Ft)';
+                if (i.category === 'mini_hall') venueTitle = 'Mini Banquet Hall (10,000 Sq Ft)';
+                else if (i.category === 'resort') venueTitle = 'Resort & Poolside';
+
+                const whatsappMsg = encodeURIComponent(
+                    `Hello ${i.name}, greetings from ASR Convention & Resort! 🎉\n\n` +
+                    `Thank you for your quotation inquiry:\n` +
+                    `🏛️ Preferred Venue: ${venueTitle}\n` +
+                    `🎉 Event Type: ${i.eventType}\n` +
+                    `📅 Preferred Date: ${i.eventDate || 'TBD'}\n` +
+                    `⏰ Session: ${i.session || 'Full Day'}\n` +
+                    `👥 Expected Guests: ${i.guests || 'TBD'}\n` +
+                    `🍽️ Catering Package: ${i.catering || 'Self-Catering'}\n` +
+                    `✨ Stage & Decor Theme: ${i.decor || 'Standard Stage'}\n\n` +
+                    `We would be delighted to host your grand event! Please let us know if you would like to schedule a site visit.`
+                );
+
+                return `
+                    <tr>
+                        <td>${dateStr}</td>
+                        <td><strong>${i.name}</strong></td>
+                        <td><a href="tel:${i.phone}" style="color:var(--brand-charcoal);">${i.phone}</a></td>
+                        <td>${venueTitle}</td>
+                        <td>${i.eventType}</td>
+                        <td><strong>${i.eventDate || '—'}</strong></td>
+                        <td>
+                            <div style="font-size:0.78rem;">🍽️ ${i.catering || 'Self-Catering'}</div>
+                            <div style="font-size:0.75rem; color:#666;">✨ ${i.decor || 'Standard'}</div>
+                        </td>
+                        <td>${i.guests || '—'}</td>
+                        <td>
+                            <a href="https://api.whatsapp.com/send/?phone=91${i.phone.replace(/[^0-9]/g, '')}&text=${whatsappMsg}" target="_blank" class="btn-sm-action" style="color:#16a34a;"><i class="fab fa-whatsapp"></i> Chat</a>
+                            <button onclick="convertInquiryToBooking(${JSON.stringify(i).replace(/"/g, '&quot;')})" class="btn-sm-action" style="color:var(--brand-gold-ink);"><i class="fas fa-check"></i> Book</button>
+                            <button onclick="deleteInquiry(${i.id})" class="btn-sm-action" style="color:#dc2626;"><i class="fas fa-trash"></i></button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        async function deleteInquiry(id) {
+            if (confirm('Are you sure you want to remove this website inquiry lead?')) {
+                await fetch(`/api/admin/inquiries/${id}`, { method: 'DELETE' });
+                loadDashboardData();
+            }
+        }
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+
+            event.currentTarget.classList.add('active');
+            const panel = document.getElementById(`panel-${tabId}`);
+            if (panel) panel.classList.add('active');
+        }
+
+        // Modal Helpers
+        function openBookingModal() {
+            document.getElementById('bookingForm').reset();
+            document.getElementById('editBookingId').value = '';
+            document.getElementById('bDiscountPercent').value = '0';
+            document.getElementById('bDiscountAmount').value = '0';
+            document.getElementById('bookingModalTitle').textContent = 'New Event Booking Entry';
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function closeBookingModal() {
+            document.getElementById('bookingModal').classList.remove('active');
+        }
+
+        function recalcModalBilling() {
+            const subtotal = Number(document.getElementById('bSubtotal').value) || 0;
+            const discountPercent = Math.max(0, Math.min(100, Number(document.getElementById('bDiscountPercent').value) || 0));
+            const discountAmount = Math.round((subtotal * discountPercent) / 100);
+            const netTotal = Math.max(0, subtotal - discountAmount);
+
+            document.getElementById('bDiscountAmount').value = discountAmount;
+            document.getElementById('bNetTotal').value = netTotal;
+
+            const advance = Number(document.getElementById('bAdvancePaid').value) || 0;
+            const balanceDue = Math.max(0, netTotal - advance);
+            document.getElementById('bBalanceDue').value = balanceDue;
+        }
+
+        async function handleSaveBooking(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editBookingId').value;
+            const subtotalAmount = Number(document.getElementById('bSubtotal').value) || 0;
+            const discountPercent = Number(document.getElementById('bDiscountPercent').value) || 0;
+            const discountAmount = Number(document.getElementById('bDiscountAmount').value) || 0;
+            const totalAmount = Number(document.getElementById('bNetTotal').value) || (subtotalAmount - discountAmount);
+            const advancePaid = Number(document.getElementById('bAdvancePaid').value) || 0;
+
+            const payload = {
+                clientName: document.getElementById('bClientName').value,
+                clientPhone: document.getElementById('bClientPhone').value,
+                clientEmail: document.getElementById('bClientEmail').value,
+                venue: document.getElementById('bVenue').value,
+                eventType: document.getElementById('bEventType').value,
+                eventDate: document.getElementById('bEventDate').value,
+                session: document.getElementById('bSession').value,
+                guests: Number(document.getElementById('bGuests').value) || 0,
+                catering: document.getElementById('bCatering').value,
+                decor: document.getElementById('bDecor').value,
+                subtotalAmount,
+                discountPercent,
+                discountAmount,
+                totalAmount,
+                advancePaid,
+                paymentMode: document.getElementById('bPaymentMode').value,
+                enteredBy: currentPerspective === 'owner' ? 'Owner' : 'Manager',
+                notes: document.getElementById('bNotes').value
+            };
+
+            const url = editId ? `/api/admin/bookings/${editId}` : '/api/admin/bookings';
+            const method = editId ? 'PUT' : 'POST';
+
+            await fetch(url, {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            closeBookingModal();
+            loadDashboardData();
+        }
+
+        function editBooking(id) {
+            const b = (dashboardData.bookings || []).find(x => x.id === id);
+            if (!b) return;
+
+            document.getElementById('editBookingId').value = b.id;
+            document.getElementById('bookingModalTitle').textContent = `Edit Booking - ${b.id}`;
+            document.getElementById('bClientName').value = b.clientName || '';
+            document.getElementById('bClientPhone').value = b.clientPhone || '';
+            document.getElementById('bClientEmail').value = b.clientEmail || '';
+            document.getElementById('bVenue').value = b.venue || 'Main Convention Hall (25,000 Sq Ft)';
+            document.getElementById('bEventType').value = b.eventType || '';
+            document.getElementById('bEventDate').value = b.eventDate || '';
+            document.getElementById('bSession').value = b.session || 'FullDay';
+            document.getElementById('bGuests').value = b.guests || '';
+            if (b.catering) document.getElementById('bCatering').value = b.catering;
+            if (b.decor) document.getElementById('bDecor').value = b.decor;
+
+            const subtotal = Number(b.subtotalAmount) || Number(b.totalAmount) || 0;
+            const discount = Number(b.discountPercent) || 0;
+            document.getElementById('bSubtotal').value = subtotal;
+            document.getElementById('bDiscountPercent').value = discount;
+            document.getElementById('bAdvancePaid').value = b.advancePaid || 0;
+            document.getElementById('bPaymentMode').value = b.paymentMode || 'UPI (GPay / PhonePe)';
+            document.getElementById('bNotes').value = b.notes || '';
+
+            recalcModalBilling();
+            document.getElementById('bookingModal').classList.add('active');
+        }
+
+        function openAddPaymentModal(bookingId) {
+            const b = (dashboardData.bookings || []).find(x => x.id === bookingId);
+            if (!b) return;
+
+            document.getElementById('payBookingId').value = b.id;
+            document.getElementById('payClientTitle').textContent = `${b.clientName} (${b.id})`;
+            document.getElementById('payNetTotalVal').textContent = '₹' + (Number(b.totalAmount) || 0).toLocaleString();
+            document.getElementById('payCurrentBalanceVal').textContent = '₹' + (Number(b.balanceDue) || 0).toLocaleString();
+            document.getElementById('payAmountInput').value = b.balanceDue || '';
+            document.getElementById('payAmountInput').max = b.balanceDue || '';
+            document.getElementById('payNoteInput').value = 'Balance Payment Settlement';
+
+            document.getElementById('addPaymentModal').classList.add('active');
+        }
+
+        function closeAddPaymentModal() {
+            document.getElementById('addPaymentModal').classList.remove('active');
+        }
+
+        async function submitRemainingPayment(e) {
+            e.preventDefault();
+            const id = document.getElementById('payBookingId').value;
+            const amount = Number(document.getElementById('payAmountInput').value) || 0;
+            const paymentMode = document.getElementById('payModeSelect').value;
+            const paymentDate = document.getElementById('payDateInput').value;
+            const note = document.getElementById('payNoteInput').value;
+
+            if (amount <= 0) return alert('Please enter a valid amount.');
+
+            const res = await fetch(`/api/admin/bookings/${id}/add-payment`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount, paymentMode, paymentDate, note })
+            });
+
+            const data = await res.json();
+            if (data.success) {
+                closeAddPaymentModal();
+                loadDashboardData();
+            } else {
+                alert(data.error || 'Failed to record payment');
+            }
+        }
+
+        async function deleteBooking(id) {
+            if (confirm(`Are you sure you want to cancel and remove booking ${id}?`)) {
+                await fetch(`/api/admin/bookings/${id}`, { method: 'DELETE' });
+                loadDashboardData();
+            }
+        }
+
+        function convertInquiryToBooking(inquiry) {
+            openBookingModal();
+            document.getElementById('bClientName').value = inquiry.name || '';
+            document.getElementById('bClientPhone').value = inquiry.phone || '';
+            document.getElementById('bClientEmail').value = inquiry.email || '';
+            document.getElementById('bEventType').value = inquiry.eventType || '';
+            document.getElementById('bEventDate').value = inquiry.eventDate || '';
+            document.getElementById('bSession').value = inquiry.session || 'FullDay';
+            document.getElementById('bGuests').value = inquiry.guests || '';
+            if (inquiry.catering) document.getElementById('bCatering').value = inquiry.catering;
+            if (inquiry.decor) document.getElementById('bDecor').value = inquiry.decor;
+            if (inquiry.category === 'mini_hall') {
+                document.getElementById('bVenue').value = 'Mini Banquet Hall (10,000 Sq Ft)';
+            } else if (inquiry.category === 'resort') {
+                document.getElementById('bVenue').value = 'Oasis Pool & Rain Dance';
+            } else {
+                document.getElementById('bVenue').value = 'Main Convention Hall (25,000 Sq Ft)';
+            }
+            switchTab('bookings');
+        }
+
+        function viewInvoice(bookingId) {
+            const b = (dashboardData.bookings || []).find(x => x.id === bookingId);
+            if (!b) return;
+
+            document.getElementById('invReceiptId').textContent = b.id;
+            document.getElementById('invDate').textContent = 'Date: ' + new Date().toISOString().split('T')[0];
+            document.getElementById('invClientName').textContent = b.clientName;
+            document.getElementById('invClientPhone').textContent = 'Phone: ' + (b.clientPhone || '—');
+            document.getElementById('invClientEmail').textContent = 'Email: ' + (b.clientEmail || '—');
+            document.getElementById('invEventName').textContent = b.eventType;
+            document.getElementById('invVenue').textContent = 'Venue: ' + b.venue;
+            document.getElementById('invEventDate').textContent = 'Event Date: ' + b.eventDate + ' (' + b.session + ')';
+            document.getElementById('invCateringDecor').textContent = `Catering: ${b.catering || 'Self-Catering'} | Decor: ${b.decor || 'Standard Stage'}`;
+
+            const subtotal = Number(b.subtotalAmount) || Number(b.totalAmount) || 0;
+            const discountPercent = Number(b.discountPercent) || 0;
+            const discountAmount = Number(b.discountAmount) || Math.round((subtotal * discountPercent) / 100);
+            const netTotal = Number(b.totalAmount) || (subtotal - discountAmount);
+            const advance = Number(b.advancePaid) || 0;
+            const balance = Number(b.balanceDue) || 0;
+
+            document.getElementById('invSubtotalRow').textContent = '₹' + subtotal.toLocaleString();
+            document.getElementById('invSubtotalSum').textContent = '₹' + subtotal.toLocaleString();
+            document.getElementById('invDiscountPercent').textContent = discountPercent;
+            document.getElementById('invDiscountSum').textContent = '-₹' + discountAmount.toLocaleString();
+            document.getElementById('invNetTotalSum').textContent = '₹' + netTotal.toLocaleString();
+            document.getElementById('invAdvanceSum').textContent = '₹' + advance.toLocaleString();
+            document.getElementById('invBalanceSum').textContent = '₹' + balance.toLocaleString();
+
+            document.getElementById('invoiceReceiptModal').classList.add('active');
+        }
+
+        function closeInvoiceModal() {
+            document.getElementById('invoiceReceiptModal').classList.remove('active');
+        }
+    </script>
+</body>
+
+</html>

@@ -1,343 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQs | ASR Convention & Resort</title>
+    <title>FAQs | ASR Convention & Resort Hyderabad</title>
+    <meta name="description" content="Frequently asked questions about guest capacity, catering, parking, accommodation, and booking at ASR Convention & Resort Hyderabad.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="/neo.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
     <style>
-       :root {
-            --gold: #b8965a;
-            --dark: #0a0e14;
-            --white: #ffffff;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; line-height: 1.6; color: #333; background-color: #fcfcfc; }
-
-        /* HEADER & NAVIGATION */
-        .main-header {
-            position: fixed;
-            top: 0; width: 100%;
-            background: var(--white);
-            z-index: 1000;
-            height: 80px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-        }
-
-        .navbar {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-        }
-
-        /* FORCED LOGO ALIGNMENT */
-        .logo-link { 
-            display: flex !important; 
-            flex-direction: row !important; /* Forces horizontal layout */
-            align-items: center !important; 
-            text-decoration: none; 
-            gap: 15px; 
-        }
-        
-        .logo-badge {
-            width: 65px; 
-            height: 65px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
+        .faq-item {
+            background: var(--surface-parchment);
+            border: 1px solid var(--surface-parchment-border);
+            border-radius: var(--radius-md);
+            margin-bottom: 16px;
             overflow: hidden;
-            background: #fff;
-            flex-shrink: 0;
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            padding: 4px;
-            order: 1; /* Ensures badge is first */
-        }
-        .logo-badge img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-        }
-        
-        .logo-area { 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-            text-align: left;
-            order: 2; /* Ensures text is second */
-        }
-        .logo-top { 
-            font-family: 'Playfair Display'; 
-            font-size: 1.9rem; 
-            font-weight: 900; 
-            color: var(--gold); 
-            line-height: 0.9;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-        }
-        .logo-divider { 
-            width: 100%; 
-            height: 2px; 
-            background: var(--gold); 
-            margin: 2px 0; 
-        }
-        .logo-bottom { 
-            font-size: 0.65rem; 
-            color: #1a1a1a; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            font-weight: 600; 
-            line-height: 1;
-        }
-
-        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
-        .nav-links li a { text-decoration: none; color: #333; font-weight: 500; transition: var(--transition); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .nav-links li a:hover, .nav-links li a.active { color: var(--gold); }
-        
-        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
-
-        .btn-quote {
-            background: var(--gold);
-            color: white !important;
-            padding: 9px 9px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
             transition: var(--transition);
-            font-size: 0.85rem;
-            white-space: nowrap;
         }
-        .btn-quote:hover { background: #9a7b45; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(184, 150, 90, 0.3); }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 5px;
-        }
-        .menu-toggle span { width: 28px; height: 3px; background: var(--gold); border-radius: 2px; }
-
-        /* FAQ CONTENT */
-        .faq-section { padding: 140px 5% 80px; max-width: 900px; margin: 0 auto; }
-        .faq-header { text-align: center; margin-bottom: 50px; }
-        .faq-header h1 { font-family: 'Playfair Display', serif; font-size: 3rem; color: var(--gold); margin-bottom: 10px; }
-        .faq-header p { color: #666; font-size: 1.1rem; }
-
-        .faq-container { margin-top: 30px; }
-        .accordion {
-            background-color: #fff;
-            color: #444;
-            cursor: pointer;
-            padding: 24px;
+        .faq-btn {
             width: 100%;
-            border: 1px solid #eee;
+            padding: 22px 28px;
+            background: transparent;
+            border: none;
+            color: var(--brand-charcoal);
+            font-family: var(--font-display);
+            font-size: 1.2rem;
             text-align: left;
-            outline: none;
-            font-size: 1.1rem;
-            transition: var(--transition);
-            font-weight: 600;
+            cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-radius: 12px;
-            margin-bottom: 15px;
-            font-family: 'Poppins', sans-serif;
+            gap: 15px;
         }
-        .accordion i { color: var(--gold); transition: transform 0.3s ease; }
-        .active, .accordion:hover { background-color: #fcf9f4; border-color: var(--gold); color: var(--gold); }
-        .active i { transform: rotate(45deg); }
-
-        .panel { 
-            padding: 0 24px; 
-            background-color: white; 
+        .faq-btn i {
+            color: var(--brand-gold-ink);
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-btn i {
+            transform: rotate(45deg);
+        }
+        .faq-panel {
             max-height: 0;
-            overflow: hidden; 
-            transition: max-height 0.3s ease-out;
-            margin-bottom: 20px;
-            border-left: 3px solid var(--gold);
+            overflow: hidden;
+            transition: max-height 0.35s ease;
+            padding: 0 28px;
+            color: var(--text-charcoal-85);
+            font-size: 0.96rem;
+            line-height: 1.75;
         }
-        .panel p { padding: 20px 0; color: #666; line-height: 1.8; font-size: 1rem; }
-
-        /* FOOTER */
-        .site-footer { background: #0a0e14; color: white; padding: 80px 5% 30px; border-top: 2px solid var(--gold); }
-        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1300px; margin: 0 auto; }
-        .footer-col h4 { color: var(--gold); font-family: 'Playfair Display'; margin-bottom: 20px; text-transform: uppercase; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .footer-col a:hover { color: var(--gold); }
-        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #64748b; }
-
-        @media (max-width: 1100px) {
-            .menu-toggle { display: flex; }
-            .nav-links {
-                position: fixed;
-                top: 0; right: -100%;
-                width: 80%; max-width: 320px;
-                height: 100vh;
-                background: var(--dark);
-                flex-direction: column;
-                justify-content: center;
-                transition: var(--transition);
-                padding: 40px;
-                gap: 25px;
-            }
-            .nav-links.active { right: 0; }
-            .nav-links li a { color: white; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; padding-bottom: 10px; }
-            .faq-header h1 { font-size: 2.2rem; }
+        .faq-item.active .faq-panel {
+            padding: 12px 28px 24px;
+            border-top: 1px solid var(--surface-parchment-border);
         }
     </style>
 </head>
+
 <body>
 
-<header class="main-header">
-    <nav class="navbar">
-        <a href="/" class="logo-link">
-            <div class="logo-badge"><img src="/images/logo.png" alt="ASR Logo"></div>
-            <div class="logo-area">
-                <span class="logo-top">ASR</span>
-                <div class="logo-divider"></div>
-                <span class="logo-bottom">CONVENTION & RESORT</span>
-            </div>
-        </a>
+    <!-- ==================== HEADER ==================== -->
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="/" class="logo-link">
+                <div class="logo-badge">
+                    <img src="/images/logo.png" alt="ASR Convention & Resort Logo">
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-brand-title">ASR</span>
+                    <div class="logo-brand-divider"></div>
+                    <span class="logo-brand-subtitle">CONVENTION & RESORT</span>
+                </div>
+            </a>
 
-        <ul class="nav-links" id="nav-list">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/facilities">Facilities & Amenities</a></li>
-            <li><a href="/events">Events</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/faqs" class="active">FAQs</a></li>
-            <li><a href="/blog">Blog</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-        </ul>
-
-        <div class="nav-right-actions">
-            <a href="/#quotation" class="btn-quote">Get Quotation</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<section class="faq-section">
-    <div class="faq-header">
-        <h1>Frequently Asked Questions</h1>
-        <p>Everything you need to know about planning your event at ASR Convention & Resort.</p>
-    </div>
-    
-    <div class="faq-container">
-        <button class="accordion">What is the total guest capacity? <i class="fas fa-plus"></i></button>
-        <div class="panel">
-            <p>Our pillar-less grand hall can comfortably accommodate up to 3,000 guests for seated weddings and up to 5,000 for floating crowds. We also have smaller lawn areas and poolside spaces for more intimate gatherings.</p>
-        </div>
-
-        <button class="accordion">Do you provide in-house catering? <i class="fas fa-plus"></i></button>
-        <div class="panel">
-            <p>We feature a massive, state-of-the-art kitchen facility. While we can recommend elite catering partners who specialize in various cuisines, you are also welcome to bring your own preferred catering team to make your event truly personal.</p>
-        </div>
-
-        <button class="accordion">Is there enough parking for large events? <i class="fas fa-plus"></i></button>
-        <div class="panel">
-            <p>Yes, parking is one of our strongest facilities. We have a dedicated, secure parking zone capable of holding over 1,500 vehicles (cars and bikes) with professional valet services to ensure smooth entry and exit.</p>
-        </div>
-
-        <button class="accordion">Do you offer accommodation for guests? <i class="fas fa-plus"></i></button>
-        <div class="panel">
-            <p>Absolutely. We provide luxury air-conditioned suite rooms for the bridal party and immediate family. Additionally, our resort wing offers premium rooms for overnight stays, allowing your guests to enjoy the celebration without worrying about travel.</p>
-        </div>
-
-        <button class="accordion">Is the venue accessible for elderly or disabled guests? <i class="fas fa-plus"></i></button>
-        <div class="panel">
-            <p>Yes, ASR Convention is designed to be fully inclusive. We have ramp access, wide hallways, and ground-level facilities to ensure that all your guests can enjoy the celebration comfortably.</p>
-        </div>
-    </div>
-</section>
-
-<footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-col brand-col">
-            <div class="footer-logo-badge">
-                <img src="/images/logo.png" alt="ASR Logo">
-            </div>
-            <h4>ASR CONVENTION</h4>
-            <p>Hyderabad's most prestigious venue for grand weddings and luxury stays.</p>
-        </div>
-        <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
+            <ul class="nav-links" id="nav-list">
                 <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/facilities">Facilities</a></li>
+                <li><a href="/events">Events</a></li>
                 <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/faqs" class="active">FAQs</a></li>
+                <li><a href="/blog">Blog</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-        </div>
-       
-        <div class="footer-col">
-            <h4>Contact Details</h4>
-            <ul>
-                <li><a href="tel:+919949400123"><i class="fas fa-phone"></i> +91 9949400123</a></li>
-                 <li><a href="tel:+919394566156"><i class="fas fa-phone"></i> +91 9394566156</a></li>
-                <li><a href="https://wa.me/919949400123" target="_blank"><i class="fab fa-whatsapp"></i> +91 9949400123</a></li>
-                <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
-                <li><a href="https://maps.app.goo.gl/MAwMvb3cGL6n9ESHA"><i class="fas fa-map-marker-alt"></i> Munganoor, Hyderabad</a></li>
-            </ul>
-        </div>
 
-        <div class="footer-col">
-            <h4>Stay Connected</h4>
-            <ul class="social-links">
-                <li><a href="https://www.instagram.com/asr_convention_resorts?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
-                <li><a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-            </ul>
+            <div class="nav-right-actions">
+                <a href="tel:+919949400123" class="btn-call">
+                    <i class="fas fa-phone-alt" style="font-size: 0.8rem;"></i> Call Us
+                </a>
+                <a href="/#quotation" class="btn-quote-gold">Get a Quote</a>
+                <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero-eventara-section" style="min-height: 55vh; padding-top: 150px; padding-bottom: 70px;">
+        <div class="hero-bg-image" style="background-image: url('/images/event4.jpeg'); opacity: 0.3;"></div>
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-fade-to-cream"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title-main" style="font-size: 3.6rem;">
+                FREQUENTLY ASKED QUESTIONS
+                <span class="hero-title-sub">everything you need to know</span>
+            </h1>
+            <p class="hero-lead">
+                Clear answers regarding guest capacity, catering policies, parking, accommodation, and booking.
+            </p>
         </div>
-    </div>
-    
-    <div class="footer-bottom">
-        <p>© 2025 <span>ASR Convention & Resort</span>. Crafted for Excellence.</p>
-    </div>
-</footer>
+    </section>
 
+    <!-- ==================== FAQ ACCORDION ==================== -->
+    <section class="story-split-section" style="padding-top: 60px;">
+        <div class="container" style="max-width: 920px;">
+            <span class="eyebrow-terracotta">Estate Policies</span>
+            <h2 style="font-size: 3.2rem; color: var(--brand-charcoal); margin-bottom: 30px;">
+                Common Inquiries
+            </h2>
 
-<script>
-    // Accordion Logic
-    const acc = document.getElementsByClassName("accordion");
-    for (let i = 0; i < acc.length; i++) {
-        acc[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            const panel = this.nextElementSibling;
-            if (panel.style.maxHeight) {
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-btn">
+                        <span>What is the total guest capacity across the venue?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>Our main pillar-less hall accommodates up to 3,000 guests in formal theater/wedding seating and up to 5,000 for floating receptions. Our outdoor lawns and poolside terrace accommodate 200 to 1,500 guests for smaller gatherings or pre-wedding functions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn">
+                        <span>Do you allow outside catering and custom event decorators?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>Yes. While we can recommend reputable catering partners and decor specialists across Hyderabad, clients are also welcome to bring their own catering teams and decorators with prior written coordination with our venue office.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn">
+                        <span>How many vehicles can your parking area hold?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>We have a paved on-site parking zone that accommodates over 500+ cars and 800+ two-wheelers. Valet drivers and traffic staff ensure smooth entry and exit during large events.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn">
+                        <span>Are overnight suite rooms available for the family?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>Yes. We offer air-conditioned bridal dressing suites attached to the main hall, as well as deluxe rooms in our resort wing for overnight family stays and weekend functions.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn">
+                        <span>What power backup and climate control systems are in place?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>The venue is equipped with 100% heavy-duty acoustic power generators with automatic transfer switches, ensuring zero power interruption. Centralized air-conditioning keeps the hall comfortable across all seasons.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-btn">
+                        <span>What is the booking and payment schedule?</span>
+                        <i class="fas fa-plus"></i>
+                    </button>
+                    <div class="faq-panel">
+                        <p>Bookings are confirmed on a first-come, first-served basis upon receipt of a 50% advance deposit. The remaining balance is payable prior to the start of the event.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 50px; text-align: center; padding: 40px; background: var(--surface-parchment); border: 1px solid var(--surface-parchment-border); border-radius: var(--radius-2xl);">
+                <h3 style="font-size: 1.8rem; color: var(--brand-charcoal); margin-bottom: 10px;">Have Further Questions?</h3>
+                <p style="color: var(--text-charcoal-70); margin-bottom: 22px;">Our team is available on WhatsApp to assist with bespoke requirements.</p>
+                <a href="https://wa.me/919949400123" target="_blank" class="btn-quote-gold" style="height: 48px; padding: 0 28px; display: inline-flex;">
+                    <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="/" class="logo-link" style="margin-bottom: 18px;">
+                        <div class="logo-badge" style="width: 64px; height: 64px;">
+                            <img src="/images/logo.png" alt="ASR Logo">
+                        </div>
+                        <div class="logo-text-group">
+                            <span class="logo-brand-title">ASR</span>
+                            <div class="logo-brand-divider"></div>
+                            <span class="logo-brand-subtitle">CONVENTION & RESORT</span>
+                        </div>
+                    </a>
+                    <p style="color: var(--text-cream-85); font-size: 0.95rem; line-height: 1.7;">
+                        A luxury space for life's most memorable moments. Hyderabad.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/facilities">Facilities</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/admin" style="color: var(--brand-gold);"><i class="fas fa-lock" style="font-size: 0.75rem;"></i> Staff Portal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="tel:+919949400123"><i class="fas fa-phone-alt"></i> +91 9949400123</a></li>
+                        <li><a href="tel:+919394566156"><i class="fas fa-phone-alt"></i> +91 9394566156</a></li>
+                        <li><a href="https://wa.me/919949400123" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Concierge</a></li>
+                        <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Location</h4>
+                    <p style="color: var(--text-cream-85); font-size: 0.92rem; margin-bottom: 12px;">Munganoor, Vanasthalipuram, Hyderabad, Telangana</p>
+                    <a href="https://maps.app.goo.gl/MAwMvb3cGL6n9ESHA" target="_blank" class="btn-call" style="height: 36px; padding: 0 16px; font-size: 0.8rem; display: inline-flex;">
+                        <i class="fas fa-map-marker-alt"></i> Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 ASR Convention & Resort. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/luxury-engine.js"></script>
+    <script>
+        document.querySelectorAll('.faq-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.parentElement;
+                const panel = item.querySelector('.faq-panel');
+                const isOpen = item.classList.contains('active');
+
+                document.querySelectorAll('.faq-item').forEach(other => {
+                    other.classList.remove('active');
+                    const otherPanel = other.querySelector('.faq-panel');
+                    if (otherPanel) otherPanel.style.maxHeight = null;
+                });
+
+                if (!isOpen) {
+                    item.classList.add('active');
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
         });
-    }
-
-    // Mobile Menu Logic
-    const menuBtn = document.getElementById('mobile-menu');
-    const navList = document.getElementById('nav-list');
-    const spans = menuBtn.querySelectorAll('span');
-
-    menuBtn.addEventListener('click', () => {
-        navList.classList.toggle('active');
-        const isActive = navList.classList.contains('active');
-        spans[0].style.transform = isActive ? 'rotate(45deg) translate(8px, 8px)' : '';
-        spans[1].style.opacity = isActive ? '0' : '1';
-        spans[2].style.transform = isActive ? 'rotate(-45deg) translate(7px, -7px)' : '';
-    });
-</script>
+    </script>
 </body>
 </html>

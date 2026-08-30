@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ASR Portal | Exclusive Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
+    <style>
+        :root { --fc-border-color: #e2e8f0; --fc-button-bg-color: #2563eb; }
+        .fc-toolbar-title { font-size: 1.25rem !important; font-weight: 700; color: #1e293b; }
+        .fc { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1); }
+    </style>
+</head>
+<body class="bg-slate-50 flex min-h-screen">
+
+    <div class="w-72 bg-slate-900 text-white flex flex-col fixed h-full">
+        <div class="p-8">
+            <h2 class="text-2xl font-black tracking-tighter text-blue-400">ASR <span class="text-white">PORTAL</span></h2>
+            <p class="text-xs text-slate-400 mt-1 uppercase tracking-widest">Resort & Convention</p>
+        </div>
+        
+        <nav class="flex-1 px-4 space-y-2">
+            <a href="#" class="flex items-center p-3 bg-blue-600 rounded-xl transition"><i class="fas fa-calendar-alt w-8"></i> Booking Schedule</a>
+            <a href="#" class="flex items-center p-3 hover:bg-slate-800 rounded-xl transition"><i class="fas fa-file-invoice-dollar w-8"></i> Revenue</a>
+            <a href="#" class="flex items-center p-3 hover:bg-slate-800 rounded-xl transition"><i class="fas fa-users-cog w-8"></i> Manager Access</a>
+            <a href="#" class="flex items-center p-3 hover:bg-slate-800 rounded-xl transition text-red-400 mt-10"><i class="fas fa-power-off w-8"></i> Logout</a>
+        </nav>
+    </div>
+
+    <div class="flex-1 ml-72 p-10">
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="p-3 bg-indigo-100 text-indigo-600 rounded-lg"><i class="fas fa-hotel"></i></div>
+                    <span class="text-xs font-bold text-green-500 bg-green-50 px-2 py-1 rounded">LIVE</span>
+                </div>
+                <h3 class="text-slate-500 text-sm font-medium">Whole Resort</h3>
+                <p class="text-2xl font-bold text-slate-800">Available</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="p-3 bg-emerald-100 text-emerald-600 rounded-lg"><i class="fas fa-users"></i></div>
+                    <span class="text-xs font-bold text-red-500 bg-red-50 px-2 py-1 rounded">BOOKED TODAY</span>
+                </div>
+                <h3 class="text-slate-500 text-sm font-medium">Big Convention Hall</h3>
+                <p class="text-2xl font-bold text-slate-800">Wedding Event</p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200">
+                <div class="flex justify-between items-start mb-4">
+                    <div class="p-3 bg-amber-100 text-amber-600 rounded-lg"><i class="fas fa-handshake"></i></div>
+                    <span class="text-xs font-bold text-slate-400 bg-slate-50 px-2 py-1 rounded">IDLE</span>
+                </div>
+                <h3 class="text-slate-500 text-sm font-medium">Small Convention Hall</h3>
+                <p class="text-2xl font-bold text-slate-800">Cleaned & Ready</p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-xl font-bold text-slate-800">Master Booking Schedule</h2>
+                <button onclick="openModal()" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold hover:bg-blue-700 transition">
+                    + New Exclusive Booking
+                </button>
+            </div>
+            <div id="calendar"></div>
+        </div>
+    </div>
+
+    <div id="bookingModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md overflow-hidden transform transition-all">
+        <div class="p-6 border-b bg-slate-50 flex justify-between items-center">
+            <h3 class="text-xl font-bold text-slate-800" id="modalTitle">Add New Booking</h3>
+            <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 text-2xl">&times;</button>
+        </div>
+        
+        <form id="bookingForm" class="p-6 space-y-4">
+            <input type="hidden" id="startDate">
+            <input type="hidden" id="endDate">
+            <input type="hidden" id="eventId"> <div>
+                <label class="block text-sm font-semibold text-slate-700">Property / Hall</label>
+                <select id="propertyType" class="mt-1 block w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+                    <option value="Whole Resort">Whole Resort</option>
+                    <option value="Big Hall">Big Convention Hall</option>
+                    <option value="Small Hall">Small Convention Hall</option>
+                </select>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700">Event/Guest Name</label>
+                <input type="text" id="eventTitle" placeholder="e.g. Sharma Wedding" class="mt-1 block w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none">
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-700">Reason for Booking/Cancellation</label>
+                <textarea id="reason" rows="2" placeholder="Note down specifics..." class="mt-1 block w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none"></textarea>
+            </div>
+
+            <div class="flex gap-3 pt-4">
+                <button type="button" id="deleteBtn" onclick="deleteBooking()" class="hidden flex-1 py-3 bg-red-50 text-red-600 rounded-xl font-bold hover:bg-red-100 transition">Delete</button>
+                <button type="submit" class="flex-1 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-700 shadow-lg shadow-blue-200 transition">Save Booking</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    var calendarEl = document.getElementById('calendar');
+    
+    var calendar = new FullCalendar.Calendar(calendarEl, {
+        initialView: 'dayGridMonth',
+        editable: true, // Allows you to drag/resize bookings
+        selectable: true,
+        
+        // LOAD: Fetch bookings from your database
+        events: '/api/bookings',
+
+        // SAVE: When you click/select a date range
+        select: async function(info) {
+            const title = prompt('Enter Event Name (e.g., Wedding, Corporate Retreat):');
+            const type = prompt('Entity (Whole Resort, Big Hall, Small Hall):');
+            
+            if (title) {
+                const newBooking = {
+                    title: `${type}: ${title}`,
+                    start: info.startStr,
+                    end: info.endStr,
+                    propertyType: type,
+                    color: type === 'Whole Resort' ? '#4f46e5' : '#059669'
+                };
+
+                // Send to Backend
+                await fetch('/api/bookings', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(newBooking)
+                });
+
+                calendar.refetchEvents(); // Refresh calendar
+            }
+        }
+    });
+    calendar.render();
+});
+    </script>
+</body>
+</html>

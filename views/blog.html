@@ -1,367 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog | ASR Convention & Resort</title>
+    <title>Blog & Planning Articles | ASR Convention & Resort Hyderabad</title>
+    <meta name="description" content="Wedding planning guides, venue selection tips, and event insights from ASR Convention & Resort Hyderabad.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Stylesheet -->
     <link rel="stylesheet" href="/neo.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --gold: #b8965a;
-            --dark: #0a0e14;
-            --white: #ffffff;
-            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; overflow-x: hidden; line-height: 1.6; color: #333; background-color: #fcfcfc; }
-
-        /* HEADER & NAVIGATION */
-        .main-header {
-            position: fixed;
-            top: 0; width: 100%;
-            background: var(--white);
-            z-index: 1000;
-            height: 95px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.06);
-        }
-
-        .navbar {
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 5%;
-        }
-
-        /* FORCED LOGO ALIGNMENT */
-        .logo-link { 
-            display: flex !important; 
-            flex-direction: row !important; /* Forces horizontal layout */
-            align-items: center !important; 
-            text-decoration: none; 
-            gap: 15px; 
-        }
-        
-        .logo-badge {
-            width: 65px; 
-            height: 65px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            overflow: hidden;
-            background: #fff;
-            flex-shrink: 0;
-            display: flex; 
-            justify-content: center; 
-            align-items: center;
-            padding: 4px;
-            order: 1; /* Ensures badge is first */
-        }
-        .logo-badge img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: contain; 
-        }
-        
-        .logo-area { 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
-            text-align: left;
-            order: 2; /* Ensures text is second */
-        }
-        .logo-top { 
-            font-family: 'Playfair Display'; 
-            font-size: 1.9rem; 
-            font-weight: 900; 
-            color: var(--gold); 
-            line-height: 0.9;
-            letter-spacing: 1px;
-            margin-bottom: 2px;
-        }
-        .logo-divider { 
-            width: 100%; 
-            height: 2px; 
-            background: var(--gold); 
-            margin: 2px 0; 
-        }
-        .logo-bottom { 
-            font-size: 0.65rem; 
-            color: #1a1a1a; 
-            letter-spacing: 2px; 
-            text-transform: uppercase; 
-            font-weight: 600; 
-            line-height: 1;
-        }
-
-        .nav-links { display: flex; list-style: none; gap: 20px; align-items: center; }
-        .nav-links li a { text-decoration: none; color: #333; font-weight: 500; transition: var(--transition); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .nav-links li a:hover, .nav-links li a.active { color: var(--gold); }
-        
-        .nav-right-actions { display: flex; align-items: center; gap: 15px; }
-
-        .btn-quote {
-            background: var(--gold);
-            color: white !important;
-            padding: 9px 9px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: var(--transition);
-            font-size: 0.85rem;
-            white-space: nowrap;
-        }
-        .btn-quote:hover { background: #9a7b45; transform: translateY(-2px); box-shadow: 0 5px 15px rgba(184, 150, 90, 0.3); }
-
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            cursor: pointer;
-            padding: 5px;
-        }
-        .menu-toggle span { width: 28px; height: 3px; background: var(--gold); border-radius: 2px; }
-        /* BLOG PAGE STYLES */
-        .blog-hero {
-            height: 40vh;
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1519222970733-f546218fa6d7?auto=format&fit=crop&w=1200&q=80');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-            margin-top: 85px;
-        }
-        .blog-hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; }
-
-        .blog-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
-            gap: 40px; 
-            padding: 80px 5%; 
-            max-width: 1400px; 
-            margin: 0 auto; 
-        }
-        .blog-card { 
-            background: white; 
-            border-radius: 15px; 
-            overflow: hidden; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            transition: var(--transition);
-            display: flex;
-            flex-direction: column;
-        }
-        .blog-card:hover { transform: translateY(-10px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
-        
-        .blog-img { 
-            height: 250px; 
-            background-size: cover; 
-            background-position: center; 
-            position: relative;
-        }
-        .blog-category {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: var(--gold);
-            color: white;
-            padding: 5px 15px;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            font-weight: 600;
-            border-radius: 5px;
-        }
-        
-        .blog-info { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
-        .blog-date { font-size: 0.85rem; color: #888; margin-bottom: 10px; display: block; }
-        .blog-info h2 { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 15px; color: var(--dark); line-height: 1.3; }
-        .blog-info p { color: #666; font-size: 0.95rem; margin-bottom: 20px; }
-        
-        .read-more { 
-            color: var(--gold); 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.9rem;
-            margin-top: auto;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .read-more:hover { gap: 10px; }
-
-        /* FOOTER (Synchronized with Canvas) */
-        .site-footer { background: #0a0e14; color: white; padding: 80px 5% 30px; border-top: 2px solid var(--gold); margin-top: 50px; }
-        .footer-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; max-width: 1300px; margin: 0 auto; }
-        .footer-col h4 { color: var(--gold); font-family: 'Playfair Display'; margin-bottom: 20px; text-transform: uppercase; }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 12px; }
-        .footer-col a { color: #cbd5e1; text-decoration: none; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .footer-col a:hover { color: var(--gold); }
-        .footer-bottom { text-align: center; margin-top: 50px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem; color: #64748b; }
-
-        @media (max-width: 1100px) {
-            .menu-toggle { display: flex; }
-            .nav-links {
-                position: fixed;
-                top: 0; right: -100%;
-                width: 80%; max-width: 320px;
-                height: 100vh;
-                background: var(--dark);
-                flex-direction: column;
-                justify-content: center;
-                transition: var(--transition);
-                padding: 40px;
-                gap: 25px;
-            }
-            .nav-links.active { right: 0; }
-            .nav-links li a { color: white; font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.05); width: 100%; padding-bottom: 10px; }
-            .blog-grid { grid-template-columns: 1fr; }
-            .blog-hero h1 { font-size: 2.5rem; }
-        }
-    </style>
 </head>
+
 <body>
 
-<header class="main-header">
-    <nav class="navbar">
-        <a href="/" class="logo-link">
-            <div class="logo-badge"><img src="/images/logo.png" alt="ASR Logo"></div>
-            <div class="logo-area">
-                <span class="logo-top">ASR</span>
-                <div class="logo-divider"></div>
-                <span class="logo-bottom">CONVENTION & RESORT</span>
-            </div>
-        </a>
+    <!-- ==================== HEADER ==================== -->
+    <header class="main-header">
+        <nav class="navbar">
+            <a href="/" class="logo-link">
+                <div class="logo-badge">
+                    <img src="/images/logo.png" alt="ASR Convention & Resort Logo">
+                </div>
+                <div class="logo-text-group">
+                    <span class="logo-brand-title">ASR</span>
+                    <div class="logo-brand-divider"></div>
+                    <span class="logo-brand-subtitle">CONVENTION & RESORT</span>
+                </div>
+            </a>
 
-        <ul class="nav-links" id="nav-list">
-            <li><a href="/">Home</a></li>
-            <li><a href="/about">About Us</a></li>
-            <li><a href="/facilities">Facilities & Amenities</a></li>
-            <li><a href="/events">Events</a></li>
-            <li><a href="/gallery">Gallery</a></li>
-            <li><a href="/faqs">FAQs</a></li>
-            <li><a href="/blog" class="active">Blog</a></li>
-            <li><a href="/contact">Contact Us</a></li>
-        </ul>
-
-        <div class="nav-right-actions">
-            <a href="/#quotation" class="btn-quote">Get Quotation</a>
-            <div class="menu-toggle" id="mobile-menu">
-                <span></span><span></span><span></span>
-            </div>
-        </div>
-    </nav>
-</header>
-
-<section class="blog-hero">
-    <h1>Latest News & Wedding Tips</h1>
-</section>
-
-<div class="blog-grid">
-    <!-- Blog Post 1 -->
-    <article class="blog-card">
-        <div class="blog-img" style="background-image: url('resort2.jpeg');">
-            <span class="blog-category">Planning</span>
-        </div>
-        <div class="blog-info">
-            <span class="blog-date">March 15, 2025</span>
-            <h2>How to Plan a 2025 Dream Wedding</h2>
-            <p>Discover the latest trends in sustainable decor, immersive lighting, and expert guest management for your grand celebration.</p>
-            <a href="#" class="read-more">Read Full Story <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </article>
-
-    <!-- Blog Post 2 -->
-    <article class="blog-card">
-        <div class="blog-img" style="background-image: url('view.png');">
-            <span class="blog-category">Architecture</span>
-        </div>
-        <div class="blog-info">
-            <span class="blog-date">February 28, 2025</span>
-            <h2>The Benefits of Pillar-less Halls</h2>
-            <p>Why unobstructed views make your event photos look 10x better and allow for more creative seating arrangements and stage setups.</p>
-            <a href="#" class="read-more">Read Full Story <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </article>
-
-    <!-- Blog Post 3 -->
-    <article class="blog-card">
-        <div class="blog-img" style="background-image: url('mainentry 2.jpeg');">
-            <span class="blog-category">Hospitality</span>
-        </div>
-        <div class="blog-info">
-            <span class="blog-date">January 12, 2025</span>
-            <h2>Luxury Resort Stays in Hyderabad</h2>
-            <p>Combine your grand event with a peaceful getaway. Explore the amenities that make ASR the top choice for luxury wedding stays.</p>
-            <a href="#" class="read-more">Read Full Story <i class="fas fa-arrow-right"></i></a>
-        </div>
-    </article>
-</div>
-
-<footer class="site-footer">
-    <div class="footer-container">
-        <div class="footer-col brand-col">
-            <div class="footer-logo-badge">
-                <img src="/images/logo.png" alt="ASR Logo">
-            </div>
-            <h4>ASR CONVENTION</h4>
-            <p>Hyderabad's most prestigious venue for grand weddings and luxury stays.</p>
-        </div>
-        <div class="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
+            <ul class="nav-links" id="nav-list">
                 <li><a href="/">Home</a></li>
-                <li><a href="/about">About Us</a></li>
+                <li><a href="/about">About</a></li>
+                <li><a href="/facilities">Facilities</a></li>
+                <li><a href="/events">Events</a></li>
                 <li><a href="/gallery">Gallery</a></li>
+                <li><a href="/faqs">FAQs</a></li>
+                <li><a href="/blog" class="active">Blog</a></li>
                 <li><a href="/contact">Contact</a></li>
             </ul>
-        </div>
-       
-        <div class="footer-col">
-            <h4>Contact Details</h4>
-            <ul>
-                <li><a href="tel:+919949400123"><i class="fas fa-phone"></i> +91 9949400123</a></li>
-                 <li><a href="tel:+919394566156"><i class="fas fa-phone"></i> +91 9394566156</a></li>
-                <li><a href="https://wa.me/919949400123" target="_blank"><i class="fab fa-whatsapp"></i> +91 9949400123</a></li>
-                <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
-                <li><a href="https://maps.app.goo.gl/MAwMvb3cGL6n9ESHA"><i class="fas fa-map-marker-alt"></i> Munganoor, Hyderabad</a></li>
-            </ul>
-        </div>
 
-        <div class="footer-col">
-            <h4>Stay Connected</h4>
-            <ul class="social-links">
-                <li><a href="https://www.instagram.com/asr_convention_resorts?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
-                <li><a href="#" target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
-            </ul>
+            <div class="nav-right-actions">
+                <a href="tel:+919949400123" class="btn-call">
+                    <i class="fas fa-phone-alt" style="font-size: 0.8rem;"></i> Call Us
+                </a>
+                <a href="/#quotation" class="btn-quote-gold">Get a Quote</a>
+                <button class="menu-toggle" id="mobile-menu" aria-label="Open Menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- ==================== HERO SECTION ==================== -->
+    <section class="hero-eventara-section" style="min-height: 55vh; padding-top: 150px; padding-bottom: 70px;">
+        <div class="hero-bg-image" style="background-image: url('/images/event2.jpeg'); opacity: 0.3;"></div>
+        <div class="hero-gradient-overlay"></div>
+        <div class="hero-fade-to-cream"></div>
+
+        <div class="hero-content">
+            <h1 class="hero-title-main" style="font-size: 3.6rem;">
+                PLANNING PERSPECTIVES
+                <span class="hero-title-sub">guides & insights for memorable events</span>
+            </h1>
+            <p class="hero-lead">
+                Helpful advice on wedding timelines, stage decor trends, and organizing events in Hyderabad.
+            </p>
         </div>
-    </div>
-    
-    <div class="footer-bottom">
-        <p>© 2025 <span>ASR Convention & Resort</span>. Crafted for Excellence.</p>
-    </div>
-</footer>
+    </section>
 
-<script>
-    const menuBtn = document.getElementById('mobile-menu');
-    const navList = document.getElementById('nav-list');
-    const spans = menuBtn.querySelectorAll('span');
+    <!-- ==================== BLOG POSTS ==================== -->
+    <section class="floorplans-section" style="padding-top: 60px;">
+        <div class="container">
+            <span class="eyebrow-terracotta">Articles</span>
+            <h2 style="font-size: 3.2rem; color: var(--brand-charcoal); margin-bottom: 35px;">
+                Event Planning Guides
+            </h2>
 
-    menuBtn.addEventListener('click', () => {
-        navList.classList.toggle('active');
-        const isActive = navList.classList.contains('active');
-        spans[0].style.transform = isActive ? 'rotate(45deg) translate(8px, 8px)' : '';
-        spans[1].style.opacity = isActive ? '0' : '1';
-        spans[2].style.transform = isActive ? 'rotate(-45deg) translate(7px, -7px)' : '';
-    });
-</script>
+            <article class="floorplan-card">
+                <div class="floorplan-grid">
+                    <div class="floorplan-content">
+                        <div>
+                            <span class="floorplan-num">AUGUST 2026 • 5 MIN READ</span>
+                            <h3 class="floorplan-title">How to Plan a Large-Scale Wedding in Hyderabad</h3>
+                            <p class="floorplan-desc">
+                                Key considerations when organizing seating, valet parking, and catering flow for celebrations with 1,000+ guests.
+                            </p>
+                        </div>
+                        <a href="/#quotation" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.28em; color: var(--brand-terracotta); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                            Plan Your Event <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="floorplan-img-wrap">
+                        <div class="floorplan-img-inner">
+                            <img src="/images/decor1.png" alt="Wedding in Hyderabad">
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="floorplan-card">
+                <div class="floorplan-grid">
+                    <div class="floorplan-content">
+                        <div>
+                            <span class="floorplan-num">JULY 2026 • 4 MIN READ</span>
+                            <h3 class="floorplan-title">The Advantages of Pillar-less Convention Halls</h3>
+                            <p class="floorplan-desc">
+                                Why unobstructed sightlines enhance guest experience, ceremony photography, and stage visibility.
+                            </p>
+                        </div>
+                        <a href="/facilities" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.28em; color: var(--brand-terracotta); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                            Explore Hall Specs <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="floorplan-img-wrap">
+                        <div class="floorplan-img-inner">
+                            <img src="/images/hall.jpeg" alt="Pillar-less Convention Hall">
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <article class="floorplan-card">
+                <div class="floorplan-grid">
+                    <div class="floorplan-content">
+                        <div>
+                            <span class="floorplan-num">JUNE 2026 • 5 MIN READ</span>
+                            <h3 class="floorplan-title">Combining Resort Stays with Wedding Celebrations</h3>
+                            <p class="floorplan-desc">
+                                How pairing an on-premise swimming pool and suite rooms creates a relaxed environment for family and out-of-town guests.
+                            </p>
+                        </div>
+                        <a href="/events" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.28em; color: var(--brand-terracotta); text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                            View Resort Packages <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="floorplan-img-wrap">
+                        <div class="floorplan-img-inner">
+                            <img src="/images/pool2.png" alt="Resort Stays">
+                        </div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <a href="/" class="logo-link" style="margin-bottom: 18px;">
+                        <div class="logo-badge" style="width: 64px; height: 64px;">
+                            <img src="/images/logo.png" alt="ASR Logo">
+                        </div>
+                        <div class="logo-text-group">
+                            <span class="logo-brand-title">ASR</span>
+                            <div class="logo-brand-divider"></div>
+                            <span class="logo-brand-subtitle">CONVENTION & RESORT</span>
+                        </div>
+                    </a>
+                    <p style="color: var(--text-cream-85); font-size: 0.95rem; line-height: 1.7;">
+                        A luxury space for life's most memorable moments. Hyderabad.
+                    </p>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/facilities">Facilities</a></li>
+                        <li><a href="/events">Events</a></li>
+                        <li><a href="/gallery">Gallery</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/admin" style="color: var(--brand-gold);"><i class="fas fa-lock" style="font-size: 0.75rem;"></i> Staff Portal</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><a href="tel:+919949400123"><i class="fas fa-phone-alt"></i> +91 9949400123</a></li>
+                        <li><a href="tel:+919394566156"><i class="fas fa-phone-alt"></i> +91 9394566156</a></li>
+                        <li><a href="https://wa.me/919949400123" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp Concierge</a></li>
+                        <li><a href="mailto:info@asrconvention.com"><i class="fas fa-envelope"></i> info@asrconvention.com</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Location</h4>
+                    <p style="color: var(--text-cream-85); font-size: 0.92rem; margin-bottom: 12px;">Munganoor, Vanasthalipuram, Hyderabad, Telangana</p>
+                    <a href="https://maps.app.goo.gl/MAwMvb3cGL6n9ESHA" target="_blank" class="btn-call" style="height: 36px; padding: 0 16px; font-size: 0.8rem; display: inline-flex;">
+                        <i class="fas fa-map-marker-alt"></i> Google Maps
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2026 ASR Convention & Resort. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/luxury-engine.js"></script>
 </body>
 </html>

@@ -864,104 +864,129 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- 12. RESPONSIVE BREAKPOINTS --- */
 @media (max-width: 1100px) {
+    /* Header on mobile - disable blur filters to prevent WebKit drawer blur */
+    .main-header {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        background: #05292c !important;
+        z-index: 9999 !important;
+    }
+    .main-header.scrolled {
+        background: #f4efea !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1) !important;
+    }
+
     .menu-toggle {
-        display: flex;
+        display: flex !important;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         width: 42px;
         height: 42px;
         border-radius: 8px;
-        background: rgba(243, 237, 211, 0.12);
-        border: 1px solid rgba(216, 148, 46, 0.35);
+        background: rgba(216, 148, 46, 0.2) !important;
+        border: 1.5px solid #d8942e !important;
         cursor: pointer;
-        z-index: 1002;
+        z-index: 10002 !important;
         padding: 0;
         gap: 4.5px;
-    }
-    .main-header.scrolled .menu-toggle {
-        background: rgba(5, 41, 44, 0.08);
-        border-color: rgba(5, 41, 44, 0.25);
     }
     .menu-toggle span {
         width: 22px;
         height: 2.2px;
-        background: var(--brand-cream);
+        background: #ffffff !important;
         border-radius: 2px;
-        transition: all 0.3s ease;
+        transition: all 0.25s ease;
         display: block;
     }
     .main-header.scrolled .menu-toggle span {
-        background: var(--brand-charcoal);
+        background: #05292c !important;
+    }
+    .menu-toggle.active span {
+        background: #e5a33c !important;
     }
     .menu-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
-        background: var(--brand-gold) !important;
     }
     .menu-toggle.active span:nth-child(2) {
         opacity: 0;
     }
     .menu-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -5px);
-        background: var(--brand-gold) !important;
     }
 
-    /* Mobile Drawer */
+    /* Mobile Drawer - Crisp Solid Opaque Background */
     .nav-links {
         position: fixed !important;
         top: 0 !important;
         right: -100% !important;
-        width: 82% !important;
-        max-width: 320px !important;
+        width: 280px !important;
+        max-width: 85vw !important;
         height: 100vh !important;
-        background: #05292c !important;
+        height: 100dvh !important;
+        background: #041f22 !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        filter: none !important;
         flex-direction: column !important;
         justify-content: flex-start !important;
-        align-items: flex-start !important;
-        padding: 95px 28px 40px !important;
-        gap: 12px !important;
-        box-shadow: -15px 0 50px rgba(0, 0, 0, 0.7) !important;
-        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        z-index: 1001 !important;
+        align-items: stretch !important;
+        padding: 90px 20px 30px !important;
+        gap: 0 !important;
+        box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8) !important;
+        transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        z-index: 10000 !important;
         overflow-y: auto !important;
+        -webkit-overflow-scrolling: touch !important;
     }
     .nav-links.active {
         right: 0 !important;
     }
 
-    /* CRITICAL FIX: Ensure mobile nav link colors are ALWAYS 100% visible cream/gold on dark drawer */
+    /* Nav items - Sharp, high contrast, clean list */
     .nav-links li {
-        width: 100%;
-        border-bottom: 1px solid rgba(243, 237, 211, 0.08);
-        padding-bottom: 6px;
-    }
-    .nav-links li a,
-    .main-header.scrolled .nav-links li a {
-        color: #f3edd3 !important;
-        font-size: 1.08rem !important;
-        font-weight: 600 !important;
-        display: block !important;
         width: 100% !important;
-        padding: 8px 0 !important;
-        letter-spacing: 0.5px;
-        transition: all 0.2s ease !important;
-    }
-    .nav-links li a:hover,
-    .nav-links li a.active,
-    .main-header.scrolled .nav-links li a:hover,
-    .main-header.scrolled .nav-links li a.active {
-        color: #d8942e !important;
-        padding-left: 8px !important;
+        border-bottom: 1px solid rgba(243, 237, 211, 0.12) !important;
+        padding: 0 !important;
+        margin: 0 !important;
     }
 
-    /* Mobile drawer backdrop */
+    .nav-links li a,
+    .main-header .nav-links li a,
+    .main-header.scrolled .nav-links li a {
+        color: #ffffff !important;
+        font-size: 1.1rem !important;
+        font-weight: 700 !important;
+        display: flex !important;
+        align-items: center !important;
+        width: 100% !important;
+        padding: 14px 12px !important;
+        letter-spacing: 0.5px !important;
+        text-decoration: none !important;
+        background: transparent !important;
+        transition: all 0.2s ease !important;
+    }
+
+    .nav-links li a:active,
+    .nav-links li a.active,
+    .main-header .nav-links li a.active,
+    .main-header.scrolled .nav-links li a.active {
+        color: #e5a33c !important;
+        background: rgba(216, 148, 46, 0.15) !important;
+        border-radius: 6px !important;
+    }
+
+    /* Mobile drawer backdrop - Simple dark overlay without blur */
     .mobile-menu-backdrop {
         position: fixed;
         inset: 0;
-        background: rgba(5, 41, 44, 0.75);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
-        z-index: 1000;
+        background: rgba(0, 0, 0, 0.65) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        filter: none !important;
+        z-index: 9998 !important;
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;

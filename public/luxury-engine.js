@@ -218,6 +218,7 @@
             // Initialize Flatpickr with visual day/night booking indicators
             if (typeof flatpickr !== 'undefined' && this.dateInput) {
                 this.fpInstance = flatpickr(this.dateInput, {
+                    disableMobile: "true",
                     minDate: "today",
                     dateFormat: "Y-m-d",
                     onDayCreate: (dObj, dStr, fp, dayElem) => {
@@ -670,16 +671,26 @@
         init() {
             if (!this.menuBtn || !this.navList) return;
 
-            this.menuBtn.addEventListener('click', () => {
+            const toggleMenu = (e) => {
+                if (e) e.stopPropagation();
                 this.navList.classList.toggle('active');
                 this.menuBtn.classList.toggle('active');
-            });
+            };
+
+            this.menuBtn.addEventListener('click', toggleMenu);
 
             document.querySelectorAll('.nav-links a').forEach(link => {
                 link.addEventListener('click', () => {
                     this.navList.classList.remove('active');
                     this.menuBtn.classList.remove('active');
                 });
+            });
+
+            document.addEventListener('click', (e) => {
+                if (this.navList.classList.contains('active') && !this.navList.contains(e.target) && !this.menuBtn.contains(e.target)) {
+                    this.navList.classList.remove('active');
+                    this.menuBtn.classList.remove('active');
+                }
             });
         }
     }

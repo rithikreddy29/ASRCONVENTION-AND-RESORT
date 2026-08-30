@@ -726,8 +726,59 @@
                 border: none !important;
                 padding: 0 !important;
                 max-width: 100% !important;
-                max-height: none !important;
-                overflow: visible !important;
+        /* ==================== MOBILE RESPONSIVE STYLES ==================== */
+        @media (max-width: 768px) {
+            .admin-header {
+                height: auto;
+                padding: 14px 16px;
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            .admin-main {
+                padding: 14px 10px;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .tabs-bar {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 6px;
+                -webkit-overflow-scrolling: touch;
+            }
+            .tab-btn {
+                flex-shrink: 0;
+                font-size: 0.8rem;
+                padding: 8px 14px;
+            }
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .modal-body-box {
+                padding: 18px 14px;
+                max-width: 95vw;
+            }
+            .cal-header-bar {
+                flex-direction: column;
+                gap: 12px;
+                align-items: flex-start;
+            }
+            .cal-cell {
+                min-height: 52px;
+                padding: 4px;
+            }
+            .cal-cell-date-num {
+                font-size: 0.8rem;
+            }
+            .login-card {
+                max-width: 92vw;
+                padding: 24px 18px;
+            }
+            .form-input {
+                font-size: 16px !important;
             }
         }
     </style>
@@ -758,7 +809,7 @@
 
                 <div class="form-field" style="margin-bottom: 16px; text-align: left;">
                     <label id="loginRoleLabel">Enter Owner Password</label>
-                    <input type="password" id="loginPassword" class="form-input" placeholder="Password: owner2345" required autofocus autocomplete="current-password">
+                    <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required autofocus autocomplete="current-password">
                 </div>
 
                 <button type="submit" class="btn-gold" style="width: 100%; height: 44px; font-size: 0.92rem;">
@@ -1328,8 +1379,8 @@
                 loadDashboardData();
             }
 
-            flatpickr('#bEventDate', { minDate: 'today', dateFormat: 'Y-m-d' });
-            flatpickr('#payDateInput', { defaultDate: 'today', dateFormat: 'Y-m-d' });
+            flatpickr('#bEventDate', { disableMobile: "true", minDate: 'today', dateFormat: 'Y-m-d' });
+            flatpickr('#payDateInput', { disableMobile: "true", defaultDate: 'today', dateFormat: 'Y-m-d' });
 
             document.getElementById('adminLoginForm').addEventListener('submit', handleLogin);
             document.getElementById('bookingForm').addEventListener('submit', handleSaveBooking);
@@ -1343,12 +1394,12 @@
                 document.getElementById('btnRoleOwner').classList.add('active');
                 document.getElementById('btnRoleManager').classList.remove('active');
                 document.getElementById('loginRoleLabel').textContent = 'Enter Owner Password';
-                document.getElementById('loginPassword').placeholder = 'Password: owner2345';
+                document.getElementById('loginPassword').placeholder = '••••••••';
             } else {
                 document.getElementById('btnRoleOwner').classList.remove('active');
                 document.getElementById('btnRoleManager').classList.add('active');
                 document.getElementById('loginRoleLabel').textContent = 'Enter Manager Password';
-                document.getElementById('loginPassword').placeholder = 'Password: asr1234';
+                document.getElementById('loginPassword').placeholder = '••••••••';
             }
             document.getElementById('loginPassword').value = '';
             document.getElementById('loginError').style.display = 'none';

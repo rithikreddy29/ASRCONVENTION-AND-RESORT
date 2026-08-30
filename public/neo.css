@@ -889,17 +889,69 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 768px) {
-    .hero-title-main { font-size: 2.8rem; }
-    .hero-title-sub { font-size: 2rem; }
-    .story-heading { font-size: 2.4rem; }
-    .simply-grand-quote { font-size: 1.8rem; }
-    .floorplan-title { font-size: 2.2rem; }
+    .hero-title-main { font-size: 2.5rem; line-height: 1.1; }
+    .hero-title-sub { font-size: 1.8rem; }
+    .story-heading { font-size: 2.2rem; }
+    .simply-grand-quote { font-size: 1.6rem; }
+    .floorplan-title { font-size: 2rem; }
     .amenities-grid { grid-template-columns: 1fr; }
-    .amenities-dark-container { padding: 40px 24px; }
+    .amenities-dark-container { padding: 36px 20px; }
     .form-grid { grid-template-columns: 1fr; }
-    .quote-box { padding: 30px 18px; }
+    .quote-box { padding: 28px 16px; border-radius: 16px; }
     .footer-grid { grid-template-columns: 1fr; }
-    .main-header { height: 85px; }
-    .logo-badge { width: 56px; height: 56px; }
-    .logo-brand-title { font-size: 1.6rem; }
+    .main-header { height: 80px; }
+    .logo-badge { width: 50px; height: 50px; }
+    .logo-brand-title { font-size: 1.45rem; }
+    .logo-brand-subtitle { font-size: 0.62rem; letter-spacing: 2px; }
+    .nav-right-actions .btn-call { display: none; }
+    .nav-right-actions .btn-quote-gold { height: 38px; padding: 0 16px; font-size: 0.8rem; }
+
+    /* Prevent iOS form zoom */
+    .form-control, .form-input, select, input[type="text"], input[type="number"], input[type="tel"], input[type="email"] {
+        font-size: 16px !important;
+    }
+
+    /* Mobile Flatpickr Optimization */
+    .flatpickr-calendar {
+        width: 92vw !important;
+        max-width: 330px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+        border-radius: 12px !important;
+    }
+
+    .flatpickr-rContainer, .flatpickr-days, .dayContainer {
+        width: 100% !important;
+        min-width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    .flatpickr-day {
+        max-width: 40px !important;
+        height: 38px !important;
+        line-height: 38px !important;
+        font-size: 0.88rem !important;
+        margin: 1px 0 !important;
+    }
+
+    .hero-btn-group {
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .btn-hero-gold, .btn-hero-outline {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title-main { font-size: 2.1rem; }
+    .hero-title-sub { font-size: 1.5rem; }
+    .hero-lead { font-size: 0.95rem; }
+    .story-heading { font-size: 1.9rem; }
+    .floorplan-num { font-size: 2.2rem; }
+    .floorplan-specs { flex-direction: column; gap: 12px; }
 }

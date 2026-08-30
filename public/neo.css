@@ -864,24 +864,118 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- 12. RESPONSIVE BREAKPOINTS --- */
 @media (max-width: 1100px) {
-    .menu-toggle { display: flex; }
-    .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 80%;
-        max-width: 320px;
-        height: 100vh;
-        background: var(--brand-charcoal);
+    .menu-toggle {
+        display: flex;
         flex-direction: column;
         justify-content: center;
-        padding: 40px;
-        gap: 22px;
-        box-shadow: -15px 0 40px rgba(0, 0, 0, 0.4);
-        transition: right 0.35s ease;
-        z-index: 1001;
+        align-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 8px;
+        background: rgba(243, 237, 211, 0.12);
+        border: 1px solid rgba(216, 148, 46, 0.35);
+        cursor: pointer;
+        z-index: 1002;
+        padding: 0;
+        gap: 4.5px;
     }
-    .nav-links.active { right: 0; }
+    .main-header.scrolled .menu-toggle {
+        background: rgba(5, 41, 44, 0.08);
+        border-color: rgba(5, 41, 44, 0.25);
+    }
+    .menu-toggle span {
+        width: 22px;
+        height: 2.2px;
+        background: var(--brand-cream);
+        border-radius: 2px;
+        transition: all 0.3s ease;
+        display: block;
+    }
+    .main-header.scrolled .menu-toggle span {
+        background: var(--brand-charcoal);
+    }
+    .menu-toggle.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+        background: var(--brand-gold) !important;
+    }
+    .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    .menu-toggle.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+        background: var(--brand-gold) !important;
+    }
+
+    /* Mobile Drawer */
+    .nav-links {
+        position: fixed !important;
+        top: 0 !important;
+        right: -100% !important;
+        width: 82% !important;
+        max-width: 320px !important;
+        height: 100vh !important;
+        background: #05292c !important;
+        flex-direction: column !important;
+        justify-content: flex-start !important;
+        align-items: flex-start !important;
+        padding: 95px 28px 40px !important;
+        gap: 12px !important;
+        box-shadow: -15px 0 50px rgba(0, 0, 0, 0.7) !important;
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        z-index: 1001 !important;
+        overflow-y: auto !important;
+    }
+    .nav-links.active {
+        right: 0 !important;
+    }
+
+    /* CRITICAL FIX: Ensure mobile nav link colors are ALWAYS 100% visible cream/gold on dark drawer */
+    .nav-links li {
+        width: 100%;
+        border-bottom: 1px solid rgba(243, 237, 211, 0.08);
+        padding-bottom: 6px;
+    }
+    .nav-links li a,
+    .main-header.scrolled .nav-links li a {
+        color: #f3edd3 !important;
+        font-size: 1.08rem !important;
+        font-weight: 600 !important;
+        display: block !important;
+        width: 100% !important;
+        padding: 8px 0 !important;
+        letter-spacing: 0.5px;
+        transition: all 0.2s ease !important;
+    }
+    .nav-links li a:hover,
+    .nav-links li a.active,
+    .main-header.scrolled .nav-links li a:hover,
+    .main-header.scrolled .nav-links li a.active {
+        color: #d8942e !important;
+        padding-left: 8px !important;
+    }
+
+    /* Mobile drawer backdrop */
+    .mobile-menu-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 41, 44, 0.75);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        z-index: 1000;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    .mobile-menu-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .mobile-drawer-header, .mobile-drawer-actions {
+        list-style: none;
+        width: 100%;
+    }
+
     .story-split-grid { grid-template-columns: 1fr; gap: 40px; }
     .floorplan-grid { grid-template-columns: 1fr; }
     .amenities-grid { grid-template-columns: 1fr 1fr; }

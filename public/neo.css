@@ -48,7 +48,9 @@
 }
 
 /* --- 2. GLOBAL RESET & BASE --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -75,19 +77,27 @@ body {
 ::-webkit-scrollbar {
     width: 8px;
 }
+
 ::-webkit-scrollbar-track {
     background: var(--brand-cream);
 }
+
 ::-webkit-scrollbar-thumb {
     background: #d4caa7;
     border-radius: var(--radius-full);
 }
+
 ::-webkit-scrollbar-thumb:hover {
     background: var(--brand-gold);
 }
 
 /* Typography Helpers */
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: var(--font-display);
     color: var(--brand-charcoal);
     font-weight: 600;
@@ -379,7 +389,7 @@ h1, h2, h3, h4, h5, h6 {
     position: absolute;
     inset: 0;
     background: radial-gradient(ellipse 82% 52% at 50% 47%, rgba(5, 41, 44, 0.46) 0%, rgba(5, 41, 44, 0.30) 55%, rgba(5, 41, 44, 0) 78%),
-                linear-gradient(180deg, rgba(5, 41, 44, 0.60) 0%, rgba(5, 41, 44, 0.38) 32%, rgba(5, 41, 44, 0.36) 62%, rgba(5, 41, 44, 0.85) 100%);
+        linear-gradient(180deg, rgba(5, 41, 44, 0.60) 0%, rgba(5, 41, 44, 0.38) 32%, rgba(5, 41, 44, 0.36) 62%, rgba(5, 41, 44, 0.85) 100%);
     z-index: 1;
 }
 
@@ -555,21 +565,27 @@ h1, h2, h3, h4, h5, h6 {
 
 .floorplan-card {
     background: var(--surface-parchment);
-    border: 1px solid var(--surface-parchment-border);
+    border: 1.5px solid var(--surface-parchment-border);
     border-radius: var(--radius-2xl);
     box-shadow: var(--shadow-eventara-card);
     overflow: hidden;
-    margin-bottom: 40px;
+    margin-bottom: 48px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.floorplan-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(5, 41, 44, 0.12);
 }
 
 .floorplan-grid {
     display: grid;
-    grid-template-columns: 1.1fr 1fr;
+    grid-template-columns: 1.15fr 1fr;
     gap: 0;
 }
 
 .floorplan-content {
-    padding: 50px;
+    padding: 48px 42px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -577,50 +593,58 @@ h1, h2, h3, h4, h5, h6 {
 
 .floorplan-num {
     font-family: var(--font-body);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     letter-spacing: 0.35em;
     text-transform: uppercase;
     color: var(--brand-gold-ink);
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .floorplan-title {
     font-size: 2.8rem;
     color: var(--brand-charcoal);
     margin: 12px 0 16px;
+    line-height: 1.15;
 }
 
 .floorplan-desc {
-    font-size: 1.05rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    line-height: 1.75;
     color: var(--text-charcoal-85);
-    margin-bottom: 24px;
+    margin-bottom: 26px;
 }
 
 .floorplan-specs {
-    display: flex;
-    gap: 40px;
-    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 28px;
+    background: rgba(243, 237, 211, 0.5);
+    padding: 16px 20px;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(216, 148, 46, 0.25);
 }
 
 .floorplan-spec-dt {
-    font-size: 0.65rem;
+    font-size: 0.72rem;
     text-transform: uppercase;
-    letter-spacing: 0.3em;
+    letter-spacing: 0.25em;
     color: var(--text-charcoal-70);
     margin-bottom: 4px;
+    font-weight: 700;
 }
 
 .floorplan-spec-dd {
     font-family: var(--font-display);
-    font-size: 1.4rem;
+    font-size: 1.6rem;
     color: var(--brand-charcoal);
-    font-weight: 700;
+    font-weight: 800;
+    line-height: 1.1;
 }
 
 .floorplan-img-wrap {
     position: relative;
-    min-height: 420px;
+    min-height: 440px;
     padding: 24px;
 }
 
@@ -628,15 +652,21 @@ h1, h2, h3, h4, h5, h6 {
     position: relative;
     width: 100%;
     height: 100%;
-    min-height: 380px;
+    min-height: 390px;
     border-radius: var(--radius-xl);
     overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 .floorplan-img-inner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.floorplan-card:hover .floorplan-img-inner img {
+    transform: scale(1.04);
 }
 
 /* --- 7. EVENTARA SUPERIOR AMENITIES DARK BLOCK --- */
@@ -663,7 +693,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .amenity-icon {
-    font-size: 2rem;
+    font-size: 2.2rem;
     color: var(--brand-gold);
     margin-bottom: 14px;
 }
@@ -671,16 +701,16 @@ h1, h2, h3, h4, h5, h6 {
 .amenity-title {
     font-family: var(--font-display);
     font-style: italic;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     color: var(--brand-gold);
     margin-bottom: 8px;
 }
 
 .amenity-desc {
-    font-size: 0.92rem;
-    line-height: 1.55;
+    font-size: 0.96rem;
+    line-height: 1.6;
     color: var(--text-cream-85);
-    max-width: 250px;
+    max-width: 280px;
 }
 
 /* --- 8. "SIMPLY GRAND" EDITORIAL BANNER --- */
@@ -713,7 +743,10 @@ h1, h2, h3, h4, h5, h6 {
     padding-bottom: 20px;
     scrollbar-width: none;
 }
-.stills-scroll-row::-webkit-scrollbar { display: none; }
+
+.stills-scroll-row::-webkit-scrollbar {
+    display: none;
+}
 
 .still-card {
     flex-shrink: 0;
@@ -864,6 +897,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* --- 12. RESPONSIVE BREAKPOINTS --- */
 @media (max-width: 1100px) {
+
     /* Header on mobile - disable blur filters to prevent WebKit drawer blur */
     .main-header {
         backdrop-filter: none !important;
@@ -871,6 +905,7 @@ h1, h2, h3, h4, h5, h6 {
         background: #05292c !important;
         z-index: 9999 !important;
     }
+
     .main-header.scrolled {
         background: #f4efea !important;
         backdrop-filter: none !important;
@@ -893,6 +928,7 @@ h1, h2, h3, h4, h5, h6 {
         padding: 0;
         gap: 4.5px;
     }
+
     .menu-toggle span {
         width: 22px;
         height: 2.2px;
@@ -901,18 +937,23 @@ h1, h2, h3, h4, h5, h6 {
         transition: all 0.25s ease;
         display: block;
     }
+
     .main-header.scrolled .menu-toggle span {
         background: #05292c !important;
     }
+
     .menu-toggle.active span {
         background: #e5a33c !important;
     }
+
     .menu-toggle.active span:nth-child(1) {
         transform: rotate(45deg) translate(5px, 5px);
     }
+
     .menu-toggle.active span:nth-child(2) {
         opacity: 0;
     }
+
     .menu-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -5px);
     }
@@ -941,6 +982,7 @@ h1, h2, h3, h4, h5, h6 {
         overflow-y: auto !important;
         -webkit-overflow-scrolling: touch !important;
     }
+
     .nav-links.active {
         right: 0 !important;
     }
@@ -991,37 +1033,194 @@ h1, h2, h3, h4, h5, h6 {
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;
     }
+
     .mobile-menu-backdrop.active {
         opacity: 1;
         visibility: visible;
     }
 
-    .story-split-grid { grid-template-columns: 1fr; gap: 40px; }
-    .floorplan-grid { grid-template-columns: 1fr; }
-    .amenities-grid { grid-template-columns: 1fr 1fr; }
-    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .story-split-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .floorplan-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .amenities-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
+/* ==================== MOBILE COMPREHENSIVE ENLARGEMENT ==================== */
 @media (max-width: 768px) {
-    .hero-title-main { font-size: 2.5rem; line-height: 1.1; }
-    .hero-title-sub { font-size: 1.8rem; }
-    .story-heading { font-size: 2.2rem; }
-    .simply-grand-quote { font-size: 1.6rem; }
-    .floorplan-title { font-size: 2rem; }
-    .amenities-grid { grid-template-columns: 1fr; }
-    .amenities-dark-container { padding: 36px 20px; }
-    .form-grid { grid-template-columns: 1fr; }
-    .quote-box { padding: 28px 16px; border-radius: 16px; }
-    .footer-grid { grid-template-columns: 1fr; }
-    .main-header { height: 80px; }
-    .logo-badge { width: 50px; height: 50px; }
-    .logo-brand-title { font-size: 1.45rem; }
-    .logo-brand-subtitle { font-size: 0.62rem; letter-spacing: 2px; }
-    .nav-right-actions .btn-call { display: none; }
-    .nav-right-actions .btn-quote-gold { height: 38px; padding: 0 16px; font-size: 0.8rem; }
+    .hero-title-main {
+        font-size: 2.6rem;
+        line-height: 1.1;
+    }
+
+    .hero-title-sub {
+        font-size: 1.9rem;
+    }
+
+    .hero-lead {
+        font-size: 1.05rem;
+        line-height: 1.65;
+    }
+
+    .story-heading {
+        font-size: 2.4rem;
+    }
+
+    .simply-grand-quote {
+        font-size: 1.75rem;
+    }
+
+    /* ENLARGED FLOOR PLANS ON MOBILE */
+    .floorplans-section {
+        padding: 50px 14px;
+    }
+
+    .floorplan-card {
+        margin-bottom: 34px;
+        border-radius: 18px;
+    }
+
+    .floorplan-content {
+        padding: 28px 20px;
+    }
+
+    .floorplan-num {
+        font-size: 0.85rem;
+    }
+
+    .floorplan-title {
+        font-size: 2.25rem;
+        margin: 10px 0 14px;
+    }
+
+    .floorplan-desc {
+        font-size: 1.05rem;
+        line-height: 1.7;
+        margin-bottom: 20px;
+    }
+
+    .floorplan-specs {
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+        padding: 14px 16px;
+        margin-bottom: 22px;
+    }
+
+    .floorplan-spec-dt {
+        font-size: 0.72rem;
+    }
+
+    .floorplan-spec-dd {
+        font-size: 1.45rem;
+    }
+
+    .floorplan-img-wrap {
+        min-height: 300px;
+        padding: 14px;
+    }
+
+    .floorplan-img-inner {
+        min-height: 280px;
+        height: 280px;
+        border-radius: 14px;
+    }
+
+    .story-img-card {
+        aspect-ratio: 16/11;
+        width: 100%;
+        border-radius: 16px;
+    }
+
+    .still-card {
+        width: 290px;
+        aspect-ratio: 4/5;
+    }
+
+    .amenities-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .amenities-dark-container {
+        padding: 40px 20px;
+        border-radius: 18px;
+    }
+
+    .amenity-icon {
+        font-size: 2.4rem;
+    }
+
+    .amenity-title {
+        font-size: 1.4rem;
+    }
+
+    .amenity-desc {
+        font-size: 1rem;
+        max-width: 100%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .quote-box {
+        padding: 28px 16px;
+        border-radius: 18px;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+    }
+
+    .main-header {
+        height: 80px;
+    }
+
+    .logo-badge {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-brand-title {
+        font-size: 1.45rem;
+    }
+
+    .logo-brand-subtitle {
+        font-size: 0.62rem;
+        letter-spacing: 2px;
+    }
+
+    .nav-right-actions .btn-call {
+        display: none;
+    }
+
+    .nav-right-actions .btn-quote-gold {
+        height: 38px;
+        padding: 0 16px;
+        font-size: 0.82rem;
+    }
 
     /* Prevent iOS form zoom */
-    .form-control, .form-input, select, input[type="text"], input[type="number"], input[type="tel"], input[type="email"] {
+    .form-control,
+    .form-input,
+    select,
+    input[type="text"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="email"] {
         font-size: 16px !important;
     }
 
@@ -1031,11 +1230,13 @@ h1, h2, h3, h4, h5, h6 {
         max-width: 330px !important;
         left: 50% !important;
         transform: translateX(-50%) !important;
-        box-shadow: 0 15px 35px rgba(0,0,0,0.3) !important;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3) !important;
         border-radius: 12px !important;
     }
 
-    .flatpickr-rContainer, .flatpickr-days, .dayContainer {
+    .flatpickr-rContainer,
+    .flatpickr-days,
+    .dayContainer {
         width: 100% !important;
         min-width: 100% !important;
         max-width: 100% !important;
@@ -1055,17 +1256,37 @@ h1, h2, h3, h4, h5, h6 {
         gap: 12px;
     }
 
-    .btn-hero-gold, .btn-hero-outline {
+    .btn-hero-gold,
+    .btn-hero-outline {
         width: 100%;
         justify-content: center;
     }
 }
 
 @media (max-width: 480px) {
-    .hero-title-main { font-size: 2.1rem; }
-    .hero-title-sub { font-size: 1.5rem; }
-    .hero-lead { font-size: 0.95rem; }
-    .story-heading { font-size: 1.9rem; }
-    .floorplan-num { font-size: 2.2rem; }
-    .floorplan-specs { flex-direction: column; gap: 12px; }
+    .hero-title-main {
+        font-size: 2.2rem;
+    }
+
+    .hero-title-sub {
+        font-size: 1.6rem;
+    }
+
+    .story-heading {
+        font-size: 2.05rem;
+    }
+
+    .floorplan-title {
+        font-size: 2rem;
+    }
+
+    .floorplan-img-wrap {
+        min-height: 250px;
+        padding: 10px;
+    }
+
+    .floorplan-img-inner {
+        min-height: 240px;
+        height: 240px;
+    }
 }
